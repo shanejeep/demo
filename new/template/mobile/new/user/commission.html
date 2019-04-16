@@ -1,0 +1,274 @@
+<include file="public/header"/>
+<body>
+<header>
+    <div class="tab_nav">
+        <div class="header">
+            <div class="h-left">
+                <!-- deng start -->
+                <if condition="$access_type eq 1">
+                    <a href="{:U('index/return_app')}" class="sb-back" title="返回"></a>
+                    <else />
+                    <!--<a href="{:U('Mobile/Goods/categoryList')}" class="back search_back"></a>-->
+                    <a href="javascript:history.back(-1)" class="sb-back"></a>
+                </if>
+                <!-- deng end -->
+                <!--<a class="sb-back" href="javascript:history.back(-1)" title="返回"></a>-->
+            </div>
+            <div class="h-mid">我的服务费</div>
+            <div class="h-right">
+                <!--<aside class="top_bar">-->
+                <!--<div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a-->
+                <!--href="javascript:;"></a></div>-->
+                <!--</aside>-->
+                <a style="line-height: 45px" href="{:U('Mobile/User/withdrawal')}">提现</a>
+            </div>
+        </div>
+    </div>
+</header>
+<style>
+    .none {
+        display: none
+    }
+    .pingjia h2 {
+        width: 95%;
+        height: auto;
+        line-height: 30px;
+        margin: auto;
+        font-size: 14px;
+        color: #999;
+        font-weight: normal;
+    }
+    .pingjia .remark {
+        margin-right: 10px;
+        background: #dd2726;
+        color: #fff;
+        border:0;
+        height:30px;
+        line-height: 30px;
+    }
+    .selectDl{ position: absolute; right: 0px;top:38px; border: 1px solid #eee; background: #fff; width: 100%; padding: 0 10px; box-shadow: 1px 2px 3px #eee; display: none; width: 80px; font-size: 16px}
+    .selectLi p,.selectLi dd { font-size: 16px;color: #666}
+    .selectLi p{
+        background: url(__STATIC__/images/arrow_down_on.png) no-repeat right center;
+        background-size: auto 14px;}
+    .selectLi{
+        position: relative;
+
+    }
+    .disbox {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -o-box;
+        display: box;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+
+    .disflex {
+        -webkit-box-flex: 1;
+        -moz-box-flex: 1;
+        -ms-box-flex: 1;
+        -o-box-flex: 1;
+        box-flex: 1;
+        display: block
+    }
+    .Evaluation ul li {
+        width: 63px;
+        float:none;
+    }
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    .clearfix:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+
+    .clearfix {
+        display: inline-block;
+    }
+
+    .disbox {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -o-box;
+        display: box;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+
+    .disflex {
+        -webkit-box-flex: 1;
+        -moz-box-flex: 1;
+        -ms-box-flex: 1;
+        -o-box-flex: 1;
+        box-flex: 1;
+        display: block
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .top {
+        padding: 10px;
+        padding-bottom: 20px;
+    }
+
+    .top h2 {
+        margin-top: 20px;
+        font-size: 30px;
+        font-weight: 100;
+        color: #E71F19;
+    }
+
+    .top a {
+        display: block;
+        width: 80px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        background: #E71F19;
+        color: #fff;
+        border-radius: 5px;
+    }
+
+    .yjTit {
+        padding: 0 10px;
+        height: 40px;
+        border-bottom: 1px solid #eee;
+        overflow: hidden;
+    }
+
+    .yjTit ul {
+        width: 100%;
+    }
+
+    .yjTit ul li {
+        width: 50%;
+        float: left;
+        text-align: center;
+        line-height: 40px;
+    }
+
+    .yjTit ul li a {
+        display: block;
+        width: 80px;
+        border-bottom: 2px solid #fff;
+        text-align: center;
+        margin: 0 auto;
+        font-size: 15px;
+    }
+
+    .yjTit ul li.on a {
+        color: #E71F19;
+        border-bottom: 2px solid #E71F19;
+    }
+
+
+    .yjUl li{ border-bottom: 1px solid #eee; padding: 10px;}
+    .yjUl li div{ line-height: 25px;}
+    .yjUl li div i{font-size: 12px; font-style: normal; color: #999;}
+    .yjUl li span{ font-size: 20px; color: #E71F19; line-height: 50px;}
+</style>
+<include file="public/menu"/>
+<div class="top">
+    <p class="disbox">
+        <span class="disflex" style="line-height: 30px;">待提服务费</span>
+
+    </p>
+    <h2 class="center">￥{$commission}</h2>
+</div>
+<div style="height: 10px; background: #f5f5f5;"></div>
+<div class="yjBox">
+    <div class="yjTit">
+        <ul class="clearfix qhUl">
+            <li <?php if($_GET['type']==1){echo 'class="on"';}?> onclick="jumpCom(this)" data-type="1">
+            <a>医学服务费</a>
+            </li>
+            <li <?php if(!($_GET['type']==1)){echo 'class="on"';}?> onclick="jumpCom(this)" data-type="2">
+            <a>推广服务费</a>
+            </li>
+        </ul>
+    </div>
+    <ul class="yjUl" id="user_goods_ka_1">
+
+        <foreach name="commission_list" item="vo" key="k">
+
+            <li class="disbox">
+                <div class="disflex">
+                  <p>{$vo.goods_name}</p>
+                    <i>{$vo.confirm_time|date="Y-m-d H:i:s",###}</i>
+                </div>
+                <span style="font-size: 16px">+<?php if($_GET['type']==1){echo $vo['sales_commission'];}else{echo $vo['promote_commission'];}?></span>
+            </li>
+
+        </foreach>
+
+
+    </ul>
+    <div name="comment_list" class="comment_list">
+        <div id="getmore" class="none" style="font-size:.24rem;text-align: center;color:#888;padding:.25rem .24rem .4rem; clear:both">
+            <a href="javascript:void(0)" onClick="ajax_sourch_submit()">点击加载更多</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(window).scroll(function () {
+        var viewH = $(document).height(),//可见高度
+                contentH = $(window).height(),//内容高度
+                scrollTop = $(document).scrollTop();//滚动高
+        if (viewH - contentH - scrollTop < 10) { //到达底部100px时,加载新内容.
+            console.log(viewH, contentH, scrollTop);
+            $("#getmore").show();
+        }
+    });
+    /**
+     * select改变事件 跳转
+     */
+
+    function jumpCom(obj) {
+        /*deng start*/
+        window.location.href = '/mobile/User/commission.html' + '?type=' + $(obj).attr('data-type');
+        /*deng end*/
+    }
+
+    var page = 1;
+    /*** ajax 提交表单 查询订单列表结果*/
+    function ajax_sourch_submit() {
+        page += 1;
+        $.ajax({
+            type: "GET",
+            url: "{:U('Mobile/User/commission',array('type'=>$_GET['type']),'')}/is_ajax/1/p/" + page,//+tab,
+//			data : $('#filter_form').serialize(),// 你的formid 搜索表单 序列化提交
+            success: function (data) {
+                if ($.trim(data) == '') {
+                    $('#getmore').hide();
+                } else {
+                    $("#user_goods_ka_1").append(data);
+                }
+            }
+        });
+    }
+</script>
+
+<script>
+    function goTop(){
+        $('html,body').animate({'scrollTop':0},600);
+    }
+</script>
+<a href="javascript:goTop();" class="gotop"><img src="__STATIC__/images/topup.png"></a>
+
+</body>
+
+</html>

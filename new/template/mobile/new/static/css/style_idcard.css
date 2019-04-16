@@ -1,0 +1,17 @@
+*{margin: 0;padding: 0}
+body{font-size: 14px;color: #333;background-color: #f3f3f3;font-family: "Microsoft YaHei", 微软雅黑}
+h1{font-size: 16px;line-height:38px;color: #333333;margin: 0px}
+p{font-size: 15px;line-height:24px;color: #999;margin: 0px}
+.Header{padding:15px;background-color: #fff  }
+.cont{padding: 0px 15px;background-color: #fff}
+.picImg{width: 100%;}
+.picImg_01{width: 100%;overflow: hidden}
+.foot{padding:5px 15px 15px 15px}
+.an_niu{width: 100%;height: 39px;line-height: 39px;background-color: #ff4413;
+    text-align: center;font-size: 15px;color: white;border-radius: 5px;margin-top: 25px;display: block}
+.btn_close{  display: block;  text-decoration: none;  width: 60px;  height: 22px;  line-height: 22px;  font-size: 12px;  color: #fff !important;  background-color: #e31939;  text-align: center;  border-radius: 5px;  float: left;  }
+.btn_choose{  display: block;  text-decoration: none;  width: 60px;  height: 22px;  line-height: 22px;  font-size: 12px;  color: #333333;  background-color: #f3f3f3;  text-align: center;  border-radius: 5px;  float: right;  }
+.check_pic_04{  position: relative;  top: -24px;  left: 0px;  opacity:0  }
+.fileinput-exists .fileinput-new,
+.fileinput-new .fileinput-exists {  display: none;  }
+.check_pic_02{  position: relative;  top: -24px;  left: 0px;  opacity:0  }

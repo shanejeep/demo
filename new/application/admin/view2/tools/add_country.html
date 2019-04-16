@@ -1,0 +1,47 @@
+<include file="public/layout" />
+ 
+<style type="text/css">
+html, body {
+	overflow: visible;
+}
+.page{
+	padding: 0px !import;
+}
+</style>  
+<body style="background-color: #FFF; overflow: auto; min-width : auto">
+<div id="toolTipLayer" style="position: absolute; z-index: 9999; display: none; visibility: visible; left: 95px; top: 573px;"></div>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div >
+  <form class="form-horizontal" id="msg_form" action="{:U('Admin/Tools/countryHandle')}" method="post"  >
+  	<input name="call_back" type="hidden" value="call_back" />
+    <div class="ncap-form-default">
+        <dl class="row">
+            <dt class="tit">
+                <label for="name"><em></em>国家名称:</label>
+            </dt>
+            <dd class="opt">
+                <input type="text" name="name" rows="6"  placeholder="国家名称" id="name" value="{$info.name}">
+            </dd>
+        </dl>
+      <input type="hidden" value="{$info.id}" name="id">
+      <div class="bot"><a href="JavaScript:void(0);" onClick="checkForm()" class="ncap-btn-big ncap-btn-green" id="submitBtn">保存</a></div>
+    </div>
+  </form>
+</div>
+<script type="text/javascript">
+function checkForm(){
+    var text = $('#name').val();
+    var error = '';
+    if(text == ''){
+        error += '请输入国家名称 ';
+    }
+    if(error){
+		layer.alert(error, {icon: 2});
+        return ;
+    }
+    $('#msg_form').submit();
+}
+</script>
+</body>
+</html>

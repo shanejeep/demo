@@ -1,0 +1,165 @@
+<include file="public/header" title="店铺街"/>
+<include file="public/header_nav" title="店铺街"/>
+		<!--banner1-start-->
+		<div class="banner">
+			<img src="__STATIC__/images/fb.jpg"/>
+		</div>
+		<!--banner1-end-->
+		<nav class="storenav p">
+			<ul>
+				<li>
+					<span class="lb">类别</span>
+					<i></i>
+				</li>
+				<li>
+				<a href="javascript:void(0)" onclick="locationaddress(this);">
+                    <script type="text/javascript">
+                        function locationaddress(e){
+                            $('.container').animate({width: '14.4rem', opacity: 'show'}, 'normal',function(){
+                                $('.container').show();
+                            });
+                            if(!$('.container').is(":hidden")){
+                                $('body').css('overflow','hidden')
+                                cover();
+                                $('.mask-filter-div').css('z-index','9999');
+                            }
+                        }
+                        function closelocation(){
+                            var province_div = $('.province-list');
+                            var city_div = $('.city-list');
+                            var area_div = $('.area-list');
+                            if(area_div.is(":hidden") == false){
+                                area_div.hide();
+                                city_div.show();
+                                province_div.hide();
+                                return;
+                            }
+                            if(city_div.is(":hidden") == false){
+                                area_div.hide();
+                                city_div.hide();
+                                province_div.show();
+                                return;
+                            }
+                            if(province_div.is(":hidden") == false){
+                                area_div.hide();
+                                city_div.hide();
+                                $('.container').animate({width: '0', opacity: 'show'}, 'normal',function(){
+                                    $('.container').hide();
+                                });
+                                undercover();
+                                $('.mask-filter-div').css('z-index','inherit');
+                                return;
+                            }
+                        }
+                    </script><span class="dq">地区</span></a>
+					<i></i>
+					<!--地区获取输出-s-->
+					<div class="dqs" style="display:none;">
+						<input id="address" type="text" readonly="" placeholder="城市选择"  value=""/>
+	            		<input id="value" type="hidden" value="20,234,504"/>
+            		</div>
+            		<!--地区获取输出-e-->
+				</li>
+				<li>
+					<span>排序</span>
+					<i></i>
+				</li>
+			</ul>
+		</nav>
+		<div class="lb_showhide p">
+			<ul>
+			<li><a href="javascript:setCat_id(0);">精选推荐</a></li>
+			<volist name="store_class" id="sc">
+				<li><a href="javascript:setCat_id({$sc['sc_id']});">{$sc['sc_name']}</a></li>
+			</volist>
+			</ul>
+		</div>
+		<div class="store_info" id="store_list">
+		
+		</div>
+		<!--选择地区-s-->
+        <div class="container" >
+            <div class="city">
+                <div class="screen_wi_loc">
+                    <div class="classreturn loginsignup">
+                        <div class="content">
+                            <div class="ds-in-bl return seac_retu">
+                                <a href="javascript:void(0);" onclick="closelocation();"><img src="__STATIC__/images/return.png" alt="返回"></a>
+                            </div>
+                            <div class="ds-in-bl search center">
+                                <span class="sx_jsxz">选择地区</span>
+                            </div>
+                            <div class="ds-in-bl suce_ok">
+                                <a href="javascript:void(0);">&nbsp;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="province-list"></div>
+                <div class="city-list" style="display:none"></div>
+                <div class="area-list" style="display:none"></div>
+            </div>
+        </div>
+        <!--选择地区-e-->
+		<!--底部导航-start-->
+		<include file="public/footer_nav"/>
+		<!--底部导航-end-->
+		<div class="mask-filter-div"></div>
+		<script type="text/javascript" src="__STATIC__/js/mobile-location.js"></script>
+		<script type="text/javascript">
+	    $(function () {
+	        getStreetList();
+	    });
+
+	    var page = 1;//页数
+	    var cat_id = '';//店铺分类id
+	    /**
+	     * 加载分类店铺
+	     */
+	    function setCat_id(cid) {
+	        $("#store_list").html('');
+	        undercover();
+	        $('.lb_showhide').hide();
+	        page = 1;
+	        cat_id = cid;
+	        getStreetList();
+	    }
+	    /**
+	     * 加载店铺
+	     */
+	    function getStreetList() {
+	        $('.get_more').show();
+	        $.ajax({
+	            type: "get",
+	            url: "/index.php?m=Mobile&c=Index&a=ajaxStreetList&p=" + page + "&sc_id=" + cat_id,
+	            dataType: 'html',
+	            success: function (data) {
+	                if (data) {
+	                    $("#store_list").append(data);
+	                    page++;
+	                    $('.get_more').hide();
+	                } else {
+	                    $('.get_more').hide();
+	                    $('#getmore').remove();
+	                }
+	            }
+	        });
+	    }
+		
+		$(function(){
+			$('.storenav ul li span').click(function(){
+				$(this).parent().addClass('red').siblings('li').removeClass('red')
+			});
+			
+			$('.storenav ul li .lb').click(function(){
+				$('.lb_showhide').show();
+				cover();
+			});
+			
+			$('.storenav ul li .dq').click(function(){
+				$(this).siblings('.dqs').find('#dq').click();
+			});
+		});
+		</script>
+	</body>
+</html>

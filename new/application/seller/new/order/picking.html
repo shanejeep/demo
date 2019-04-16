@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="__PUBLIC__/static/css/base.css" rel="stylesheet" type="text/css"/>
+<link href="__PUBLIC__/static/css/seller_center.css" rel="stylesheet" type="text/css"/>
+<style type="text/css">
+body { background: #FFF none;}
+.ncsc-order-details{width: 50%;box-sizing: border-box;}
+.ncsc-order-details:last-child{border-right: 0}
+.ncsc-order-details .content dl dd a, .ncsc-order-contnet .daddress-info dd a{float: none;padding-left: 0}
+.bl-img{ width: 70px;height: 70px;margin-left: 10px; margin-top: 20px; }
+</style>
+<title>配货单打印</title>
+</head>
+
+<body>
+<div class="print-layout">
+  <div class="print-btn" id="printbtn" title="选择喷墨或激光打印机<br/>根据下列纸张描述进行<br/>设置并打印发货单据"><i></i><a href="javascript:void(0);" onclick="window.print();">打印</a></div>
+  <div class="a5-size"></div>
+  <dl class="a5-tip">
+    <!-- <dt>
+      <h1>A5</h1>
+      <em>Size: 210mm x 148mm</em></dt>
+    <dd>当打印设置选择A5纸张、横向打印、无边距时每张A5打印纸可输出1页{$orderword}。</dd> -->
+  </dl>
+  <div class="a4-size"></div>
+  <dl class="a4-tip">
+<!--     <dt>
+      <h1>A4</h1>
+      <em>Size: 210mm x 297mm</em></dt>
+    <dd>当打印设置选择A4纸张、竖向打印、无边距时每张A4打印纸可输出2页{$orderword}。</dd> -->
+  </dl>
+  <div class="print-page">
+    <div id="printarea">
+            <div style="height: auto;" class="orderprint">
+        <div class="top">
+             <div class="full-title">{$tpshop_config['shop_info_store_name']} 配货单</div>
+        </div>
+        
+		<table class="buyer-info">
+          <tr>
+            <td class="w300">收货人：{$order.consignee}</td>
+            <td>电话：{$order.mobile}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td colspan="3">地址：{$order.province}&nbsp;&nbsp;{$order.city}&nbsp;&nbsp;{$order.district}&nbsp;&nbsp;{$order.address}</td>
+          </tr>
+        </table>
+         <div class="ncsc-order-info">
+		    <div class="ncsc-order-details">
+		      <div class="title">发货来源</div>
+		      <div class="content">
+		        <dl>
+		          <dt>店铺名称：</dt>
+		          <dd><strong>{$shop.store_name}</strong></dd>
+		        </dl>
+		        <dl>
+		          <dt>店铺地址：</dt>
+		          <dd>{$shop.address}</dd>
+		        </dl>
+		           <dl>
+		          <dt>电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：</dt>
+		          <dd>{$shop.phone}</dd>
+		        </dl>
+		        <dl>
+		          <dt>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;件：</dt>
+		          <dd>
+		           <empty name="shop.smtp_user">
+						无
+					<else /> 
+						{$shop.smtp_user}
+					</empty> 
+		          </dd>
+		        </dl>
+		        <dl>
+		          <dt>网&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：</dt>
+		          <dd>
+		          	<empty name="shop.tpshop_http">
+						<a style="padding:0px float:left" href="http://www.tpshop.cn">http://www.tpshop.cn</a>
+					<else /> 
+						<a style="padding:0px float:left" href="{$shop.tpshop_http}">{$shop.tpshop_http}</a>
+					</empty>
+		          </dd>
+		        </dl>
+		      </div>
+		    </div> 
+		    <div class="ncsc-order-details">
+		      <div class="title">{$orderword}详情</div>
+		      <div class="content">
+		        <dl>
+		          <dt>下单日期：</dt>
+		          <dd>{$order.add_time|date='Y-m-d H:i:s',###}</dd>
+		        </dl>
+		        <dl>
+		          <dt>{$orderword}编号：</dt>
+		          <dd>{$order.order_sn}</dd>
+		        </dl>
+		           <dl>
+		          <dt>支付方式：</dt>
+		          <dd>{$order.pay_name}</dd>
+		        </dl>
+		        <dl>
+		          <dt>配送方式：</dt>
+		          <dd>{$order.shipping_name}</dd>
+		        </dl>
+		        <dl>
+		          <dt>&nbsp;</dt>
+		          <dd>&nbsp;</dd>
+		        </dl>
+		      </div>
+		    </div>
+    	</div>
+    <eq name="order.is_drug" value="1">
+		<div class="ncsc-order-info">
+			<div class="ncsc-order-details">
+				<div class="title">用药人信息</div>
+				<div style="line-height: 22px;" id="content1" class="content">
+					<dl>
+						<dt>姓名：</dt>
+						<dd>{$user_infos.user}</dd>
+					</dl>
+					<dl>
+						<dt>性别：</dt>
+						<dd>{$user_infos.sex}</dd>
+					</dl>
+					<dl>
+						<dt>年龄：</dt>
+						<dd>{$user_infos.ages}</dd>
+					</dl>
+					<dl>
+						<dt>联系电话：</dt>
+						<dd>{$user_infos.mobile}</dd>
+					</dl>
+					<dl>
+						<dt>身份证号：</dt>
+						<dd>{$user_infos.idcard}</dd>
+					</dl>
+				</div>
+			</div>
+			<div class="ncsc-order-details">
+				<div class="title">病例图片</div>
+				<div class="content">
+					<notempty name="order.case1"> <img class="bl-img" src="{$order.case1}"></notempty>
+					<notempty name="order.case2"> <img class="bl-img" src="{$order.case2}"></notempty>
+					<notempty name="order.case3"> <img class="bl-img" src="{$order.case3}"></notempty>
+					<notempty name="order.case4"> <img class="bl-img" src="{$order.case4}"></notempty>
+				</div>
+			</div>
+		</div>
+    </eq>
+        <table class="order-info" style="margin-top:10px">
+          <thead>
+            <tr>
+              <th class="w40">序号</th>
+              <th class="tl">{$goodsword}名称</th>
+              <th class="w150 tl">规格属性</th>
+              <th class="w70">单价(元)</th>
+              <th class="w50">数量</th>
+              <th class="w70 tl">小计(元)</th>
+            </tr>
+          </thead>
+          <tbody>
+          <volist name="orderGoods" id="good" key="k">
+          	<tr>
+              <td>{$k}</td>
+              <td class="tl">{$good.goods_name}</td>
+              <td class="tl">{$good.spec_key_name}</td>
+              <td >&yen;{$good.goods_price}</td>
+              <td>{$good.goods_num}</td>
+              <td class="tl">&yen;{$good.goods_total}</td>
+            </tr>
+            </volist>
+          	<tr>
+              <th></th>
+              <th colspan="3" class="tl">合计</th>
+              <th>{$goods_count}</th>
+              <th class="tl">&yen;{$order.goods_price}</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+          </div>
+      </div>
+</div>
+</body>
+</html>

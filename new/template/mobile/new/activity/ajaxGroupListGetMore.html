@@ -1,0 +1,22 @@
+<foreach name="list" item="v" key="k" >
+ <li> 
+	 <a class="url" href="{:U('Activity/group',array('id'=>$v[goods_id]))}"> 
+	 <img src="{$v.goods_id|goods_thum_images=200,200}">   </a>
+	 <a href="{:U('Activity/group',array('id'=>$v[goods_id]))}"  class="info_wrap">
+		 <div class="fn good">{$v.title}</div>
+		 <div class="price_wrap"> 
+		 	<i class="discount"  style="display:;">{$v[rebate]}折</i> <span class="price" style="display:;">￥{$v[price]}元</span> <del class="old_price"  style="display:;">￥{$v[goods_price]}元</del> 
+		 </div> 
+		 <div class="bottom_info">
+		 	<span class="remain_num" style="display:;">已售{$v[buy_num] + $v[virtual_num]}件</span>
+		    <span class="sg_g_time last_g_time" id="jstimerBox{$v[goods_id]}"></span>
+		 </div> 
+	 </a>
+</li>
+ 
+<script>
+Tday['{$v[goods_id]}'] = new Date('{$v.end_time|date="Y/m/d H:i:s",###}');  
+window.setInterval(function()    
+{clock11('{$v[goods_id]}');}, 1000);  
+</script> 
+</foreach>

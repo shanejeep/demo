@@ -1,0 +1,216 @@
+<include file="public/head"/>
+<script src="__ROOT__/public/static/js/layer/laydate/laydate.js"></script>
+<div class="ncsc-layout wrapper">
+    <include file="public/left"/>
+    <div id="layoutRight" class="ncsc-layout-right">
+        <div class="ncsc-path"><i class="icon-desktop"></i>商家管理中心<i class="icon-angle-right"></i>促销<i class="icon-angle-right"></i>商品促销管理</div>
+        <div class="main-content" id="mainContent">
+            <div class="tabmenu">
+                <ul class="tab pngFix">
+                    <li class="normal"><a href="{:U('Coupon/index')}">返回优惠券列表</a></li>
+                    <li class="active"><a>新增/编辑活动</a></li>
+                </ul>
+            </div>
+            <div class="alert alert-block mt10 mb10">
+	            <ul>
+					<li>1、下单赠送，一般用在商品优惠活动中赠送给完成订单的会员</li>
+					<li>2、免费领取，该类型的优惠券在店铺首页会员可以直接领取</li>
+					<li>3、指定发放，则是属于不公开的优惠券,商家可以指定关注店铺会员发放</li>
+					<li>4、线下发放，则表示通过打印成实体券，并且生成验证劵码，用户凭借券码消费</li>
+				</ul>
+			</div>
+            <div class="ncsc-form-default">
+                <form id="coupon_form" method="post" onsubmit="return coupon_submit();">
+                    <input type="hidden" name="id" value="{$coupon.id}">
+                    <dl>
+                        <dt><i class="required">*</i>优惠券名称：</dt>
+                        <dd>
+                            <input class="w400 text" type="text" id="name" name="name" value="{$coupon.name}" maxlength="30"/>
+                            <span></span>
+                            <p class="hint">请填写优惠券名称</p>
+                        </dd>
+                    </dl>
+					<dl>
+                            <dt><i class="required">*</i>限制商品分类使用：</dt>
+                            <dd>
+                                <select name="cat_id1" id="cat_id1" onchange="get_category2(this.value,'cat_id2','0');" class="valid">
+                                    <option value="0">请选择商品分类</option>
+                                    <foreach name="cat_list" item="v" key="k" >
+                                        <option value="{$v['id']}" <if condition="$v['id'] eq $coupon['cat_id1']">selected="selected"</if> >
+                                        {$v['name']}
+                                        </option>
+                                    </foreach> 
+                                </select>
+                                <select name="cat_id2" id="cat_id2" onchange="get_category2(this.value,'cat_id3','0');" class="valid">
+                                	<option value="0">请选择商品分类</option>
+                                </select>
+                                <select name="goods_cat_id" id="cat_id3" class="valid">
+                                	<option value="0">请选择商品分类</option>
+                                </select>
+                                <span id="err_cat_id1" style="color:#F00; display:none;"></span>
+                                <span id="err_cat_id2" style="color:#F00; display:none;"></span>
+                                <span id="err_cat_id3" style="color:#F00; display:none;"></span>
+                                <p class="hint">若不选表示不限制，否则请选择到指定三级分类</p>
+                            </dd>
+                        </dl>
+                    <dl>
+                        <dt><i class="required">*</i>优惠券面额：</dt>
+                        <dd>
+                            <select id="money" name="money">
+                                <volist name="coupon_price_list" id="vo">
+                                    <option value="{$vo['coupon_price_value']}" <if condition="$vo['coupon_price_value'] eq $coupon['money']">selected="selected"</if> >
+                                    {$vo['coupon_price_value']}元
+                                    </option>
+                                </volist>
+                            </select>
+                            <p class="hint">优惠券面额由平台设置，优惠券可抵扣金额,单位：元</p>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><i class="required">*</i>消费金额：</dt>
+                        <dd>
+                            <input id="condition" name="condition" value="{$coupon.condition}"  onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" type="text" class="text w130"/>
+
+                            <p class="hint">订单需满足的最低消费金额(必需为整数)才能使用</p>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>发放类型：</dt>
+                        <dd>
+                            <ul class="ncsc-form-radio-list">
+                                <li>
+                                    <label><input name="type" type="radio" value="0" <if condition="$coupon['type'] eq 0">checked</if>>下单赠送</label>
+                                </li>
+                                <li>
+                                    <label><input name="type" type="radio" value="1" <if condition="$coupon['type'] eq 1">checked</if>>指定发放</label>
+                                </li>
+                                <li>
+                                    <label><input name="type" type="radio" value="2" <if condition="$coupon['type'] eq 2">checked</if>>免费领取</label>
+                                </li>
+                                <li>
+                                    <label><input name="type" type="radio" value="3" <if condition="$coupon['type'] eq 3">checked</if>>线下发放</label>
+                                </li>
+                            </ul>
+                            <p class="hint"></p>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><i class="required">*</i>可发放总数：</dt>
+                        <dd>
+                            <input id="createnum" name="createnum" value="{$coupon.createnum|default=0}"  onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" type="text" class="text w130"/>
+
+                            <p class="hint">发放数量限制(默认为0则无限制)</p>
+                        </dd>
+                    </dl>
+                    <dl class="timed">
+                        <dt><i class="required">*</i>发放起始日期：</dt>
+                        <dd>
+                            <input id="send_start_time" name="send_start_time" value="{$coupon.send_start_time|date='Y-m-d H:i:s',###}"  type="text" class="text w130"/><em class="add-on"><i class="icon-calendar"></i></em><span></span>
+
+                            <p class="hint">发放起始日期</p>
+                        </dd>
+                    </dl>
+                    <dl class="timed">
+                        <dt><i class="required">*</i>发放结束日期：</dt>
+                        <dd>
+                            <input id="send_end_time" name="send_end_time"  value="{$coupon.send_end_time|date='Y-m-d H:i:s',###}" type="text" class="text w130"/><em class="add-on"><i
+                                class="icon-calendar"></i></em><span></span>
+
+                            <p class="hint">发放结束日期</p>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><i class="required">*</i>使用起始日期：</dt>
+                        <dd>
+                            <input id="use_start_time" name="use_start_time" value="{$coupon.use_start_time|date='Y-m-d H:i:s',###}"  type="text" class="text w130"/><em class="add-on"><i class="icon-calendar"></i></em><span></span>
+
+                            <p class="hint">使用起始日期</p>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><i class="required">*</i>使用结束日期：</dt>
+                        <dd>
+                            <input id="use_end_time" name="use_end_time"  value="{$coupon.use_end_time|date='Y-m-d H:i:s',###}" type="text" class="text w130"/><em class="add-on"><i
+                                class="icon-calendar"></i></em><span></span>
+
+                            <p class="hint">使用结束日期</p>
+                        </dd>
+                    </dl>
+                    <dl>
+				      <dt><i class="required">*</i>代金券描述：</dt>
+				      <dd>
+				        <textarea name="coupon_info" class="textarea w400 h600 valid">{$coupon.coupon_info}</textarea>
+				        <span></span>
+				      </dd>
+				    </dl>
+				    <dl>
+				      	<dt><em class="pngFix"></em>状态：</dt>
+				      	<dd>
+				      		<input type="radio" value="1" name="status" <if condition="$coupon.status eq 1">checked</if>> 有效	      		
+				      		<input type="radio" value="2" name="status" <if condition="$coupon.status eq 2">checked</if>> 失效	      	
+				      	</dd>
+				    </dl>
+                    <div class="bottom"><label class="submit-border">
+                        <input type="submit" class="submit" value="提交"></label>
+                    </div>
+                </form>
+            </div>
+            <script type="text/javascript">
+                $('input[name="type"]').click(function(){
+                    if($(this).val() == 0){
+                        $('.timed').hide();
+                    }else{
+                        $('.timed').show();
+                    }
+                })
+
+                function coupon_submit(){
+                    if($('input[name=name]').val() == ''){
+                        layer.msg('优惠券名称不能为空！', {icon: 2,time: 1000});
+                        return false;
+                    }
+                }
+                $(document).ready(function(){
+                    $('input[type="radio"]:checked').trigger('click');
+                    $('#send_start_time').layDate();
+                    $('#send_end_time').layDate();
+                    $('#use_start_time').layDate();
+                    $('#use_end_time').layDate();
+
+                    $("#prom_type").trigger('change');
+                    $('input[name=expression]').val("{$info.expression}");
+                    
+                    <if condition="$coupon['cat_id2'] gt 0">
+                    	get_category2("{$coupon['cat_id1']}",'cat_id2',"{$coupon['cat_id2']}");
+		            </if>
+		            <if condition="$coupon['goods_cat_id'] gt 0">
+		                 get_category2("{$coupon['cat_id2']}",'cat_id3',"{$coupon['goods_cat_id']}");
+		            </if>
+                })
+
+            /**
+		     * 获取多级联动的商品分类
+		     */
+		    function get_category2(id, next, select_id) {
+		        var url = '/index.php?m=Seller&c=Index&a=get_category&parent_id=' + id;
+		        $.ajax({
+		            type: "GET",
+		            url: url,
+		            error: function (request) {
+		                layer.alert("服务器繁忙, 请联系管理员!",{icon:2});
+		                return;
+		            },
+		            success: function (v) {
+		                v = "<option value='0'>请选择商品分类</option>" + v;
+		                $('#' + next).empty().html(v);
+		                (select_id > 0) && $('#' + next).val(select_id);//默认选中
+		            }
+		        });
+		    }
+            </script>
+        </div>
+    </div>
+</div>
+<include file="public/foot"/>
+</body>
+</html>

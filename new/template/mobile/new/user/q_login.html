@@ -1,0 +1,180 @@
+<!DOCTYPE html >
+<html>
+<head>
+	<meta name="Generator" content="tpshop" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>绑定手机号-{$tpshop_config['shop_info_store_title']}</title>
+	<meta name="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+	<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<link rel="stylesheet" type="text/css" href="__STATIC__/css/public.css"/>
+	<link rel="stylesheet" type="text/css" href="__STATIC__/css/login.css"/>
+	<script type="text/javascript" src="__STATIC__/js/jquery.js"></script>
+	<script type="text/javascript" src="http://yzjshop.oss-cn-hangzhou.aliyuncs.com/common/layer/layer.js" ></script>
+	<script src="__PUBLIC__/js/global.js"></script>
+	<script src="__PUBLIC__/js/mobile_common.js"></script>
+</head>
+<body>
+<header id="header" class='header'>
+	<div class="h-left"><a href="javascript:history.back(-1)" class="back"></a></div>
+	<div class="h-mid">快捷登录</div>
+	<div class="h-right"><a style="color: #757575;text-decoration: #0a2e87;" href="{:U('Mobile/user/login')}">登录</a></div>
+</header>
+<div id="tbh5v0">
+	<div class="log_reg_box">
+		<div id="logRegTabCon">
+			<div class="log_reg_item" id="phonearea">
+				<form action="" id="mobileForm" name="mobileForm" method="post"  onsubmit="return check_submit()">
+					<input type="hidden" name="scene" value="1">
+					<div class="field phone">
+						<input type="text" id="username" name="username" placeholder="手机号" class="c-form-txt-normal" />
+						<div class="tips">
+							<span id="mobile_phone_notice"></span>
+						</div>
+					</div>
+
+					<!-- <div class="yanzheng" style=" margin-top:10px;"> -->
+					<!-- <div class="codeTxt"> -->
+					<!-- <input type="text" id="captcha" name="verify_code" placeholder="验证码" /> -->
+					<!-- </div> -->
+					<!-- <div class="codePhoto"> -->
+					<!-- <img class="check-code-img" src="/index.php?m=Mobile&c=User&a=verify&type=reg" alt="验证码" id="verify_code_img" onClick="verify()" height="35"/> -->
+					<!-- </div> -->
+					<!-- </div>  -->
+					<div class="yanzheng"  style=" margin-top:0px;">
+						<div class="codeTxt">
+							<input type="hidden"  name="referurl"  value="{$referurl}" />
+							<input type="text" id="mobile_code"  name="mobile_code" placeholder="手机验证码" />
+						</div>
+						<div class="codePhoto">
+							<input id="zphone" type="button" rel="mobile" value="获取手机验证码 " class="zphone" style=" color:#FFF">
+						</div>
+					</div>
+					<input type="submit" id="btn_submit" name="Submit" class="btn_big1" value="登录" />
+				</form>
+			</div>
+		</div>
+		<div></div>
+	</div>
+	<include file="public/footer"/>
+</div>
+<script type="text/javascript">
+
+    setCurrentForm($("#mobileForm"));
+    var flag = true;
+
+    function setCurrentForm(formObj) {
+        currentForm = $(formObj);
+    }
+
+    $("#zphone").click(function(){
+        checkMobilePhone($("#username").val());
+        var vrcode=$("#captcha").val();
+        <!-- if(vrcode.length==0){ -->
+        <!-- layer.open({content:"图片验证码不能为空！",time:2}); -->
+        <!-- return false; -->
+        <!-- } -->
+        <!-- $.ajax({ -->
+        <!-- url:'/index.php?m=Mobile&c=User&a=check_captcha', -->
+        <!-- type:'post', -->
+        <!-- dataType:'json', -->
+        <!-- data:{verify_code:vrcode,id:'reg'}, -->
+        <!-- success:function(res){ -->
+        <!-- if(res.status==1){ -->
+        sendcode();
+        <!-- }else{ -->
+        <!-- layer.open({content:res.msg,time:2}); -->
+        <!-- } -->
+        <!-- } -->
+        <!-- });	 -->
+
+
+    });
+
+
+
+    function checkMobilePhone(mobile){
+        if(mobile == ''){
+            layer.msg('手机号码不能为空');
+            flag = false;
+            return false;
+        }
+        if(!checkMobile(mobile)){
+            layer.msg('手机号码格式不正确');
+            flag = false;
+            return false;
+        }
+        flag = true;
+    }
+
+    //验证码切换
+
+    function verify(){
+        $('#verify_code_img').attr('src','/index.php?m=Mobile&c=User&a=verify&type=reg&r='+Math.random());
+    }
+
+
+
+    function check_submit()
+    {
+        var isMobileReg = !($('#phonearea').is(':hidden'))
+        var username = $.trim($(currentForm).find('#username').val());
+        var sms_code = $(currentForm).find('#mobile_code').val();
+        if(isMobileReg && sms_code ==""){
+            layer.open({content:'请输入短信验证码',time:2});
+            return (false);
+        }
+
+        if(username.length == "" )
+        {
+            layer.open({content:'请输入手机号！',time:2});
+            return (false);
+        }
+
+    }
+
+    function sendcode(){
+        if(flag){
+            $.ajax({
+                url:  '/index.php?m=Home&c=Api&a=send_validate_code&t='+Math.random(),
+                type:'post',
+                dataType:'json',
+                data:{type:'mobile',send:$.trim($(currentForm).find('#username').val()) , scene:1},
+                success:function(res){
+                    if(res.status == 1){
+                        layer.msg(res.msg);
+                        flag = false;
+                        countdown($("#zphone"));
+                    }else{
+                        layer.msg(res.msg);
+                    }
+                }
+            })
+        }
+    }
+
+    var wait = 150;
+    function countdown(obj, msg) {
+        obj = $(obj);
+        if (wait == 0) {
+            obj.removeAttr("disabled");
+            obj.val(msg);
+            flag = true;
+            wait = 150;
+        } else {
+            if (msg == undefined || msg == null) {
+                msg = obj.val();
+            }
+            obj.attr("disabled", "disabled");
+            obj.val(wait + "秒后重新获取");
+            wait--;
+            setTimeout(function() {
+                countdown(obj, msg)
+            }, 1000)
+        }
+    }
+</script>
+</body>
+</html>

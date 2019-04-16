@@ -1,0 +1,46 @@
+<div class="com_top">
+    <if condition="$access_type neq 1">
+        <h2><a href="{:U('Mobile/User/userinfo')}">设置</a></h2>
+        <p class="tuij_cas">
+            {$user['mobile']}
+        </p>
+
+        <dl>
+            <dt>
+                <img src="{$user['head_pic']|default=" __STATIC__/images/user68.jpg"}">
+            <dd>{$level_name}</dd>
+            </dt>
+        </dl>
+    </if>
+</div>
+<if condition="$access_type eq 1">
+    <style type="text/css">
+        .uer_topnav ul {
+            width: 100%;
+            height: 40px;
+            padding-top: 10px;
+            float: left;
+        }
+        .uer_topnav ul li {
+            width: 20%;
+            float: left;
+            line-height: 20px;
+            color: #666;
+            text-align: center;
+        }
+        .app_user{
+            width: 30%;
+            padding-top: 10px;
+        }
+    </style>
+</if>
+<div class="uer_topnav">
+    <ul>
+        <if condition="$access_type eq 1">
+            <li class="bain" style="width: 35%;"><a href="#"><span>{$user['mobile']}</span>{$level_name}</a></li>
+        </if>
+        <li class="bain"><a href="{:U('Mobile/User/order_list')}"><span>{$order_count}</span>我的订单</a></li>
+        <li class="bain"><a href="{:U('Mobile/User/collect_list')}"><span>{$goods_collect_count}</span>我的收藏</a></li>
+        <li><a href="{:U('Mobile/User/comment',array('status'=>-1))}"><span>{$comment_count}</span>我的评价</a></li>
+    </ul>
+</div>

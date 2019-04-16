@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no"/>
+    <title>医之佳 - 商家入驻</title>
+    <link rel="stylesheet" href="__STATIC__/newjoin2/styles/base.css">
+    <script src="__STATIC__/newjoin2/scripts/font.js"></script>
+</head>
+<body>
+<header>
+    <div class="container">
+        <a class="brand" href="/"></a>
+        <ul class="nav">
+            <empty name="user">
+                <li><a href="{:U('Home/user/login_new_join')}" class="link">Hi.请登录</a></li>
+                <li><a href="{:U('Home/user/reg_new_join')}" class="link">免费注册</a></li>
+            <else/>
+                <li><a href="javascript:void(0);" class="link">{$user['mobile']}</a></li>
+                <li><a href="{:U('Home/user/logout_new_join')}" class="link">退出</a></li>
+            </empty>
+        </ul>
+    </div>
+</header>
+<section class="section1">
+    <div class="container">
+        <div class="title"></div><a class="btn" href="{:U('Newjoin/index_join')}">立即入驻</a><a class="link" href="{:U('Newjoin/index_join')}">查询入驻进度</a>
+    </div>
+</section>
+<section class="section2">
+    <div class="container">
+        <ul>
+            <li><a href="{:U('Home/Article/join_detail',array('article_id'=>$data['article']['ganggao']['article_id']))}"><i class="ico1"></i>
+                <h4>信息公告</h4>
+                <p>{$data['article']['ganggao']['title']}</p></a>
+            </li>
+            <li><a href="{:U('Home/Article/join_detail',array('article_id'=>$data['article']['zhangshang']['article_id']))}"><i class="ico2"></i>
+                <h4>招商标准</h4>
+                <p>{$data['article']['zhangshang']['title']}</p></a>
+            </li>
+            <li><a href="{:U('Home/Article/join_detail',array('article_id'=>$data['article']['zifei']['article_id']))}"><i class="ico3"></i>
+                <h4>资费标准</h4>
+                <p>{$data['article']['zifei']['title']}</p></a>
+            </li>
+            <li><a href="{:U('Home/Article/join_detail',array('article_id'=>$data['article']['youshi']['article_id']))}"><i class="ico4"></i>
+                <h4>医之佳商城优势</h4>
+                <p>{$data['article']['youshi']['title']}</p></a>
+            </li>
+            <li><a href="{:U('Home/Article/join_detail',array('article_id'=>$data['article']['help']['article_id']))}"><i class="ico5"></i>
+                <h4>帮助中心</h4>
+                <p>{$data['article']['help']['title']}</p></a>
+            </li>
+            <li><a class="span" href="tel:{$tpshop_config['shop_info_phone']}"><i class="ico6"></i>
+                <h4 class="cr999">联系方式</h4>
+                <p>招商电话：{$tpshop_config['shop_info_phone']}</p></a>
+            </li>
+        </ul>
+    </div>
+</section>
+<section class="section3">
+    <div class="container">
+        <div class="title">入驻流程</div>
+        <ul>
+            <li>
+                <h4>申请入驻</h4>
+                <p>准备店铺信息</p>
+                <p>资质在线填写入驻</p>
+                <p>信息上传资质文件</p>
+            </li>
+            <li>
+                <h4>签订协议</h4>
+                <p>TP在线审核</p>
+                <p>双方确认合同</p>
+                <p>商家邮寄合同</p>
+            </li>
+            <li>
+                <h4>准备开店</h4>
+                <p>商家缴纳费用</p>
+                <p>上线培训</p>
+                <p>开通商家管理后台</p>
+            </li>
+            <li>
+                <h4>商品销售</h4>
+                <p>商品录入</p>
+                <p>装修店铺</p>
+                <p>店铺上线销售</p>
+            </li>
+        </ul><a class="btn btn-transparent" href="{:U('Newjoin/agreement')}">查看入驻标准</a>
+    </div>
+</section>
+<section class="section4">
+    <div class="container">
+        <ul>
+            <li><i class="ico7"></i><span>品类齐全，轻松购物</span></li>
+            <li><i class="ico8"></i><span>多仓直发，急速配送</span></li>
+            <li><i class="ico9"></i><span>正品行贷，精致服务</span></li>
+            <li><i class="ico10"></i><span>天天低价，畅选无忧</span></li>
+        </ul>
+    </div>
+</section>
+</body>
+</html>

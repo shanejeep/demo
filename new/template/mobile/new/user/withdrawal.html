@@ -1,0 +1,155 @@
+<include file="public/header"/>
+<body>
+<div id="tbh5v0">
+    <div class="user_com">
+        <div class="endorse_hend" style="padding: 0;">
+            <!-- deng start -->
+            <div class="h-left">
+                <a class="sb-back" href="javascript:history.back(-1)" title="返回"></a>
+            </div>
+            <div class="h-mid">提现信息</div>
+            <!-- deng end -->
+        </div>
+        <style>
+            .disbox {
+                display: -webkit-box;
+                display: -moz-box;
+                display: -ms-flexbox;
+                display: -o-box;
+                display: box;
+                box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+            }
+
+            .disflex {
+                -webkit-box-flex: 1;
+                -moz-box-flex: 1;
+                -ms-box-flex: 1;
+                -o-box-flex: 1;
+                box-flex: 1;
+                display: block
+            }
+            .tx_cash span {
+                float: none;
+                width: 70px;
+                font-size: 14px;
+            }
+            .tx_cash input[type=text] {
+                height: 24px;
+                padding: 2px 10px;
+                float: none;
+                margin-top: 5px;
+            }
+        </style>
+        <div class="Wallet" style="border: 0">
+            <div class="cash_num bb1">
+                <form action="" method="post" enctype="multipart/form-data" name="distribut_form" id="distribut_form">
+                    <p class="tx_cash disbox"><span>提现金额：</span><input class="disflex" type="text" id="money" name="money" placeholder="" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onKeyUp="this.value=this.value.replace(/[^\d.]/g,'')"/></p>
+                    <p class="tx_cash disbox"><span>银行名称：</span><input class="disflex" type="text" value="{$user.bank_name}" id="bank_name" name="bank_name" placeholder="如:农业银行,工商银行等..."/></p>
+                    <p class="tx_cash disbox"><span>收款账号：</span><input class="disflex" type="text" value="{$user.bank_card}" id="bank_card" onkeyup="value=value.replace(/[^\w\/]/ig,'')" name="bank_card" placeholder="如:建设银行账号"/></p>
+                    <p class="tx_cash disbox"><span>开户名：</span><input class="disflex" type="text" value="{$user.realname}" id="realname" name="realname" placeholder="开户人姓名"/></p>
+                    <p class="tx_cash disbox">
+                        <span>验证码：</span>
+                        <input type="text" class="disflex" name="verify_code" id="verify_code" placeholder="请输入下面的验证码" style="width:200px;" />
+                        <img class="po-ab to0" id="verify_code_img"  style="height: 30px; width: 100px" src="{:U('User/verify',array('type'=>'withdrawals'))}"  onclick="verify(this)" />
+                    </p>
+                    <p><a id="cash_submit" href="javascript:void(0);" onClick="checkSubmit();" style="background: #dd2726; height: 40px; line-height: 40px; color: #fff;border-radius: 5px; display: block; padding: 0;">确定提交</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--deng start-->
+    <if condition="$access_type eq 1">
+        <else />
+        <include file="public/footer"/>
+    </if>
+    <!--deng end-->
+</div>
+
+<style>
+    .edit p{ font-size: 12px; line-height: 20px; color: #999}
+</style>
+<div class="edit" style="padding: 10px;">
+    <p>提现说明：</p>
+    <p>1.提现必须为整数。</p>
+    <p>2.提现到账时间为一个自然月内申请提现后，次月初对上月的数据进行统计，15号左右到达申请的账户上。</p>
+    <p>3.目前仅支持银行账号和支付宝提现，暂不支持微信。</p>
+    <p>4.单次提现金额应大于等于100元。</p>
+</div>
+<!--deng start-->
+<if condition="$access_type eq 1">
+    <else />
+    <include file="public/footer_nav"/>
+</if>
+<!--deng end-->
+</body>
+<script>
+    // 表单验证提交
+    function checkSubmit(){
+        var money = $.trim($('#money').val());
+        var bank_name = $.trim($('#bank_name').val());
+        var bank_card = $.trim($('#bank_card').val());
+        var realname = $.trim($('#realname').val());
+        var verify_code = $.trim($('#verify_code').val());
+        if(money == '')
+        {
+            alert('提现金额必填');
+            return false;
+        }
+        if(money < {$tpshop_config['basic_min']|default=100} || money > {$user['user_money']})
+        {
+            //alert("每次最少提现额度{$tpshop_config['distribut_min']},你的账户余额{$user['user_money']}");
+            //return false;
+        }
+
+        if(bank_name == '')
+        {
+            alert('银行名称必填');
+            return false;
+        }
+        if(bank_card == '')
+        {
+            alert('收款账号必填');
+            return false;
+        }
+        if(realname == '')
+        {
+            alert('开户名必填');
+            return false;
+        }
+        if(verify_code == '')
+        {
+            alert('验证码必填');
+            return false;
+        }
+        $('#distribut_form').submit();
+    }
+
+    // 验证码切换
+    function verify(){
+        $('#verify_code_img').attr('src','/index.php?m=Mobile&c=User&a=verify&type=withdrawals&r='+Math.random());
+    }
+
+    var  page = 1;
+    /*** ajax 提交表单 查询订单列表结果*/
+    function ajax_sourch_submit()
+    {
+        page += 1;
+        $.ajax({
+            type : "GET",
+            url:"/index.php?m=Mobile&c=User&a=withdrawals&is_ajax=1&p="+page,//+tab,
+//			data : $('#filter_form').serialize(),// 你的formid 搜索表单 序列化提交
+            success: function(data)
+            {
+                if($.trim(data) == '')
+                    $('#getmore').hide();
+                else{
+                    $("#ajax_return").append(data);
+                }
+            }
+        });
+    }
+
+</script>
+</html>

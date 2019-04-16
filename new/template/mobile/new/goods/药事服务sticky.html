@@ -1,0 +1,56 @@
+  //顶部sticky效果
+        setTimeout(function () {
+            var sboxH = sbox.height();
+            var sortH = sort.height();
+            var sortStart = sort.offset().top - sboxH;
+            var showEnd = sort.offset().top;
+            var init = function () {
+                sbox.css({"position": "fixed", "top": "0"});
+                window.scrollTo(0, 0);
+            };
+            var rawScroll = 0, nowScroll = 0;
+            var upOrDown = function () {
+                var delta = 30;
+                if (nowScroll > rawScroll + delta) {
+                    return 1;
+                } else if (nowScroll < rawScroll - delta) {
+                    return 2;
+                } else {
+                    return 0;
+                }
+            };
+            var sticky = function () {
+                nowScroll = $(window).scrollTop();
+                if (nowScroll >= sortStart) {
+                    sort.css({"position": "fixed", "top": sboxH});
+                    g_list.css({"margin-top": sortH});
+                } else {
+                    sort.attr("style", "");
+                    g_list.attr("style", "");
+                }
+                if (nowScroll > showEnd + sortH) {
+                    var up = upOrDown();
+                    if (up == 1) {
+                        if (sbox.css("display") != "none") {
+                            sbox.hide();
+                            sort.hide();
+                        }
+                        rawScroll = nowScroll;
+                    } else if (up == 2) {
+                        if (sbox.css("display") == "none") {
+                            sbox.show();
+                            sort.show();
+                        }
+                        rawScroll = nowScroll;
+                    }
+                } else {
+                    if (sbox.css("display") == "none") {
+                        sbox.show();
+                        sort.show();
+                    }
+                }
+            };
+            init();
+            $(document).on("touchmove", sticky);
+            $(window).on("scroll", sticky);
+        }, 500);

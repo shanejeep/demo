@@ -1,0 +1,95 @@
+<include file="public/head"/>
+<div class="ncsc-layout wrapper">
+	<include file="public/left"/>
+  <div id="layoutRight" class="ncsc-layout-right">
+    <div class="ncsc-path">
+    	<i class="icon-desktop"></i>商家管理中心
+    	<i class="icon-angle-right"></i>店铺信息
+    	<i class="icon-angle-right"></i>账户设置
+    </div>
+    <div class="main-content" id="mainContent">     
+<div class="tabmenu">
+  <ul class="tab pngFix">
+  <li <if condition="ACTION_NAME eq 'store_setting'">class="active"<else/>class="normal"</if>><a  href="{:U('Store/store_setting')}">店铺设置</a></li>
+  <li <if condition="ACTION_NAME eq 'store_slide'">class="active"<else/>class="normal"</if>><a  href="{:U('Store/store_slide')}">幻灯片设置</a></li>
+  <li <if condition="ACTION_NAME eq 'store_theme'">class="active"<else/>class="normal"</if>><a  href="{:U('Store/store_theme')}">店铺主题</a></li>
+  <li <if condition="ACTION_NAME eq 'mobile_slide'">class="active"<else/>class="normal"</if>><a  href="{:U('Store/mobile_slide')}">手机店铺设置</a></li>
+  <li <if condition="ACTION_NAME eq 'getpoint'">class="active"<else/>class="normal"</if>><a  href="{:U('Store/getpoint')}">拾取店铺坐标</a></li>
+  <li <if condition="ACTION_NAME eq 'store_setting_account'">class="active"<else/>class="normal"</if>><a  href="{:U('Store/store_setting')}">账户设置</a></li>
+  </ul>
+</div>
+<div class="ncsc-form-default">
+  <form method="post" id="handlepost" action="{:U('')}" enctype="multipart/form-data">
+     <dl>
+      <dt>银行开户名：</dt>
+      <dd>
+        <input class="w200 text" name="bank_account_name" type="text"  id="bank_account_name" value="{$apply.bank_account_name}" />
+      </dd>
+    </dl>
+    <dl>
+      <dt>银行账号：</dt>
+      <dd>
+        <input class="text w200" name="bank_account_number" type="text"  id="{$apply.bank_account_number}" value="{$apply.bank_account_number}" />
+      </dd>
+    </dl>
+    <dl>
+      <dt>开户银行支行名称：</dt>
+      <dd>
+        <p>
+          <input class="text w400" name="bank_branch_name" type="text"  value="{$apply.bank_branch_name}" />
+        </p>
+      </dd>
+    </dl>
+    <dl>
+      <dt>开户银行所在地：</dt>
+      <dd>
+      	 <select style="width: 25%; float: left; margin-right: 15px;" onchange="get_city(this,0)" id="province" name="bank_province" class="form-control">
+           <option  value="0">选择省份</option>
+           <volist name="province" id="vo">
+               <option value="{$vo.id}" <if condition="$apply[bank_province] eq $vo[id]">selected</if>>{$vo.name}</option>
+           </volist>
+         </select>
+         <select style="width: 25%;" onchange="get_area(this)" id="city" name="bank_city" class="form-control">
+            <option value="0">选择城市</option>
+            <volist name="city" id="vo">
+                <option value="{$vo.id}" <if condition="$apply[bank_city] eq $vo[id]">selected</if>>{$vo.name}</option>
+            </volist>
+         </select>
+      </dd>
+    </dl>
+
+    <div class="bottom">
+        <label class="submit-border"><input type="submit" class="submit" value="提交" /></label>
+      </div>
+  </form>
+</div>
+<script type="text/javascript">
+function adsubmit(){
+	$('#handlepost').submit();
+}
+
+function goset(obj){
+	window.location.href = $(obj).attr('data-url');
+}
+
+function callback1(img_str){
+	$('input[name="store_logo"]').val(img_str);
+	$('#store_logo').attr('src',img_str);
+}
+
+function callback2(img_str){
+	$('input[name="store_banner"]').val(img_str);
+	$('#store_banner').attr('src',img_str);
+}
+
+function callback3(img_str){
+	$('input[name="store_avatar"]').val(img_str);
+	$('#store_avatar').attr('src',img_str);
+}
+</script>
+    </div>
+  </div>
+</div>
+<include file="public/foot"/>
+</body>
+</html>

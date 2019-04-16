@@ -1,0 +1,68 @@
+<include file="public/header" title="我的收藏" body=""/>
+<include file="public/header_nav" title="我的收藏" href="javascript:history.back(-1)"/>
+
+<if condition="empty($lists)" >
+    <!--没有收藏-s-->
+    <div class="comment_con p">
+        <div class="none"><img src="__STATIC__/images/none.png"><br><br>亲，此处还没有收藏哦~</div>
+    </div>
+    <!--没有收藏-e-->
+<else/>
+    <div class="floor guesslike">
+        <div class="likeshop">
+            <ul id="lists">
+                <foreach name="lists" item="good">
+                    <li>
+                        <div class="similer-product">
+                            <a class="simidibl" href="{:U('Goods/goodsInfo',array('id'=>$good[goods_id]))}">
+                                <img src="{$good.goods_id|goods_thum_images=400,400}"/>
+                                <span class="similar-product-text">{$good[goods_name]|getSubstr=0,20}</span>
+                            </a>
+                                <span class="similar-product-price">
+                                    ¥
+                                    <span class="big-price">{$good[shop_price]}</span>
+                                    <!--<a href="{:U('Mobile/Goods/similar',array('id'=>$good[goods_id]))}"><span class="guess-button J_ping">看相似</span></a>-->
+                                    <a href=""><span class="guess-button J_ping">看相似</span></a>
+                                    <a href="{:U('Mobile/User/cancel_collect', array('collect_id'=>$good[collect_id]))}"><span class="guess-button dele-button J_ping">删除</span></a>
+                                </span>
+                        </div>
+                    </li>
+                </foreach>
+            </ul>
+        </div>
+    </div>
+</if>
+<notempty name="lists">
+    <div id="getmore" style="font-size:.32rem;text-align: center;color:#888;padding:.25rem .24rem .4rem; clear:both">
+        <a href="javascript:void(0)" onClick="ajax_sourch_submit()">点击加载更多</a>
+    </div>
+</notempty>
+<!--底部导航-start-->
+<include file="public/footer_nav"/>
+<!--底部导航-end-->
+
+<script  type="text/javascript" charset="utf-8">
+    /**
+     * ajax加载更多
+     * */
+    var page = 1;
+    function ajax_sourch_submit()
+    {
+        page += 1;
+        $.ajax({
+            type : "GET",
+            url:"/index.php/Mobile/User/collect_list?is_ajax=1&p="+page,//+tab,
+//			url:"{:U('Mobile/User/collect_list',null,'')}/is_ajax/1/p/"+page,//+tab,
+//			data : $('#filter_form').serialize(),// 你的formid 搜索表单 序列化提交
+            success: function(data)
+            {
+                if($.trim(data) == '')
+                    $('#getmore').hide();
+                else
+                    $("#lists").append(data);
+            }
+        });
+    }
+</script>
+</body>
+</html>

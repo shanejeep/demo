@@ -1,0 +1,136 @@
+<include file="public/header" title="设置" body="g4"/>
+<include file="public/header_nav" title="设置" href="javascript:history.back(-1);"/>
+		<div class="floor my p setting">
+			<div class="content">
+				<div class="floor list7">
+					<div class="myorder he p">
+						<div class="content30">
+							<div class="order">
+								<div class="fl">
+									<span>头像</span>
+									<span class="bridh"></span>
+								</div>
+								<div class="fr">
+									<!--<a href="">-->
+										<div class="hendicon">
+											<span></span>
+											<div class="around">
+												<img src="{$user.head_pic|default='__STATIC__/images/user68.jpg'}" alt="" />
+											</div>
+										</div>
+									<!--</a>-->
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="myorder p">
+						<div class="content30">
+							<a href="{:U('Mobile/User/userinfo',array('action'=>'nickname'))}">
+								<div class="order">
+									<div class="fl">
+										<span>用户名</span>
+									</div>
+									<div class="fr">
+                                        <span>{$user.nickname}</span>
+										<i class="Mright"></i>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="myorder p">
+						<div class="content30">
+							<a href="{:U('Mobile/User/userinfo',array('action'=>'sex'))}">
+								<div class="order">
+									<div class="fl">
+										<span>性别</span>
+									</div>
+									<div class="fr">
+                                        <span>{$sex[$user.sex]}</span>
+										<i class="Mright"></i>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="myorder p">
+						<div class="content30">
+							<a href="{:U('Mobile/User/userinfo',array('action'=>'mobile'))}">
+								<div class="order">
+									<div class="fl">
+										<span>手机</span>
+									</div>
+									<div class="fr">
+                                        <span>{$user.mobile}</span>
+										<i class="Mright"></i>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="myorder p bo">
+						<div class="content30">
+							<a href="{:U('Mobile/User/userinfo',array('action'=>'email'))}">
+								<div class="order">
+									<div class="fl">
+										<span>邮箱</span>
+									</div>
+									<div class="fr">
+                                        <span>{$user.email}</span>
+										<i class="Mright"></i>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="myorder p ma-to-20">
+						<div class="content30">
+							<a href="{:U('Mobile/User/password')}">
+								<div class="order">
+									<div class="fl">
+										<span>修改密码</span>
+									</div>
+									<div class="fr">
+										<i class="Mright"></i>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="myorder p">
+						<div class="content30">
+							<a href="{:U('Mobile/User/address_list')}">
+								<div class="order">
+									<div class="fl">
+										<span>收货地址</span>
+									</div>
+									<div class="fr">
+										<i class="Mright"></i>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<!--<div class="myorder p bo">
+						<div class="content30">
+							<a href="{:U('Mobile/User/authinfo')}">
+								<div class="order">
+									<div class="fl">
+										<span>实名认证</span>
+									</div>
+									<div class="fr">
+										<i class="Mright"></i>
+									</div>
+								</div>
+							</a>
+						</div>
+					&lt;!&ndash;</div>&ndash;&gt;
+				</div>-->
+			</div>
+			<div class="close">
+				<a href="{:U('User/logout')}">退出</a>
+			</div>
+		</div>
+        </div>
+	</body>
+</html>

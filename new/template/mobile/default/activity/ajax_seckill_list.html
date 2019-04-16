@@ -1,0 +1,21 @@
+<foreach name="seckill_list" item="good" >
+    <li>
+        <div class="img czg"><img src="{$good[goods_id]|goods_thum_images=400,400}" alt="" /></div>
+        <div class="fon">
+            <div class="similar-product-text">{$good[goods_name]}</div>
+            <div class="ms p">
+                <div class="redmon">￥<span>{$good[price]}</span></div>
+                <div class="qums"><a href="{:U('Goods/goodsinfo',array('id'=>$good[goods_id]))}">去秒杀</a></div>
+            </div>
+            <div class="ce">
+                <div class="redmon">￥{$good[market_price]}</div>
+                <div class="jd">
+                    <div class="ymper">已秒<span>{:ceil($good[order_num]/$good[goods_num]*100)}%</span></div>
+                    <div class="jdtred">
+                        <div class="percent" style="width: {:ceil($good[order_num]/$good[goods_num]*100)}%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+</foreach>

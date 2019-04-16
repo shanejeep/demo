@@ -1,0 +1,18 @@
+<?php if(empty($commission_list)){ ?>
+<script type="text/javascript">
+    alert('没有更多数据啦');
+    $("#getmore").hide();
+</script>
+<?php }else{ ?>
+<foreach name="commission_list" item="vo" key="k">
+
+    <li class="disbox">
+        <div class="disflex">
+            <p>{$vo.goods_name}</p>
+            <i>{$vo.confirm_time|date="Y-m-d H:i:s",###}</i>
+        </div>
+        <span>+<?php if($_GET['type']==1){echo $vo['sales_commission'];}else{echo $vo['promote_commission'];}?></span>
+    </li>
+
+</foreach>
+<?php } ?>

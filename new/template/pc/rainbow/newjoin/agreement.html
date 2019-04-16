@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>商家入驻</title>
+	<link rel="stylesheet" type="text/css" href="__STATIC__/css/tpshop.css" />
+	<link href="__STATIC__/css/common.min.css" rel="stylesheet" type="text/css" />
+	<script src="__STATIC__/js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="__PUBLIC__/js/global.js"></script>
+	<script src="__PUBLIC__/js/pc_common.js"></script>
+	<link href="__STATIC__/css/qt_style.css" rel="stylesheet" type="text/css" />
+	<style>
+		@font-face {
+			font-family: "Times New Roman";
+		}
+
+		@font-face {
+			font-family: "宋体";
+		}
+
+		@font-face {
+			font-family: "Calibri";
+		}
+
+		@font-face {
+			font-family: "Wingdings";
+		}
+
+		@font-face {
+			font-family: "微软雅黑";
+		}
+
+		p.MsoNormal {
+			mso-style-name: 正文;
+			mso-style-parent: "";
+			margin: 0pt;
+			margin-bottom: .0001pt;
+			mso-pagination: none;
+			text-align: justify;
+			text-justify: inter-ideograph;
+			font-family: Calibri;
+			mso-fareast-font-family: 宋体;
+			mso-bidi-font-family: 'Times New Roman';
+			font-size: 10.5000pt;
+			mso-font-kerning: 1.0000pt;
+		}
+
+		span
+
+		.10
+		{
+			font-family: Calibri
+		;
+		}
+
+		span
+
+		.15
+		{
+			font-family: Calibri
+		;
+		}
+
+		span
+
+		.16
+		{
+			font-family: Calibri
+		;
+			color: rgb(0, 0, 255)
+		;
+			text-decoration: underline
+		;
+			text-underline: single
+		;
+		}
+
+		span
+
+		.17
+		{
+			font-family: Calibri
+		;
+			font-weight: bold
+		;
+		}
+
+		p.p {
+			mso-style-name: "普通\(网站\)";
+			mso-style-noshow: yes;
+			margin-top: 5.0000pt;
+			margin-bottom: 5.0000pt;
+			mso-margin-top-alt: auto;
+			mso-margin-bottom-alt: auto;
+			mso-pagination: widow-orphan;
+			text-align: left;
+			font-family: 宋体;
+			font-size: 12.0000pt;
+		}
+
+		span.msoIns {
+			mso-style-type: export-only;
+			mso-style-name: "";
+			text-decoration: underline;
+			text-underline: single;
+			color: blue;
+		}
+
+		span.msoDel {
+			mso-style-type: export-only;
+			mso-style-name: "";
+			text-decoration: line-through;
+			color: red;
+		}
+
+		table.MsoNormalTable {
+			mso-style-name: 普通表格;
+			mso-style-parent: "";
+			mso-style-noshow: yes;
+			mso-tstyle-rowband-size: 0;
+			mso-tstyle-colband-size: 0;
+			mso-padding-alt: 0.0000pt 5.4000pt 0.0000pt 5.4000pt;
+			mso-para-margin: 0pt;
+			mso-para-margin-bottom: .0001pt;
+			mso-pagination: widow-orphan;
+			font-family: 'Times New Roman';
+			font-size: 10.0000pt;
+			mso-ansi-language: #0400;
+			mso-fareast-language: #0400;
+			mso-bidi-language: #0400;
+		}
+
+		@page {
+			mso-page-border-surround-header: no;
+			mso-page-border-surround-footer: no;
+		}
+
+		@page Section0 {
+			margin-top: 72.0000pt;
+			margin-bottom: 72.0000pt;
+			margin-left: 90.0000pt;
+			margin-right: 90.0000pt;
+			size: 595.3000pt 841.9000pt;
+			layout-grid: 15.6000pt;
+		}
+
+		div.Section0 {
+			page: Section0;
+		}
+	</style>
+</head>
+<body>
+<include file="public/sign-header_new_join"/>
+<div class="gome-wrap bg">
+	<div style="position: relative;top: -40px;left: 190px;">
+    	<a href="/" target="_blank" class="item fl"><img height="60" width="160" src="{$tpshop_config['shop_info_store_logo']}"></a>
+    </div>
+	<div class="gome-layout-area">
+        <ul class="gome-nav">
+        	<li><a href="{:U('Newjoin/index')}" target="_blank">招商首页</a></li>
+        	<tpshop sql="select * from `__PREFIX__article_cat` where parent_id=2" key="k" item='v'>
+            	<li><a href="{:U('Newjoin/question',array('cat_id'=>$v[cat_id]))}" target="_blank">{$v.cat_name}</a></li>
+            </tpshop>
+        </ul>
+    </div>
+</div>
+	<form action="" id="queryForm" name="query" method="post">
+    <div class="gome-layout-area pb50 clearfix">
+    	<ul class="steps clearfix">
+        	<li class="first cur ok"><b>1</b><span class="going"></span><em class="f">入驻须知</em></li>
+        	<li><b>2</b><span></span><em class="f">填写基本信息</em></li>
+        	<li><b>3</b><span></span><em class="f">填写店铺信息</em></li>
+        	<li><b>4</b><span></span><em class="f">资质上传</em></li>
+        	<li class="last"><b>5</b><em class="f">等待审核</em></li>
+        </ul>
+        <div class="settled-agreement">
+        	<div class="agreement-title"><span>协议确认</span></div>
+            <div class="agreement-con">
+				<div class="agreement-article">
+					<div class="Section0" style="layout-grid:15.6000pt;">
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">1、本协议的订立</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">1.1本协议由</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">医之佳</font></span><span class="17"
+																   style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">App</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">所有者及技术服务提供者</font>&#8220;</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">重庆医之佳医疗科技股份有限公司</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">&#8221;与拟在</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">&#8220;医之佳</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">App健康</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">开放平台</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">（以下简称</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">&#8220;甲方&#8221;</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">或</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">&#8220;医之佳&#8221;</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">或</font>&#8220;医之佳平台&#8221;）以独立第三方经营者身份设立店铺进行经营的法律实体（以下简称&#8220;</span><span class="17"
+																														 style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">商家</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">&#8221;或&#8220;</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">店铺</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">&#8221;或&#8220;乙方&#8221;）共同缔结，具有合同效力。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">1.2商家通过&#8220;商家在线入驻系统&#8221;办理店铺入驻过程中，一经勾选&#8220;我已仔细阅读并同意协议&#8221;并点击&#8220;提交入驻申请&#8221;按键，即意味着商家同意与医之佳签订本协议并自愿受本协议约束，但商家在线同意本协议并不导致本协议立即生效。商家的入驻申请、资料提交等经过医之佳审核通过并以邮件及系统通知形式向商家发出权限开通通知时，本协议对商家及医之佳具有法律效力；如医之佳审核后需要商家与医之佳另行签署协议的，则商家还应遵守另行签署的协议。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">1.3</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">本协议</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">及公示于</font>&#8220;医之佳平台&#8221;的各项规则及其之后可能调整的规则共同组成。协议正文与规则冲突的，以发布在后的文件为准执行。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">1.4本协议仅在表明&#8220;医之佳&#8221;与&#8220;商家&#8221;二者之间的权利义务关系，对于商家通过&#8220;医之佳APP&#8221;与任何第三方建立的合作关系以及由此产生的权利义务关系等，由商家与第三方自行解决。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;mso-char-indent-count:2.0000;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">2、定义和解释</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">2.1</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">商家：</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">商家指拟在医之佳平台以独立第三方经营者身份开设店铺，从事经营的法律实体，必须自申请时起持续具备本协议正文第四条约定的资格要求。商家的身份信息，在申请</font>&#8220;商家入驻&#8221;时，由商家通过&#8220;商家在线入驻系统&#8221;自行填写并提交；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">2.2</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">商家入驻，亦称</font>&#8220;店铺入驻&#8221;指欲成为医之佳平台独立第三方经营者的商家，依据医之佳平台入驻流程和要求通过&#8220;商家在线入驻系统&#8221;完成在线签署本协议、信息提交，并通过医之佳审核，按本协议第五条开通相关店铺&#8220;</span><span><a
+								href="https://shop.jd.com/"><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">商家后台管理系统</font></span></a></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">&#8221;权限的过程。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">2.</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">3</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">店铺：</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">商家在完成商家入驻流程后，为进行合法经营，依据协议约定和医之佳平台规则由商家申请，</font>&#8220;医之佳&#8221;审核通过的具有独立且唯一性ID（英文IDentity的缩写，意为&#8220;身份标识号码&#8221;,此处指&#8220;商家ID&#8221;）、特定名称（可依据相关平台规则进行调整）的网络化虚拟商铺。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">2.</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">4</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">店铺服务期</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">：指医之佳按本协议第五条为商家开通店铺权限所对应的期间，</font></span><span class="17"
+																							style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">首个服务期自权限开通之日起至</font></span><span class="17"
+																			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">本年度</font>12</span><span class="17"
+																	 style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">月</font>31日止</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">，此后每次延展期限均为一年。</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">2.</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">5</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">&#8220;店铺用户名&#8221;：</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">是指商家完成商家入驻后获取的与自设密码共同使用以登陆</font>&#8220;医之佳平台&#8221;商家管理系统，使用&#8220;医之佳平台&#8221;店铺服务的登陆账户，每一个店铺用户名对应一个店铺。商家通过店铺用户名可以实现对该店铺的管理，包括但不仅限于商品信息上传、修改、删除处理，交易跟踪、取消等。商家应妥善保管店铺用户名及密码信息，不得擅自转让或授权他人使用。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">2.</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">6</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">医之佳平台规则：</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">指标示在</font>&#8220;医之佳平台&#8221;之上的，需商家实时关注的，与商家经营有关的任何规范性文件，包括但不限于入驻协议</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">、</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">商家手册、商家后台公告、商家后台帮助中心等。</font></span><span class="17"
+																					  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">商家知晓并同意，医之佳有权单方更新、调整医之佳平台规则，商家进一步知晓并同意，如不同意接受调整后的医之佳平台规则时，应终止本协议，停止在医之佳平台的店铺经营。</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">3、服务内容</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">3.1医之佳向商家提供&#8220;医之佳平台&#8221;上相应的网络空间、技术支持和系统维护，以及同意向商家提供的各项附属功能、增值服务等，以使商家作为销售者有能力独立开设店铺、上传并维护商品信息、与意向客户洽商交易以及开展与交易有关的各项业务。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">3.2商家获得&#8220;商家后台管理系统&#8221;使用权限后，可独立开展店铺经营，同时可参与&#8220;医之佳APP&#8221;相关活动及接受其他有偿服务。其他有偿服务包括但不限于广告推广服务、配送仓储服务、支付结算服务等。商家如需使用该等有偿服务的，应以商家自身名义单独与提供方洽谈并签署协议。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">3.3商家的经营行为受医之佳的监督和管理。医之佳依据法律法规、本协议约定以及&#8220;医之佳平台规则&#8221;，有权单方决定限制商家的经营行为，比如限制&#8220;商家后台管理系统&#8221;权限，要求商家删除或调整发布的信息等，商家拒绝履行或配合时，医之佳有权根据本协议及&#8220;医之佳平台规则&#8221;采取相应措施；医之佳同时有权将商家违法、违规行为举报到工商、药监等国家监管部门。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">3.4商家的经营行为受消费者的监督，消费者可以通过&#8220;医之佳平台&#8221;评价功能对商家的商品和服务进行评价，该评价将以分值的形式体现商家商品及其服务的优劣；消费者也可以通过向医之佳、监管机关、媒体等进行投诉进行监督，医之佳知悉该投诉后，将介入调查并向商家出具意见，商家应积极配合并妥善解决。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">3.5商家的经营行为受国家监管机构的监督和管理。医之佳收到工商、药监等监管部门监管意见时，有权向监管机关提供相关资料，要求商家予以整改、执行监管意见等；商家怠于执行或迟延执行时，医之佳有权限制&#8220;商家后台管理系统&#8221;权限，删除或调整商家发布的信息等，由此产生的不利后果由商家自行承担。。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">4、资格要求及证明文件</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">4.1资格要求</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">：</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">商家申请及开展店铺经营活动，须持续的同时满足以下基本条件：</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">4.1.1商家应当具备中华人民共和国法律规定的与其行为相适应的民事行为能力。若不具备前述与其行为相适应的民事行为能力，则其及其的监护人应依照法律规定承担因此而导致的一切后果。此外，还需确保其不是任何国家、国际组织或者地域实施的贸易限制、制裁或其他法律、规则限制的对象，否则可能无法正常注册及使用医之佳App平台服务。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">4.1.2</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">商家已依照中华人民共和国法律注册并领取合法有效的营业执照及取得其他经营许可，身份信息应为商家自身情况的客观表现；</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">4.1.3</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">商家经营的商品来源合法，资质齐全，不侵犯第三方合法权益；</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">4.1.4</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">商家提交的任何信息均真实、合法、有效，所使用的图片、文字等不侵犯任何第三方合法权益；</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">4.1.5</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">商家自愿签署并严格履行本协议；</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">4.1.6</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">医之佳依据法律法规等要求及经营需要可能设定的其他条件。</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">4.2</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">证明文件</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">4.2.1商家须依据&#8220;商家在线入驻系统&#8221;所示在线提交各项必须文件或证明，包括但不限于个人身份证</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">、</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">营业执照、税务登记证、开户行证明、授权委托书、商标注册证、质检报告、报关单、检验检疫证书、产品来源地证明、法定代表人身份证正反面复印件等。</font></span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">在发生客户投诉、行政机关机构调查、诉讼解决等事项时，商家还应向医之佳提交与原件核对一致且加盖商家公章的纸质复印件。</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">4.2.2商家保证向医之佳提供的上述证明文件或其他相关证明真实、合法、准确、有效，医之佳有权自行或单方聘请第三方公司予以核实，商家应积极配合并承担由此产生的费用</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">。</font></span><span class="17"
+																 style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">基于开放平台的特殊性，除核实商家身份信息真实性以及依据</font>&#8220;医之佳平台&#8221;监管规定核实商家相关信息以外，医之佳无义务代替商家对其上传的所有信息、交易行为以及与交易行为有关的其他事项进行事先审查和核实，同时，医之佳对商家信息的核实，仅为形式审核，并不代表医之佳对其真实性和有效性的认可，该证明文件的真实性、合法性、准确性、有效性仍由商家单独承担全部法律责任</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">。</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">4.2.3商家保证上述证明文件发生任何变更或更新时立即通知医之佳，并于十五个工作日内，提交更新后的文件。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">4.2.4商家提交虚假、过期文件、或未如期通知并提交更新文件等情形的，由商家独立承担全部法律责任。若由此导致商家不符合店铺入驻条件的，医之佳有权要求商家补充提供相关资料，或者拒绝商家申请、调整&#8220;商家后台管理系统&#8221;权限、直至终止本协议。如商家造成医之佳及其他任何第三方损失的，商家还应足额赔偿。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p style="margin-top:0.0000pt;margin-bottom:0.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">5、&#8220;商家后台管理系统&#8221;权限开通及调整</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">5.1</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">&#8220;商家后台管理系统&#8221;权限开通</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+				face="微软雅黑">对于商家拟经营的店铺，医之佳在满足以下全部条件后，为商家开通相关</font>&#8220;商家后台管理系统&#8221;权限，医之佳将在权限正式开通前一个工作日以邮件及系统通知方式告知商家：</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">1)商家已通过&#8220;商家在线入驻系统&#8221;提交入驻申请，包括所需信息的提交和在线同意本协议；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">2)商家入驻申请已通过医之佳审核,，并依据审核结果另行签署了相关协议；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">5.2&#8220;商家后台管理系统&#8221;权限停止</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">5.2.1&#8220;商家后台管理系统&#8221;权限停止，亦称</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">限制</font>&#8220;商家后台管理系统&#8221;权限</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">，包括商家权限的全部停止和商家权限的部分停止。商家权限全部停止时，商家无法自行通过</font>&#8220;商家后台管理系统&#8221;对其店铺进行任何操作，同时&#8220;医之佳平台&#8221;上不再显示商家店铺信息及其商品信息；商家权限部分停止时，商家只能使用&#8220;商家后台管理系统&#8221;的部分功能，可能导致商家无法上传维护商品信息，已上传信息无法在&#8220;医之佳平台&#8221;显示等情况的发生。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">5.2.2商家权限的全部停止</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">5.2.2.1商家自愿申请权限全部停止的，应至少提前</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">30</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">个工作日向医之佳提出申请，经医之佳审核同意后由医之佳停止其权限。</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">5.2.2.2在商家经营过程中，发现以下任一情形时，医之佳有权随时停止商家全部权限；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p style="margin-top:0.0000pt;margin-bottom:0.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(255,255,255);font-size:10.5000pt;mso-font-kerning:0.0000pt;">&#160;&nbsp;&#160;&nbsp;&#160;&nbsp;&#160;</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">1）商家不满足第4.1条资格要求的，比如提交虚假文件、资质不全或过期而无法及时补全、更新的；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p style="margin-top:0.0000pt;margin-bottom:0.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(255,255,255);font-size:10.5000pt;mso-font-kerning:0.0000pt;">&#160;&nbsp;&#160;&nbsp;&#160;&nbsp;&#160;</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">2）商家产品价格、规格等信息标示错误，导致投诉、争议和纠纷的，或者遭受行政机关调查、处罚的；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p style="margin-top:0.0000pt;margin-bottom:0.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(255,255,255);font-size:10.5000pt;mso-font-kerning:0.0000pt;">&#160;&nbsp;&#160;&nbsp;&#160;&nbsp;&#160;</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">3）商家产品质量、标识不合格的，或者产品涉嫌走私、假冒伪劣、三无产品、旧货、返修品的；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p style="margin-top:0.0000pt;margin-bottom:0.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(255,255,255);font-size:10.5000pt;mso-font-kerning:0.0000pt;">&#160;&nbsp;&#160;&nbsp;&#160;&nbsp;&#160;</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">4）商家连续30（三十）日或每一服务期内累计45（四十五）日未经营店铺的；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p style="margin-top:0.0000pt;margin-bottom:0.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(255,255,255);font-size:10.5000pt;mso-font-kerning:0.0000pt;">&#160;&nbsp;&#160;&nbsp;&#160;&nbsp;&#160;</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">5）商家未经医之佳事先审核产品类目、品牌，而上传某类目、品牌商品的；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p style="margin-top:0.0000pt;margin-bottom:0.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(255,255,255);font-size:10.5000pt;mso-font-kerning:0.0000pt;">&#160;&nbsp;&#160;&nbsp;&#160;&nbsp;&#160;</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">6）其他违反本协议约定的，或者其他侵犯消费者、医之佳及其关联公司/机构权益的。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">5.2.3商家权限的部分停止</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">5.2.3.1商家自愿申请权限部分停止的，应至少提前</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">30</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">个工作日向医之佳提出申请，经医之佳审核同意后由医之佳停止其相应权限。</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">5.2.3.2在商家经营过程中，发现以下任一情形时，医之佳有权随时停止商家部分权限，；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">1）第三方向医之佳投诉商家侵权、违约，有待进一步核实或已查证部分侵权、违约属实的；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">2）未按承诺参加&#8220;医之佳平台&#8221;相关活动的；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">3）商家违反本协议约定，但不属于5.2.2.2情形的。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">5.2.4商家未经医之佳同意，擅自停止店铺经营，或者商家因为出现第5.2.2.2条情形被医之佳停止店铺服务的，商家已缴纳的本协议附件所涉及特定店铺的平台使用费未到期部分，作为商家向医之佳支付的违约金，该金额不足以冲抵商家应付违约金和赔偿金时，商家应另行支付差额。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">5.3&#8220;商家后台管理系统&#8221;权限增加</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+				face="微软雅黑">医之佳将针对</font>&#8220;商家后台管理系统&#8221;在使用过程中出现的问题，以及商家提出的需求，和基于医之佳平台运营需要等，不断的改进和优化，一旦&#8220;商家后台管理系统&#8221;版本升级，将可能导致商家权限的增加</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">，在此，商家知晓并同意，在使用新版本的</font>&#8220;商家后台管理系统&#8221;时，若涉及资费调整，应按新版本对应的费用标准支付技术服务费。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p style="margin-top:0.0000pt;margin-bottom:0.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">6、协议方权利及义务</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">6.1医之佳在现有技术实现基础上努力维护医之佳平台的正常稳定运行，并努力提升和改进技术，对平台功能及服务进行更新、升级，以不断提升平台性能和交易效率。如发现商家有损系统安全、稳定操作的，医之佳有权立即停止商家的服务权限，并立即删除所有有害信息、数据等；商家应对此导致的一切不利后果承担全部法律责任，包括但不限于赔偿医之佳及其关联公司/机构、消费者、第三方公司/机构等的损失。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">6.2医之佳有权根据医之佳平台的发展规划自主选择为申请入驻的商家开通权限，而未承诺必然对所有申请入驻的商家承诺开通权限；同时有权依据独立判断，不受时间限制的审批商家的入驻申请。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">6.3医之佳对商家在使用医之佳平台过程中遇到的问题及提出的建议和意见予以积极回复，可依商家需求对其使用医之佳平台提供合理的指导和培训。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">6.4医之佳有权单方根据国家相关法律法规、政策及医之佳平台运营情况，对公示于医之佳平台规则进行变更，变更后的规则将以公告形式告知商家，任何变更一经公告即构成本协议的组成部分。商家应实时关注公告内容，如不同意该变更，应书面通知医之佳并立即停止使用&#8220;商家后台管理系统&#8221;，一旦商家继续使用&#8220;商家后台管理系统&#8221;，则视为商家自愿接受变更后的规则。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">6.5商家应对店铺负有管理义务，对其店铺中出现的违反国家有关法律、法规规定及医之佳规则的信息予以立即删除。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">6.6医之佳有权将国家生效法律文书或行政文书确定的商家违法违规事件，或商家已确认的商家违反本协议相关约定的事项，在医之佳平台上予以公示；商家违规或者有严重违约、违规情形的，医之佳有权对其采取限制&#8220;商家后台管理系统&#8221;权限、直至终止本协议等措施，上述措施不足以补偿医之佳及其关联公司/机构、消费者损失的，商家还应足额赔偿。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">6.7如商家的运营情况不能满足医之佳平台公布的要求（包括但不限于医之佳平台规则等），经限期整改调整后，仍无法满足的，医之佳有权解除本协议，停止向商家提供服务。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">6.8医之佳有权根据市场情况及医之佳平台入驻商家经营情况组织相应的促销活动，商家应根据自身经营情况及商品情况予以积极支持并按约履行。一旦商家以书面方式（包括但不限于电子邮件、传真等）确认选择参与上述促销活动的，商家不得中途退出促销活动，或采取商品下架等影响店铺正常运营或不利于消费者权益的方式变相退出促销活动。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">6.9</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">&nbsp;</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">为最大程度保障消费者权益，满足消费者对商品的质量要求，商家有义务对其在</font>&#8220;医之佳平台&#8221;销售的每款商品按照国家标准，行业标准及&#8220;医之佳&#8221;发布的各品类商品要求进行质量控制（包括且不仅限于商品法律法规符合性，商品安全性，商品功能材质与描述符合性，商品标识标示，商品外观，商品包装等），并依照国家法律法规提供售后三包服务。&#8220;医之佳&#8221;有权委托第三方质检机构进行不定期商品抽检（检测项目包括且不仅限于商家销售商品的性能，质量，材料成分，是否符合国家法律法规要求等各方面），或要求商家对&#8220;医之佳&#8221;指定商品提供进货凭证，出厂检验报告或者第三方质检机构出具的检测报告等相关商品及批次的质量合格证明文件。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+				face="微软雅黑">如果商家所销售商品抽检不合格或无法向</font>&#8220;医之佳&#8221;提供相关商品及批次质量合格的证明文件，&#8220;医之佳&#8221;有权根据所公示的商家规则，规范及标准，并且依据问题的严重程度对商家进行处罚及提出相应的限期整改要求。商家必须配合限期整改及根据&#8220;医之佳&#8221;的要求进行指定商品的第三方检测，并完全承担因此产生的所有费用。商家拒绝执行的，&#8220;医之佳&#8221;有权采取相关措施，包括且不仅限于停止商家服务、终止本协议、要求商家承担违约责任、损害赔偿等措施。如果因商家商品质量问题而导致&#8220;医之佳&#8221;产生损失（包括且不仅限于经济或声誉上的损失），&#8220;医之佳&#8221;有权要求商家赔偿因此而产生的所有费用，并保留进一步追究商家相应责任的权利。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">6.10医之佳有权要求商家提供与商家商品、售后服务等相关的信息，以便于客户直接向医之佳平台客服中心进行咨询时予以回复，对于医之佳无法回答或属商家掌握的情况，医之佳有权要求商家在指定的时限内予以回复或给出相应方案，如商家未及时予以解决的客户咨询及投诉，医之佳有权对商家采取相应处理措施。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">6.11商家同意医之佳根据商家营业执照所载明的经营范围及商家申请经营的经营类目，</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">核实及调整</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">商家在医之佳平台经营的具体商品的种类、数量和类目范围。</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">6.12如因商家商品、发布的信息或提供的售后服务问题而引发客户对医之佳及其关联公司/机构的诉讼，商家应承担因诉讼而产生的全部法律责任，如因此而给医之佳及其关联公司/机构造成损失的，医之佳有权要求商家赔偿医之佳及其关联公司/机构的全部损失。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">6.13因网上交易平台的特殊性，医之佳没有义务对所有商家的交易行为以及与交易有关的其它事项进行事先审查，但下列情况除外：</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p style="margin-top:0.0000pt;margin-bottom:0.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">6.13.1第三方通知医之佳，认为某个具体商家或具体交易事项可能存在重大问题；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p style="margin-top:0.0000pt;margin-bottom:0.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">6.13.2商家或第三方向医之佳告知交易平台上有违法或不当行为的；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:18.7500pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">6.13.3医之佳发现某个具体商家或具体交易事项可能存在重大问题。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p style="margin-top:0.0000pt;margin-bottom:0.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+				face="微软雅黑">医之佳以普通非专业人员的知识水平标准对相关内容进行判别，可以认为这些内容或行为具有违法或不当性质的，医之佳有权根据不同情况选择删除相关信息、对商家店铺采取限制性措施或停止对该商家提供服务。</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">6.14商家知悉并同意，商家的店铺经营需要获得包括但不限于技术服务、广告推广服务、物流服务、支付结算服务等的支持，而该等服务可能需要与&#8220;医之佳平台&#8221;进行系统对接和安全测试，一旦需要与&#8220;医之佳平台&#8221;对接，将有可能影响&#8220;医之佳平台&#8221;的系统安全，基于此，商家进一步知悉并同意，商家将使用医之佳指定公司提供的前述支持服务，商家与服务公司将另行签署协议。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">6.15商家知悉并同意，商家违反本协议时，应立即向医之佳承担法律责任（包括但不限于支付违约金、赔偿金、补足保证金差额等），同时，医之佳有权暂缓支付未结算款项；商家进一步知悉并同意，在商家未按时承担法律责任时，医之佳有权直接自暂缓支付的未结算款项中扣除相关款项。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">6.16商家知悉并同意：商家因开设店铺及其经营需要、履行本协议义务而向医之佳提交的任何信息和数据，以及商家在经营过程中产生的交易数据、店铺及商品评价数据，医之佳有权在本协议终止后继续保留，同时，无论本协议终止前还是终止之后，医之佳均有权合理使用，使用方式包括但不限于依据数据进行市场分析和调研；商家进一步知悉并同意：该等数据，无论本协议终止前还是终止之后，医之佳均无义务返还商家、也无义务删除原始数据及其备份、同时无义务就使用该数据的行为向商家支付任何费用。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p style="margin-top:0.0000pt;margin-bottom:0.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">7、商家声明及保证</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">7.1保证遵守本协议，不从事任何有损医之佳利益的行为。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">7.2保证符合本协议约定的资格要求，保证在&#8220;商家在线入驻系统&#8221;中在线提交的信息和证明文件真实、准确、合法、有效，并保证在上述资料发生变更时及时通知医之佳，并予以更新。商家应保证入驻时提供的联系人、联系地址、联系电话等信息真实、有效、完整，并对此承担法律责任。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">7.3保证订立本协议和在&#8220;商家在线入驻系统&#8221;提出申请是商家真实意思表示，保证其具有足够资格订立本协议，其代理人（包括所有操作&#8220;医之佳商家管理系统&#8221;的人员和店铺运营所需的全部雇员、职员、管理者）已获得充分授权，并对代理人的行为承担法律责任，同时商家保证对其雇员、联系人及其他商家委派的履行本协议的人员的行为承担法律责任。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">7.4商家应当为每一个&#8220;店铺用户名&#8221;设定独立的、高安全等级的密码，保证妥善保管&#8220;店铺用户名&#8221;及密码，不得擅自转让或授权他人使用，并对利用该用户名所进行的一切活动负全部责任。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">7.5保证严格按照本协议约定、技术要求使用&#8220;医之佳商家管理系统&#8221;，不从事攻击、破译、反向工程，上传木马、病毒等有损该系统安全和稳定的操作。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">7.6保证按照审核通过的商品类目和品牌经营，不得擅自增加、变更商品类目和品牌。保证按照医之佳平台规则及国家相关规定设置商品价格、售卖限制、库存数量、商品说明及其他商品信息，并对上述设置独立承担全部法律责任。商家同时保证在经营过程中，按照医之佳平台相关规则使用客服IM工具，积极对医之佳用户的咨询进行回复，并保证在医之佳用户提交订单后按要求发货。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">7.7保证拥有在医之佳平台经营商品的合法销售权，商品来源可溯、合法、质量合格，符合国家相关质量标准，不侵犯任何第三方的合法权利，并对其商品质量及商品合法性独立承担全部法律责任。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">7.8保证履行&#8220;如实描述&#8221;义务，保证在医之佳平台发布的商品信息真实、准确，符合医之佳平台规则及国家相关法律法规的规定，与实际出售的商品一致，不含任何夸大或虚假内容，不包含任何未经品牌授权的文字和图片，对描述的准确和相符负有举证责任并承担独立的完全的法律责任。若发布的上述信息变更的，商家应及时在医之佳平台予以更新。若因信息未及时变更引起法律后果的，商家独立承担全部责任。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">7.9保证向购买其商品的医之佳用户开具合法合规发票，并保证按照国家相关规定自行承担相应税费。如因商家发票开具错误、未开具发票或者其他发票问题引起的纠纷，均由商家独立承担相应的法律责任，如造成医之佳损失的，商家应予以赔偿。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">7.10保证通过合法渠道获取医之佳用户信息，并保证不在违背医之佳用户真实意愿及未通过医之佳审核的前提下，向医之佳用户发送任何性质的商品推荐、推广信息等。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">7.11保证按照国家相关规定、自身售后服务承诺及《消费者权益保障服务条款》的相关要求，提供商品&#8220;修理、更换、退货&#8221;等售后服务。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">7.12保证在使用医之佳平台进行交易的过程中遵守诚实信用原则，不在交易中采取欺诈及虚假宣传、混淆等不正当竞争行为，不扰乱网上交易的正常秩序，不从事与网上交易无关的行为。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">7.13保证不将从医之佳平台获取的任何数据用于本协议约定以外的用途，同时保证未经医之佳许可不得擅自获取、使用、传播医之佳平台的任何资料，包括但不限于交易数据、用户信息、支付信息、医之佳其他用户展示于医之佳平台的信息等。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">7.14同意授予医之佳全球通用（在法律许可范围内）的、免费的许可使用权利(并有权对该权利进行再授权)，使医之佳有权(全部或部份地)使用、复制、修订、改写、发布、翻译、分发、执行和展示商家公示于医之佳平台的各类信息或制作其派生作品，和/或以现在已知或日后开发的任何形式、媒体或技术，将上述信息纳入其它作品内。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">7.15商家不得在医之佳平台发布任何吸引医之佳用户到其他平台或商家自身网络销售平台或渠道进行交易的信息，也不得在配送包裹中夹带此类吸引医之佳用户的信息。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">7.16商家不得隐瞒任何可能对医之佳平台产生风险的事项，包括但不限于产品出现设计缺陷、质量瑕疵、权利纠纷、重大违约、上传资料包含病毒木马等，若商家发生此类影响医之佳平台商誉、正常经营、安全的事项应立即通知医之佳，并严格执行医之佳对此所作出的处置。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">7.17未经医之佳另行书面许可，商家不得将本协议项下权利义务全部或部分转移给第三方；商家聘请第三方代运营公司代表商家运营店铺的，第三方代运营公司的一切行为均视同为商家亲自实施，由商家承担全部法律后果；商家与第三方代运营公司间的权利义务关系由商家与第三方代运营公司单独解决，不得影响到医之佳及医之佳其他用户的权利。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">7.18商家应向医之佳支付的所有应付款项，如未按照规定要求完成费用支付的，则医之佳有权暂缓支付未结算货款，并有权自未向商家结算的货款中扣除，如未结算货款不足抵扣的，则医之佳有权自乙方及其关联公司待向商家结算的任意一笔货款或商家交纳的任意一笔保证金中直接扣除。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p style="margin-top:0.0000pt;margin-bottom:0.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">&#160;&nbsp;&#160;&nbsp;&#160;&nbsp;&#160;7.19如&#8220;医之佳&#8221;的损失通过上述方式仍无法弥补，则医之佳有权单方终止向上提供的一切服务，且有权继续向商家追偿。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p style="margin-top:0.0000pt;margin-bottom:0.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">8、费用和结算</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">8.1费用标准及费用类型</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+				face="微软雅黑">商家同意按照</font>&#8220;医之佳&#8221;公示中明示的标准以及后续更新的标准或补充协议（若有）中确定的标准向&#8220;医之佳&#8221;支付平台使用费、保证金及技术服务费等费用。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">8.1.2保证金</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">8.1.2.1商家知悉并同意向医之佳缴纳相应金额的保证金，作为履行本协议尤其是消费者权益保障义务的保证，并进一步知悉且同意在商家违反本协议相关约定时，医之佳有权根据相关约定扣除相应金额的保证金作为违约金或给予买家等第三方的赔偿。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">8.1.2.2保证金额度</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">8.1.2.2.1商家应根据上述&#8220;医之佳&#8221;公示链接中的保证金缴纳标准、医之佳平台相关招商规则及自身申请经营的类目情况，将对应金额的保证金按照约定的时间及方式支付至医之佳指定账户。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">8.1.2.2.2商家知悉并同意：商家缴纳的保证金在任何情况下，均不计算任何利息。同时，医之佳有权根据商家经营类目的变化、商品实际销售情况、履约能力、资信状况等情形调整商家交付的保证金额度，或者依据本协议约定扣减保证金，商家应在医之佳通知后5日内补足相应金额的保证金，否则，医之佳有权从未结算款项中直接扣除相关金额、限制&#8220;商家合同管理系统&#8221;权限，直至解除本协议。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">8.1.2.3保证金的管理和使用</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">8.1.2.3.1在下述情形下，医之佳有权根据具体情况直接扣除部分或全部保证金：</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">1)商家违反本协议项下的任何保证、承诺或义务的；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">2)商家的行为违反国家法律法规及其它规范性文件等规定的；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">3)商家在医之佳平台发布商品、达成交易、履行交易相关活动中，违反法律法规、政策、医之佳平台任何规则或违反其对客户的承诺，或被客户投诉、索赔时，医之佳判断应对客户进行赔付的；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">4)商家违反其与医之佳或医之佳关联公司/机构的其他协议或医之佳平台任何规则，给医之佳或其关联公司/机构造成任何损失（包括但不限于诉讼赔偿、诉讼费用、律师费用等）的；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">5)本协议中约定的其它可扣除保证金的情形出现的。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">8.1.2.3.2医之佳如使用保证金进行任何抵扣或赔付，将以书面方式（包括但不限于电子邮件、传真等）通知商家，并在书面通知中，说明抵扣和/或赔付原因及抵扣和/或赔付的金额。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">8.1.2.3.3若商家保证金不足时，医之佳没有使用自有资金替商家支付赔偿金、补偿金、抚恤金或其他任何款项的义务，但若医之佳进行了该等支付，则医之佳有权要求商家于五日内足额赔偿。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">8.1.2.4保证金的退还</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+				face="微软雅黑">服务协议终止且服务协议所约定的特定店铺所有订单终止、所有争议及索赔已处理完毕、已完成交易的商品质保期届满后，商家可向医之佳提出退还保证金的书面申请，医之佳审核通过后三个月内，扣除依据协议应扣除的各项费用后，将保证金余额退还商家，如商家支付的保证金，不足以抵扣应由商家支付违约金、赔偿金等款项的，医之佳将不予退还商家保证金，并保留向商家追偿的权利。</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">8.1.3技术服务费</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+				face="微软雅黑">商家在申请入驻及经营过程中，医之佳提供相关的系统维护和支持服务，而向商家收取的技术服务费：</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">8.1.3.1固定技术服务费（亦称&#8220;平台使用费&#8221;）：商家在获得缴费权限后应向医之佳支付的与特定店铺服务期对应的技术服务费。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">8.1.3.2按比例计收的服务费（亦称&#8220;技术服务费&#8221;）：医之佳在收取固定技术服务费之外，在商家每达成一笔交易而</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">实时</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">向商家收取的技术服务费。</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">8.1.4增值服务费</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+				face="微软雅黑">商家使用医之佳或医之佳指定第三方提供的增值服务时，应按照另行签订的协议履行其义务并支付相关费用。</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">8.1.5税费</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+				face="微软雅黑">商家在经营过程中，应自行承担相关税费，医之佳无义务为商家代扣代缴。</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">8.2费用结算：&#8220;医之佳&#8221;与商家按照下述约定对商家基于本协议而设立店铺产生的订单货款进行结算：</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">8.2.1商家同意：&#8220;医之佳&#8221;将引入第三方支付机构或银行提供该等服务，商家应按要求与第三方支付机构或银行签署可能存在的相关协议。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">8.2.2</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">&#8220;医之佳&#8221;提供以下多种可选择的结算方式供商家选择，具体结算方式以&#8220;医之佳平台&#8221;系统确认为准。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">&#8220;医之佳平台&#8221;系统在每个结算日（结算日遇休息日或法定节假日的，顺延至休息日或法定节假日结束后的第一个工作日）自动生成结算单，商家确认无误后，&#8220;医之佳&#8221;向付款机构发出付款指令，由付款机构将扣除技术服务费、促销费用及其他费用后的货款支付给商家；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">8.2.2.1</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">月结：以每个自然月为结算期，每个月</font>1日为结算日，结算上月1日至上月末最后一日产生的款项；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">8.2.2.2</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">半月结：以每半个月为结算期，每月</font>16日与次月1日为结算日；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">8.2.2.3</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">其他：以协议方选择的天数作为结算周期，每个结算期满的次日为结算日。</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+				face="微软雅黑">有关其他费用的开票事宜以相关法律法规等规范性文件及医之佳规则为准。</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">8.2.3商家须向&#8220;医之佳&#8221;提供符合医之佳要求的结算账户以便&#8220;医之佳&#8221;完成货款结算，若商家账户信息变更，应提前</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">10个工作日</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">通知</font>&#8220;医之佳&#8221;，否则，因商家变更账户造成货款支付失败、迟延或错误，损失由商家自行承担。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">8.2.4&#8220;医之佳&#8221;与商家根据本协议开展的业务以人民币作为结算货币。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p style="margin-top:0.0000pt;margin-bottom:0.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">9、保密义务</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">9.1一方对于本协议的签订、内容及在履行本协议期间所获知的其他方的商业秘密负有保密义务。非经相对方书面同意，不得向相对方以外的任何第三方（关联公司除外）泄露、给予或转让该等保密信息。（根据法律法规、证券交易所规则向政府、证券交易所和/或其他监管机构提供、协议方的法律、会计、商业及其他顾问、雇员除外）。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">9.2如相对方提出要求，任何一方均应将载有相对方单独所有的保密信息的任何文件、资料或软件等，在本协议终止后按对方要求归还对方，或予以销毁，或进行其他处置，并且不得继续使用这些保密信息。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">9.3在本协议终止之后，各方在本条款项下的义务并不随之终止，各方仍需遵守本协议之保密条款，履行其所承诺的保密义务，直到其他方同意其解除此项义务，或事实上不会因违反本协议的保密条款而给其他方造成任何形式的损害时为止。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">9.4任何一方均应告知并督促其因履行本协议之目的而必须获知本协议内容及因合作而获知对方商业秘密的雇员、代理人、顾问等遵守保密条款，并对其雇员、代理人、顾问等的行为承担责任。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">9.5医之佳依据本协议正文第6.16条约定使用商家相关数据时，除不得直接体现商家身份信息外，不受本第9条的保密限制。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p style="margin-top:0.0000pt;margin-bottom:0.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">10、违约责任</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">10.1商家的经营导致纠纷或政府部门查处的，商家应按医之佳的要求提供相应的证明材料，必要时，应自行或由医之佳协助或授权医之佳及/或其关联公司/机构处理解决。由此导致的医之佳及/或其关联公司/机构损失（损失包括但不限于诉讼费、律师费、赔偿、补偿、行政机关处罚、差旅费等），商家应足额赔偿。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">10.2</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">商家承诺不在医之佳平台销售假冒</font></span><span class="17"
+																			   style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">伪劣商品</font></span><span class="17"
+																	style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">、不合格产品等，否则如销售假冒伪劣商品，则医之佳有权要求商家支付人民币</font>100万元或该店铺全部累计销售额10倍的金额（二者以高者为准）作为违约金。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">同时医之佳有权对商家采取暂停向商家提供服务、暂时关闭商家后台管理账户、暂缓支付未结算款项、终止合作等措施。违约金不足以弥补医之佳损失的，商家还应全部赔偿（包括但不限于医之佳对客户的赔偿、补偿、行政部门的处罚、律师费、诉讼费、鉴定费、差旅费等）。上述违约金的支付并不影响医之佳依照本协议和</font>/或平台规则的约定扣除相应的保证金。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">10.3商家不论采取何种方式将医之佳用户吸引到&#8220;医之佳平台&#8221;以外的平台或场所进行交易或绕开医之佳指定付款方式进行交易的，以及非法获取&#8220;医之佳APP&#8221;数据、利用&#8220;医之佳平台&#8221;谋取不正当利益或从事非法活动的，医之佳有权扣除商家全部保证金作为违约金，并保留向商家继续追究违约责任的权利。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">10.4商家发生违反本协议情形时，医之佳除有权按照本条约定要求商家承担违约责任外，还有权依据本协议其他约定限制&#8220;商家后台管理系统&#8221;权限、扣除保证金、解除本协议等措施。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">10.5本条中涉及的违约金及赔偿金，商家应在5日内医之佳支付，否则医之佳有权自商家缴纳的保证金及未结算货款中直接予以扣除，本协议另有约定的除外。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p style="margin-top:0.0000pt;margin-bottom:0.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">11、有限责任及免责条款</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:23.2500pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">11.1不论在何种情况下，医之佳均不对由于电力、网络、电脑、通讯或其他系统的故障、罢工（含内部罢工或劳工骚乱）、劳动争议、暴乱、起义、骚乱、生产力或生产资料不足、火灾、洪水、风暴、爆炸、战争、政府行为等不可抗力，国际、国内法院的命令或第三方的不作为而造成的不能服务或延迟服务承担责任。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:23.2500pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">11.2本协议项下服务将按&#8220;现状&#8221;和&#8220;可得到&#8221;的状态提供，医之佳在此明确声明对服务不作任何明示或暗示的保证，包括但不限于对服务的可适用性、没有错误或疏漏、持续性、准确性、可靠性、适用于某一特定用途、满足商家的任意需求。商家在确认使用前，应充分考虑并慎重决策，一旦使用，商家将须自行承担由此导致的各项风险和责任。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:23.2500pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">11.3使用&#8220;医之佳平台&#8221;下载数据或者获取任何资料的行为均出于商家的独立判断，并由其自行承担因此而可能产生的风险和责任。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:23.2500pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">11.4法律地位声明：医之佳作为交易平台服务提供商，仅为便于商家与其他用户间达成交易提供交易地点，而并非商家与其他用户之间交易行为的参与方，医之佳不对商家及/或参与交易的其他用户的任何口头、书面陈述或承诺，发布的信息及交易行为的真实性、合法性、准确性、及时性、有效性等作任何明示或暗示的保证，亦不承担任何法律责任。若因商家与参与交易的其他用户之间的交易行为引起的任何法律纠纷，包括但不限于投诉、起诉、举报及税赋等，均由参与交易的双方解决，与医之佳及/或其关联公司/机构无关。但是，商家怠于履行义务时，医之佳有权介入商家与其他用户间的争议，依据一般人的认知程度对该争议进行判断和处置，商家应当予以执行。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:23.2500pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">11.5不可抗力处理：如本协议履行期间，协议方任何一方遭受不可抗力，均应在遭受不可抗力后尽快通知对方，并于通知之日起15日内提供相关证明文件，不可抗力持续达到三十日的，任一方有权经通知对方提前终止本协议。因不可抗力原因而导致本协议中止、终止的，协议方均不须向对方承担违约责任。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p style="margin-top:0.0000pt;margin-bottom:0.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">12、协议有效期</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">12.1本协议自生效时起，有效期至商家基于本协议而设立的特定店铺服务期到期日止。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">12.2本协议仅对商家基于本协议而设立的特定店铺开展的相关业务具有法律约束力，不对&#8220;医之佳&#8221;与商家开展的同等或类似业务具有法律约束力，如&#8220;医之佳&#8221;与商家同时开展同等或类似业务，应依据另行签订的协议执行，本协议另有约定的除外。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p style="margin-top:0.0000pt;margin-bottom:0.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">13、协议的终止</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">13.1本协议在下述情形下自然终止：</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">13.1.1店铺服务期届满，而商家未提出延展申请或延展申请未通过医之佳审核的；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">13.1.2协议方签署新协议替代本协议的。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:18.7500pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">13.2通知终止：除本协议另有约定外，缔约协议方中任一方可提前15（十五）日以书面形式通知对方终止本协议，经对方同意后双方签署协议终止本协议。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:18.7500pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+				face="微软雅黑">本协议签署后，为使商家顺利开展经营，医之佳已提供人力、物力、技术支持和服务，如因前述原因导致本协议提前终止的，商家同意医之佳不退还已缴纳的平台使用费，未缴纳的，商家同意足额缴纳。</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">13.3商家有下述情形时，医之佳可单方终止本协议：</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">13.3.1&#8220;商家后台管理系统&#8221;权限全部停止的；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">13.3.2&#8220;商家后台管理系统&#8221;权限部分停止，但商家未在限定时间内改进的；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">13.3.3商家出现负面消息等可能影响&#8220;医之佳平台&#8221;商誉的；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">13.3.4商家连续30（三十）日，或服务期内累计45（四十五）日未登陆&#8220;商家后台管理系统&#8221;的；</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;margin-left:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">13.3.5本协议其他相应条款中，约定医之佳有权终止本协议的情形发生的。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">13.4协议终止后有关事项的处理</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">13.4.1协议终止日起，医之佳将停止&#8220;商家后台管理系统&#8221;全部权限，同时，医之佳无义务在&#8220;医之佳平台&#8221;上继续展示任何商家及其商品信息。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">13.4.2本协议终止后，医之佳有权保留商家的注册信息及交易行为记录等数据，但医之佳没有为商家保留这些数据的义务，亦不承担在协议终止后向商家或第三方转发任何未阅读或未发送的信息的义务，也不就协议终止向商家或任何第三方承担责任。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">13.4.3本协议终止之日起三个月内，&#8220;医之佳&#8221;与商家进行清算，包括但不限于财务对账及在途货物的处理。在途货物指本协议终止前，客户已购买但尚未收到的商品，对于此类商品，商家仍应按照合作终止前的流程交付并结算。同时，医之佳有权将协议终止事项告知该等客户，客户有权选择是否继续履行交易，商家同意无条件接受客户的选择。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">13.4.4本协议的终止，并不免除商家依据本协议应向客户承担的售后服务及产品保证责任，商家仍应按照履行售后服务义务及产品质量保证责任；如因商家商品质量问题或售后服务问题而导致医之佳或其他第三方人身或财产损失的，商家仍应独立承担全部责任。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">13.4.5本协议终止后，如发生&#8220;医之佳&#8221;收到有关商家的行政机关调查、因商家产生诉讼等情形的，商家需积极配合&#8220;医之佳&#8221;处理，如因此导致&#8220;医之佳&#8221;损失的，商家应独立承担全部责任。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p style="margin-top:0.0000pt;margin-bottom:0.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">14、通知及送达</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">14.1医之佳针对所有商家的技术服务费收费标准变更、规则变更、通知等将以&#8220;医之佳平台&#8221;公告形式告知商家，公告一经发布，即视为送达，商家应实时关注公告内容。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">14.2</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;"><font
+								face="微软雅黑">除法律法规或监管规定另有强制性规定外，本合同履行过程中，医之佳向商家发送书面通知的，按照商家向</font>&#8220;医之佳平台&#8221;提供的通讯地址交邮后的第三个自然日即视为送达；书面通知的形式还包括但不限于在&#8220;医之佳平台&#8221;发布公告、向商家发送电子邮件、医之佳站内信、系统信息、联系人手机短信和传真等电子方式，在采用电子方式进行书面通知的情况下发送当日即视为送达。商家应保证提供的联系地址、联系人、联系电话真实、准确、有效，如信息变更应立即在医之佳平台系统更新，若商家未及时更新的，向原地址送达的仍视为有效送达地址。&#160;</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">14.3法律文书送达</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p align=justify
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-align:justify;text-justify:inter-ideograph;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(255,255,255);font-weight:normal;font-size:10.5000pt;">&#160;&nbsp;&#160;&nbsp;&#160;&nbsp;&#160;</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">14.3.1对于&nbsp;因合同争议引起的任何纠纷，商家声明法院或仲裁机构可以手机短信或电子邮件等现代通讯方式或邮寄方式向商家送达法律文书（包括诉讼文书）。法院向前述码址发出法律文书即视为送达，发送当日即为送达之日。&nbsp;&#160;</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p align=justify
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-align:justify;text-justify:inter-ideograph;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(255,255,255);font-weight:normal;font-size:10.5000pt;">&#160;&nbsp;&#160;&nbsp;&#160;&nbsp;&#160;</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">14.3.2商家同意法院可采取以上一种或多种送达方式向商家送达法律文书，法院采取多种方式向商家送达法律文书，送达时间以上述送达方式中最先送达的为准。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p align=justify
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-align:justify;text-justify:inter-ideograph;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(255,255,255);font-weight:normal;font-size:10.5000pt;">&#160;&nbsp;&#160;&nbsp;&#160;&nbsp;&#160;</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">14.3.3商家应保证14.2条约定的联系信息，如果提供的送达地址不确切，或不及时告知变更后的地址，或拒绝签收等原因，导致法律文书未能被商家实际接收的，邮寄送达的，以文书退回之日视为送达之日；直接送达的，送达人当场在送达回证上记明情况之日视为送达之日；履行送达地址变更通知义务的，以变更后的送达地址为有效送达地址。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p align=justify
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-align:justify;text-justify:inter-ideograph;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(255,255,255);font-weight:normal;font-size:10.5000pt;">&#160;&nbsp;&#160;&nbsp;&#160;</span><span
+								class="15" style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(255,255,255);font-size:10.5000pt;">&#160;</span><span
+								class="17"
+								style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">14.3.4纠纷进入仲裁、民事诉讼程序后，如商家应诉并直接向仲裁机构、法院提交送达地址确认书，该确认地址与诉前确认的送达地址不一致的，以向仲裁机构、法院提交确认的送达地址为准（该送达地址适用法律文书送达方式及送达的法律后果）。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p style="margin-top:0.0000pt;margin-bottom:0.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">15、争议解决</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">15.1履行本协议过程中产生的任何争议，协议方应协商解决，协商不成的，任一方有权将争议提交</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">甲方</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><font
+								face="微软雅黑">所在地人民法院诉讼解决。</font></span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">15.2本协议的签订、解释、变更、履行及争议的解决等均适用中华人民共和国大陆地区现行有效的法律。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p style="margin-top:0.0000pt;margin-bottom:0.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+        <span class="17"
+			  style="mso-spacerun:'yes';font-family:微软雅黑;color:rgb(0,0,0);font-weight:normal;font-size:10.5000pt;">16、其他约定</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">16.1本协议的任何一方未能及时行使本协议项下的权利不应被视为放弃该权利，也不影响该方在将来行使该权利。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">16.2如果本协议中的任何条款无论因何种原因完全或部分无效或不具有执行力，或违反任何适用的法律，则该条款被视为删除，但本协议的其余条款仍应具有法律约束力。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">16.3本协议是缔约协议方之间关于本协议中提及合作事项的完整的、唯一的协议，本协议取代了任何先前的关于该合作事项的协议和沟通（包括书面形式和口头形式）。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+						<p class=p
+						   style="margin-top:0.0000pt;margin-bottom:0.0000pt;text-indent:21.0000pt;line-height:18.0000pt;background:rgb(255,255,255);">
+							<span style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(0,0,0);font-size:10.5000pt;mso-font-kerning:0.0000pt;">16.4本协议文本以中华人民共和国通用简体汉字版本为准。</span><span
+								style="mso-spacerun:'yes';font-family:微软雅黑;mso-bidi-font-family:宋体;color:rgb(153,153,153);font-size:10.5000pt;mso-font-kerning:0.0000pt;"><o:p></o:p></span>
+						</p>
+					</div><!--EndFragment-->
+				</div>
+            </div>
+        </div>
+        <label class="agree clearfix" >
+            <input type="checkbox" hidefocus="ture" name="check2" id="check2" class="inputcheck" />我已阅读并同意接受以上所有协议</label >
+        <div class="gome-btn">
+        	<a href="javascript:nextStep();" class="gome-btn-red">同意并继续</a>
+        </div>
+    </div>
+</form>
+<include file="public/footer_new_join"/>
+<!--footerEnd-->
+	<script language="javascript">
+		function nextStep() {
+			// 对协议确认做判断
+			var check2 = document.getElementById("check2");
+			if (check2.checked == true) {
+				document.getElementById('queryForm').submit();
+			} else {
+                layer.alert("请同意以上协议", {icon: 2});
+			}
+		}
+	</script>
+</body>
+</html>

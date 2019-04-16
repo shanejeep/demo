@@ -1,0 +1,18 @@
+<script src="__PUBLIC__/js/layer/layer.js"></script><!--弹窗js 参考文档 http://layer.layui.com/-->
+<div class="m-top-bar editable" moduleid="1539923" style="position:relative;min-height:25px;">
+    <div class="container">
+        <ul class="fl">
+            <if condition="$user[user_id] gt 0">
+                <li class="fl J_login_status">
+                    <a href="{:U('Home/newjoin/index')}" alt="" title="" target="_self">{$user['nickname']|default=$user['mobile']}</a>
+                    <a  href="{:U('Home/user/logout_new_join')}" style="margin:0 10px;" title="退出" target="_self">退出</a></li>
+                <else/>
+                <li class="fl J_login_status"><a class="menu-item fl J_do_login J_chgurl" href="{:U('Home/user/login_new_join')}">
+                    <span>Hi，请登录</span> </a><a class="menu-item fl ht" href="{:U('Home/user/reg_new_join')}">免费注册</a>
+            </if>
+            <li class="fl sep"></li>
+            <li class="fl select-city dropdown">
+            </li>
+        </ul>
+    </div>
+</div>

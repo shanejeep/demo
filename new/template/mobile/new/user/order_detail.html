@@ -1,0 +1,245 @@
+<include file="public/header"/>
+<body>
+<header>
+    <div class="tab_nav">
+        <div class="header">
+            <div class="h-left"><a class="sb-back" href="{:U('User/order_list')}" title="返回"></a></div>
+            <div class="h-mid">{$orderword}详情</div>
+            <div class="h-right">
+                <aside class="top_bar">
+                    <div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a
+                            href="javascript:;"></a></div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</header>
+<include file="public/menu"/>
+<div id="tbh5v0">
+    <div class="order">
+        <div class="detail_top">
+            <div class="lan">
+                <dl>
+                    <dt class="dingdan_1"></dt>
+                    <dd><span id="now_pay">{$orderword}状态&nbsp;：&nbsp;{$order_info.order_status_desc}</span><br>
+                        <span class="dingdanhao">{$orderword}号&nbsp;：&nbsp;{$order_info.order_sn}</span><br>
+                        <span>配送费用&nbsp;：&nbsp;￥{$order_info.shipping_price}元</span><br>
+						<if condition="$order_ps eq 1"><span style="color:red; font-size:15px;line-height:20px;">{$orderword}回调中，数据稍有延迟，请耐心等待刷新看看，勿重复支付{$orderword}哦！</span></if>
+                    </dd>
+                </dl>
+            </div>
+
+            <dl style="border-bottom:1px solid #eeeeee">
+                <dt class="dingdan_2"></dt>
+                <dd ><span class="zhif">所选支付方式&nbsp;:&nbsp;{$order_info.pay_name}</span>
+                    <span class="zhif">应付款金额&nbsp;：&nbsp;￥{$order_info.total_fee}元</span>
+                    <if condition="$order_info.pay_btn eq 1 and $order_ps neq 1">
+                        <a href="{:U('Mobile/Cart/cart4',array('order_id'=>$order_info['order_id']))}" class="zhifu"
+                           style=" float:right;margin-right:8%; width:38%; color:#fff; font-size:16px;">去支付</a>
+                    </if>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt class="dingdan_3"></dt>
+                <dd><h3>收货人姓名&nbsp;：&nbsp;{$order_info.consignee}<em>{$order_info.mobile}</em></h3>
+                    <div class="adss">详细地址&nbsp;：&nbsp;{$regionLits[$order_info['province']]},{$regionLits[$order_info['city']]},{$regionLits[$order_info['district']]},{$order_info.address}</div>
+                </dd>
+            </dl>
+			 <if condition="$order_info.pay_status eq 1">
+            <dl style="border-top:1px solid #eeeeee; margin-top:10px; height:70px; padding-bottom:0px;">
+                <if condition="$order_info.shipping_status eq 1"> <dt class="dingdan_4"><img src="__STATIC__/images/wuliuimg.png" width="30" height="70"></dt></if>
+                <dd>
+                    <switch name="order_info.shipping_code">
+                        <case value="ziti">您的商品已完成提货，感谢您的支持与信任！</case>
+                        <case value="seller">您的商品已由商家自主安排了小货车配送，看不到物流信息哦！</case>
+                        <default />
+						 <if condition="$order_info.shipping_status eq 1">
+                          <h3>快递单号&nbsp;：</h3>
+                        <p>{$order_info.invoice_no}<a href="{:U('Mobile/User/express',array('order_id'=>$order_info['order_id']))}">查看物流</a></p>
+						</if>
+                    </switch>
+                </dd>
+            </dl>
+			</if>
+            <dl style="border-top:1px solid #eeeeee; margin-top:10px; height:90px; padding-bottom:0px;">
+                <dd>
+                     <h3>店铺名称：{:getSubstr($store['store_name'],0,6)}<a style="float: right;" href="javascript:contact_server({$app_type});">商城客服<img  style="margin-left: 4px; margin-top: -3px;" width="13" height="13" src="/public/images/kefu.png"></a></h3>
+                               <h3>商家电话：
+                            <notempty name="store.store_phone">
+                              <a  href="javascript:Con_tel('{$store[store_phone]}',{$app_type})">{$store['store_phone']}<img style="margin-left: 4px; margin-top: -2px;" width="13" height="13" src="/public/images/contact_tel.png"></a>
+                            <else />
+                                无
+                            </notempty>
+                        </h3>
+                        <h3>
+                            平台电话：
+                            <notempty name="tpshop_config.shop_info_phone">
+                               <a href="javascript:Con_tel('{$tpshop_config[shop_info_phone]}',{$app_type})" >{$tpshop_config[shop_info_phone]}<img  style="margin-left: 4px;margin-top: -2px;" width="13" height="13" src="/public/images/contact_tel.png"></a>
+                            <else />
+                                无
+                            </notempty>
+                        </h3>
+                </dd>
+            </dl>
+        </div>
+        <div class="ord_list1">
+            <h2><img src="__STATIC__/images/dianpu.png">{$store['store_name']}</h2>
+            <!--商品列表-->
+            <volist name="order_info.goods_list" id="good">
+                <div class="order_list">
+                    <a href="{:U('Mobile/Goods/goodsInfo',array('id'=>$good['goods_id']))}">
+                        <dl>
+                            <dt><img src="{$good.goods_id|goods_thum_images=100,100}"></dt>
+                            <dd class="name" class="pice" style=" width:55%;">
+                                <strong>{$good.goods_name}</strong><span>{$good.spec_key_name}</span>
+                            </dd>
+                            <dd class="pice" style=" font-size:13px; color:#F60; width:25%;">
+                                ￥{$good['member_goods_price']}元<em>x{$good['goods_num']}</em></dd>
+                            <dd class="pice" style=" font-size:13px; color:#F60; width:25%;">
+                           <!-- <em>
+                                <if condition="$list.return_btn lt 2">
+                                    <a href="{:U('Mobile/User/return_goods',array('order_id'=>$order_info[order_id],'order_sn'=>$order_info[order_sn],'goods_id'=>$good[goods_id],'spec_key'=>$good['spec_key']))}"
+                                       style="color:#999;">申请退款</a>
+                                </if>
+                            </em>-->
+                            <em>
+                                <switch name="good.is_send">
+                                    <case value="0">待发货</case>
+                                    <case value="1">已发货</case>
+                                    <case value="2">已换货</case>
+                                    <case value="3">已退款</case>
+                                    <default />
+                                </switch>
+                            </em>
+                            </dd>
+                        </dl>
+                    </a>
+                    <div class="pic" style=" border:0;"><span>小计：</span><strong>￥{$good['member_goods_price'] *
+                        $good['goods_num']}元</strong></div>
+                </div>
+            </volist>
+            <!-- end 商品列表-->
+            <div class="jiage">
+                <p>商品总价&nbsp;：&nbsp;<span class="price">￥{$order_info.total_amount}元</span></p>
+                <p>配送费用&nbsp;：&nbsp;<span class="price">￥{$order_info.shipping_price}元</span></p>
+                <p>关税&nbsp;：&nbsp;<span class="price">￥{$order_info.custom_duty_price}元</span></p>
+                <p>优惠券&nbsp;：&nbsp;<span class="price">￥{$order_info.coupon_price}元</span></p>
+                <p>积分&nbsp;：&nbsp;<span class="price">￥{$order_info.integral_money}元</span></p>
+                <p>余额&nbsp;：&nbsp;<span class="price">￥{$order_info.user_money}元</span></p>
+                <p>活动优惠&nbsp;：&nbsp;<span class="price">￥{$order_info.order_prom_amount}元</span></p>
+                <p>应付款金额&nbsp;：&nbsp;<span class="price1">￥{$order_info.total_fee}元</span></p>
+            </div>
+        </div>
+        <section class="qita">
+            <div class="navContent">
+                <ul>
+                    <li class="first">配送方式&nbsp;：&nbsp;{$order_info.shipping_name}</li>
+                    <if condition="$order_info.pay_name neq '' ">
+                        <li>支付方式&nbsp;：&nbsp;{$order_info.pay_name}</li>
+                    </if>
+                </ul>
+            </div>
+        </section>
+        <div style=" height:50px;"></div>
+        <div class="detail_dowm">
+            <div class="anniu1">
+                <if condition="$order_info.cancel_btn eq 1">
+                    <a onClick="cancel_order({$order_info.order_id})" class="on_comment">取消{$orderword}</a></if>
+                <if condition="$order_info.pay_btn eq 1 AND $order_ps neq 1">
+                    <a id="now_pay_but" href="javascript:sub_order({$order_info['order_id']})" class="on_comment">立即付款</a>
+                </if>
+                <if condition="$order_info.receive_btn eq 1">
+                    <a
+                        href="{:U('Mobile/User/order_confirm',array('id'=>$order_info['order_id']))}"
+                        class="on_comment">收货确认
+                    </a>
+                </if>
+                <!--<if condition="$order_info.shipping_btn eq 1">
+                    <a href="http://www.kuaidi100.com/" target="_blank" class="on_comment">查看物流</a>
+                </if>-->
+                <!--<if condition="$order_info.return_btn eq 1">
+                    <a href="mqqwpa://im/chat?chat_type=wpa&uin={$store['store_qq']}&version=1&src_type=web&web_src=oicqzone.com"
+                        target="_blank" class="on_comment">联系客服</a>
+                </if>-->
+                <if condition="$order_info.return_btn eq 1">
+                    <a href="{:U('Mobile/User/return_goods',array('order_id'=>$order_info[order_id],'order_sn'=>$order_info[order_sn],'goods_id'=>$good[goods_id],'spec_key'=>$good['spec_key']))}">申请退款</a>
+                </if>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    ajax_return_status = 1;
+    //商品是否下架
+        function checkOnSaleRe(goods_id,auth,order_id){
+        $.ajax({
+            type : "POST",
+            url:"/index.php?m=Mobile&c=Cart&a=check_on_sale",
+            data :{goods_id:goods_id,shopauth:auth,order_id:order_id} ,
+            dataType:'json',
+            async:false,
+            success: function(data){
+              if(data.status < 0)
+            {
+              ajax_return_status = 2;
+            }
+           }
+        });
+  }
+   //联系商城客服
+  function contact_server(app_type) {
+    switch (app_type){
+        case 1:
+        case 3:
+            // IOS
+            window.webkit.messageHandlers.ContactServer.postMessage('');
+            break;
+        case 2:
+        case 4:
+            // android
+            window.ContactServer.postMessage();
+         //  window.PopToMainViewCon.postMessage();
+            break;
+        default:
+            return;
+    }
+}
+//拨打电话
+  function Con_tel(infoJson,app_type){
+    switch (app_type){
+        case 1:
+        case 3:
+            // IOS
+            window.webkit.messageHandlers.TeltoPhone.postMessage(infoJson);
+            break;
+        case 2:
+        case 4:
+            // android
+            window.TeltoPhone.postMessage(infoJson);
+            //window.IsNotLoginInfo.postMessage();
+            break;
+        default:
+            return;
+    }
+}
+  //商品是否下架
+    function sub_order(oid){
+        checkOnSaleRe(0,0,oid);
+        if(ajax_return_status == 2){
+            alert('{$orderword}中包含已下架商品！');
+            return false;
+        }
+        location.href="/index.php?m=Mobile&c=Cart&a=cart4&order_id="+oid;
+    }
+
+    //取消{$orderword}
+
+    function cancel_order(id) {
+        if (!confirm("确定取消{$orderword}?"))
+            return false;
+        location.href = "/index.php?m=Mobile&c=User&a=cancel_order&id=" + id;
+    }
+</script>
+</body>
+</html>

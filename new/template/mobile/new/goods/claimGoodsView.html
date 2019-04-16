@@ -1,0 +1,484 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta name="Generator" content="tpshop"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>{$goods.goods_name}_{$tpshop_config.shop_info_store_title}</title>
+    <meta name="keywords" content="{$tpshop_config['shop_info_store_keyword']}"/>
+    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}"/>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/public.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/goods1.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/css/layer.css"/>
+    <script type="text/javascript" src="__STATIC__/js/jquery.js"></script>
+    <script type="text/javascript" src="__STATIC__/js/jquery.json.js"></script>
+    <script type="text/javascript" src="__STATIC__/js/touchslider.dev.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/layer/layer.js"></script>
+    <script src="__PUBLIC__/js/global.js"></script>
+    <script src="__PUBLIC__/js/mobile_common.js"></script>
+    <script src="__PUBLIC__/js/smoothscroll.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    var process_request = "正在处理您的请求...";
+</script>
+<div class="main">
+    <div class="tab_nav">
+        <div class="header">
+            <div class="h-left">
+                  <if condition="($url_type eq 1) OR ($mb_type eq 1)">
+                    <a class="sb-back" href="{:U('index/return_app')}" class="return_app" title="返回"></a>
+                    <else/>
+                    <a class="sb-back" href="javascript:history.back(-1)" title="返回"></a>
+                </if>
+            </div>
+            <div class="h-mid">
+                <ul>
+                    <li style="width: 30%;"><a href="#ban_t" class="tab_head on smoothScroll" >商品</a></li>
+                    <li style="width: 30%;"><a href="#ban_m" class="tab_head smoothScroll">详情</a></li>
+                    <li style="width: 30%;"><a href="#ban_b" class="tab_head smoothScroll">评价</a></li>
+                </ul>
+                <script type="text/javascript">
+                    $(function () {
+                        $(".tab_head").on('click', function () {
+                            $(".tab_head").removeClass('on');
+                            $(this).addClass('on');
+                        })
+                    });
+                </script>
+            </div>
+            <div class="h-right">
+                <!--<aside class="top_bar">-->
+                <!--<div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a-->
+                <!--href="javascript:;"></a></div>-->
+                <!--<a href="{:U('Mobile/Cart/cart')}" class="show_cart">-->
+                <!--&lt;!&ndash;<em class="global-nav__nav-shop-cart-num" id="tp_cart_info">{$cart_total_price[anum]}</em>&ndash;&gt;</a>-->
+                <!--</aside>-->
+            </div>
+        </div>
+    </div>
+    <include file="public/menu"/>
+    <div class="main" id="ban_t" style="display:block;">
+        <div class="banner">
+            <div id="slider" class="slider"
+                 style="overflow: hidden; visibility: visible; list-style: none; position: relative;">
+                <ul id="sliderlist" class="sliderlist"
+                    style="position: relative; overflow: hidden; transition: left 600ms ease; -webkit-transition: left 600ms ease;">
+                    <foreach name="goods_images_list" item="pic">
+                        <li style="float: left; display: block; width: 100%;"><span><a href="javascript:void(0)">
+                        <img title="" width="100%" src="{$pic.image_url}"></a></span></li>
+                    </foreach>
+                </ul>
+                <div id="pagenavi">
+                    <foreach name="goods_images_list" item="pic" key="k">
+                        <a href="javascript:void(0);" <if condition="$k eq 0">class="active"</if> ></a>
+                    </foreach>
+                </div>
+            </div>
+        </div>
+        <div class="s_bottom"></div>
+        <script type="text/javascript">
+            $(function () {
+                $("div.module_special .wrap .major ul.list li:last-child").addClass("remove_bottom_line");
+            });
+            var active = 0,
+                    as = document.getElementById('pagenavi').getElementsByTagName('a');
+            for (var i = 0; i < as.length; i++) {
+                (function () {
+                    var j = i;
+                    as[i].onclick = function () {
+                        t2.slide(j);
+                        return false;
+                    }
+                })();
+            }
+            var t2 = new TouchSlider({
+                id: 'sliderlist', speed: 600, timeout: 6000, before: function (index) {
+                    as[active].className = '';
+                    active = index;
+                    as[active].className = 'active';
+                }
+            });
+
+        </script>
+        <form name="buy_goods_form" method="post" id="buy_goods_form">
+            <div class="product_info">
+                <div class="info_dottm">
+                    <h3 class="name">
+                        <span style='background-color:#fc0f45;color:white;font-size:13px;padding:2px 5px'>{$goods.sales_model_title}</span>&nbsp&nbsp
+                        {$goods.goods_name}
+                    </h3>
+                </div>
+                <dl class="goods_price">
+                    <script type="text/javascript" src="__STATIC__/js/lefttime.js"></script>
+                    <dt><span id="goods_price">￥{$goods.shop_price}元</span><font>价格：￥{$goods.market_price}元</font></dt>
+                </dl>
+                <ul class="price_dottm">
+                    <li style=" text-align:left">折扣：{$goods.discount}折</li>
+                    <li>{$commentStatistics.c0}人评价</li>
+                    <li style=" text-align:right">{$goods.sale_num}人已付款</li>
+                </ul>
+            </div>
+            <!-------商品属性-------->
+            <script type="text/javascript">
+                $(function () {
+                    $(".subNav").click(function () {
+                        $(this).next(".navContent").slideToggle(300).siblings(".navContent").slideUp(500);
+                        $(this).toggleClass("on").siblings(".subNav").removeClass("on");
+                        if ($(".is_scroll").length <= 0) {
+                            $('html,body').animate({'scrollTop': $('body')[0].scrollHeight}, 600);
+                        }
+                    });
+                    commentType = 1; // 评论类型
+                    ajaxComment(1, 1);// ajax 加载评价列表
+                })
+            </script>
+            <div style=" height:8px; background:#eeeeee; margin-top:-1px;"></div>
+        </form>
+    </div>
+
+    <!--详情-->
+    <div class="main" id="ban_m">
+        <section class="index_floor">
+            <h2 style=" border-bottom:1px solid #ddd "><span></span> 商品详情 </h2>
+            <ul class="xiangq">
+                <foreach name="goods_attr_list" item="v" key="k">
+                    <li><p>{$goods_attribute[$v[attr_id]]}:</p><span>{$v[attr_value]}</span></li>
+                </foreach>
+                <li><p>上架时间：</p><span>{$goods.on_time|date='Y-m-d H:i',###}</span></li>
+                <li></li>
+            </ul>
+        </section>
+        <div class="product_main"> <!-- 产品图片 -->
+            <div class="product_images product_desc" id="product_desc"> {$goods.goods_content|htmlspecialchars_decode}
+            </div>
+        </div>
+    </div>
+    <div class="tab_attrs tab_item hide" id="ban_b">
+        <div id="ECS_COMMENT" style="margin-top:45px">
+            <link href="__STATIC__/css/photoswipe.css" rel="stylesheet" type="text/css">
+            <script src="__STATIC__/js/klass.min.js"></script>
+            <script src="__STATIC__/js/photoswipe.js"></script>
+            <div class="comment_littlenav" style='margin-top:65px'>
+                <div style="height: 35px;width:100%"></div>
+                <div style="height: 10px;width:100%;background-color:#f3f3f3"></div>
+                <ul id="fy-comment-list">
+                    <li class="com-red" data-id="1">全部评论<br/>({$commentStatistics['c0']})</li>
+                    <li data-id="2">好评<br/>({$commentStatistics['c1']})</li>
+                    <li data-id="3">中评<br/>({$commentStatistics['c2']})</li>
+                    <li data-id="4">差评<br/>({$commentStatistics['c3']})</li>
+                    <li data-id="5">晒单<br/>({$commentStatistics['c4']})</li>
+                </ul>
+            </div>
+            <div class="my_comment_list" id="ECS_MYCOMMENTS"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function goTop() {
+        $('html,body').animate({'scrollTop': 0}, 600);
+    }
+</script>
+<a href="javascript:goTop();" class="gotop"><img src="__STATIC__/images/topup.png"></a>
+<div style=" height:60px;"></div>
+<if condition="$goods.is_on_sale eq 1">
+    <div class="footer_nav">
+        <dl>
+            <dd onclick="javascript:shareWith('{$goods.goods_id}','{$did}');"  class="erweima"><a  href="javascript:void(0);" >分享<img src="__STATIC__/images/share.png"></a></dd>
+            <dd onclick="javascript:qrcode('{$goods.goods_id}','{$did}');" class="erweima"><a  href="javascript:void(0);" >二维码<img src="__STATIC__/images/qcode.png"></a></dd>
+            <if condition="$hasCollect eq 1"> 
+                      <dd data-status="{$hasCollect}" data-goodsid="{$goods.goods_id}" class="erweima renlin"><a href="javascript:void(0);"><span>收藏</span><img class="redlin-img" src="__STATIC__/images/soucang.png"></a></dd>
+                <else/>
+                    <dd data-status="{$hasCollect}" data-goodsid="{$goods.goods_id}" class="erweima renlin"><a  href="javascript:void(0);"><span>已收藏</span><img class="redlin-img" src="__STATIC__/images/yisoucang.png"></a></dd>
+            </if>
+          
+        </dl>
+    </div>
+    <else/>
+    <!-- zhang注释商品下架模块-->
+    <div>
+        <div style="width: 100%;line-height: 21px;font-size: 14px;text-align: center;color: #E68A41;background-color: #FCFBE7;border: 1px solid #E8E6D7;position: fixed;bottom: 50px">
+            商品已经下架，非常抱歉！
+        </div>
+    </div>
+</if>
+<script type="text/javascript">
+    $(document).ready(function () {
+        // 更新商品价格
+        get_goods_price();
+    });
+    function switch_spec(spec) {
+        $(spec).siblings().removeClass('hover');
+        $(spec).addClass('hover');
+        $(spec).siblings().children('input').prop('checked', false);
+        $(spec).children('input').prop('checked', true);
+        //更新商品价格
+        get_goods_price();
+    }
+    function get_goods_price() {
+        var goods_price = {$goods.shop_price
+    }
+        ; // 商品起始价
+        var store_count = {$goods.store_count
+    }
+        ; // 商品起始库存
+        var spec_goods_price = {$spec_goods_price};  // 规格 对应 价格 库存表   //layer.msg(spec_goods_price['28_100']['price']);
+        var isArray = (spec_goods_price instanceof Array);
+        // 如果有属性选择项
+        if (spec_goods_price != null && isArray && spec_goods_price.length > 0) {
+            goods_spec_arr = new Array();
+            $("input[name^='goods_spec']:checked").each(function () {
+                goods_spec_arr.push($(this).val());
+            });
+            var spec_key = goods_spec_arr.sort(sortNumber).join('_');  //排序后组合成 key
+            goods_price = spec_goods_price[spec_key]['price']; // 找到对应规格的价格
+            store_count = spec_goods_price[spec_key]['store_count']; // 找到对应规格的库存
+        }
+        var goods_num = parseInt($("#goods_num").val());
+        // 库存不足的情况
+        if (goods_num > store_count) {
+            goods_num = store_count;
+            layer.msg('库存仅剩 ' + store_count + ' 件');
+            $("#goods_num").val(goods_num);
+        }
+        var flash_sale_price = parseFloat("{$goods['flash_sale']['price']}");
+        (flash_sale_price > 0) && (goods_price = flash_sale_price);
+        $("#goods_price").html('￥' + goods_price + '元'); // 变动价格显示
+    }
+
+    function sortNumber(a, b) {
+        return a - b;
+    }
+    // 好评差评 切换
+    $("#fy-comment-list").children().each(function (i, o) {
+        $(o).click(function () {
+            $(o).siblings().removeClass('com-red');
+            $(o).addClass('com-red');
+            commentType = $(o).data('id');// 评价类型   好评 中评  差评
+            ajaxComment(commentType, 1);
+        });
+    });
+    function ajaxComment(commentType, page) {
+        $.ajax({
+            type: "GET",
+            url: "/index.php?m=Mobile&c=goods&a=ajaxComment&goods_id={$goods['goods_id']}&commentType=" + commentType + "&p=" + page,//+tab,
+            success: function (data) {
+                $(".my_comment_list").empty().append(data);
+                if ($("#gallery").length > 0) {
+                    var myPhotoSwipe = $("#gallery a").photoSwipe({
+                        enableMouseWheel: false,
+                        enableKeyboard: false,
+                        allowUserZoom: false,
+                        loop: false
+                    });
+                }
+            }
+        });
+    }
+    $(document).ready(function () {
+        var cart_cn = getCookie('cn');
+        if (cart_cn == '') {
+            $.ajax({
+                type: "GET",
+                url: "/index.php?m=Home&c=Cart&a=header_cart_list",//+tab,
+                success: function (data) {
+                    cart_cn = getCookie('cn');
+                }
+            });
+        }
+        $('#tp_cart_info').html(cart_cn);
+    });
+    /**
+     * 立即购买 商品信息存入session
+     * @param goods_id
+     * @param num
+     * @param to_catr
+     * @constructor
+     */
+    function AjaxSave(goods_id, num, to_catr) {
+        if ($("#buy_goods_form").length > 0) {
+            $.ajax({
+                type: "POST",
+                url: "/index.php?m=Mobile&c=Cart&a=AjaxSave",
+                data: $('#buy_goods_form').serialize(),// 你的formid 搜索表单 序列化提交
+                dataType: 'json',
+                success: function (data) {
+                    // 加入购物车后再跳转到 购物车页面
+                    if (data.status <= 0) {
+                        layer.open({content: data.msg, time: 2});
+                        return false;
+                    }
+                    if (to_catr == 1)  //直接购买
+                    {
+                        location.href = "/index.php?m=Mobile&c=Cart&a=order_preview";
+                    }
+                }
+            });
+        }
+    }
+    /**
+    *提示登录通过app分享
+    **/
+    function Warn_login(){
+        alert("请您先登录，再做操作！");
+        location.href = "{:U('user/login')}?reurl="+location.href;
+    }
+
+    /*-------- deng start ---------*/
+    //收藏商品 取消收藏
+    $('.renlin').click(function () {
+        var goods_id = $(this).attr('data-goodsId');
+        var num = $(this).attr('data-status');
+        claimGoods(goods_id,num,1);
+    });
+    /**
+     * 收藏商品 取消收藏
+     * @param goods_id
+     */
+    function claimGoods(goods_id, num, type) {
+        $.ajax({
+            type: "GET",
+            url: "{:U('Mobile/Goods/claim')}",
+            data: {gid: goods_id, doctor_id: doctorid, action: num},
+            dataType: "json",
+            success: function (data) {
+                if(num == 1){
+                    layer.msg(data.msg);
+                    $("img.redlin-img").attr("src","__STATIC__/images/yisoucang.png");
+                    $("dd.renlin").attr("data-status",2);
+                    $("dd.renlin a span").text("已收藏");
+                }else{
+                      layer.msg(data.msg);
+                     $("img.redlin-img").attr("src","__STATIC__/images/soucang.png");
+                     $("dd.renlin").attr("data-status",1);
+                     $("dd.renlin a span").text("收藏");
+                }
+
+            }
+        });
+    }
+
+ /**
+     * 发送环信信息
+     * @param goods_id
+     */
+    doctorid = "{$did}";
+    memberid = "{$mid}";
+    //share 商品
+    function shareWith(goods_id,doc) {  
+        $.ajax({
+            type: "GET",
+            url: "{:U('Mobile/Goods/shareInfo')}",
+            data: {id: goods_id,doctor_id:doc},
+            dataType: "json",
+            success: function (data) {
+                if (goods_id == '') {
+                    return false;
+                }
+                shareGoods(JSON.stringify(data),"{$app_type}");
+
+            }
+        });
+    }
+
+    //生成请求参数
+    function qrcode(goods_id,doc) {  
+        $.ajax({
+            type: "GET",
+            url: "{:U('Mobile/Goods/qrcode')}",
+            data: {id: goods_id,doctor_id:doc},
+            dataType: "json",
+            success: function (data) {
+                if (goods_id == '') {
+                    return false;
+                }
+                tomakeqr(JSON.stringify(data),"{$app_type}");
+
+            }
+        });
+    }
+
+    //调用app方法生成二维码
+      function tomakeqr(goodsJson,app_type) {
+       app_type = parseInt(app_type);
+        switch (app_type){
+            case 1:
+            case 3:
+                // IOS
+                window.webkit.messageHandlers.MakeQr.postMessage(goodsJson);
+                break;
+            case 2:
+            case 4:
+                // android
+                window.MakeQr.postMessage(goodsJson);
+                //window.IsNotLoginInfo.postMessage();
+                break;
+            default:
+                return;
+        }
+    }
+    //药事服务调用与app交互发送事件
+    function sale_goods(goods_id,infoJson,app_type) {
+        app_type = parseInt(app_type);
+        switch (app_type){
+            case 1:
+            case 3:
+                // IOS
+                window.webkit.messageHandlers.fenxiaoConsultation.postMessage(infoJson);
+                break;
+            case 2:
+            case 4:
+                // android
+                window.fenxiaoConsultation.postMessage(infoJson);
+                //window.IsNotLoginInfo.postMessage();
+                break;
+            default:
+                return;
+        }
+    }
+   
+    //分享商品JS
+     //{"drugtext":"药品内容","drugimage":"药品图片地址","drugurl":"药品分享地址","drugtitle":"药品名称"}
+    function shareGoods(goodsJson,app_type) {
+       app_type = parseInt(app_type);
+        switch (app_type){
+            case 1:
+            case 3:
+                // IOS
+                window.webkit.messageHandlers.ShareDrug.postMessage(goodsJson);
+                break;
+            case 2:
+            case 4:
+                // android
+                window.ShareDrug.postMessage(goodsJson);
+                //window.IsNotLoginInfo.postMessage();
+                break;
+            default:
+                return;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+<script src="__PUBLIC__/js/jqueryUrlGet.js"></script><!--获取get参数插件-->
+<script> set_first_leader(); //设置推荐人 </script>
+<!-- 微信浏览器 调用微信 分享js-->
+<include file="public/wx_share"/>
+<!-- 微信浏览器 调用微信 分享js  end-->
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>商家入驻</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/newjoin/css/theme.css"/>
+    <script src="__STATIC__/newjoin/js/jquery-1.10.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            font-family: "微软雅黑","Microsoft YaHei";
+            background-color: white
+        }
+        li{
+            list-style: none;
+        }
+        .item_1{
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            background: url("__STATIC__/newjoin/images/banner.jpg") center top;
+        }
+        .thumbnails a{
+            text-decoration: none;
+        }
+        .item_3{
+            background-color: #00c2c1;
+            color: white;
+        }
+
+        .item_3 p{
+            line-height: 16px;
+        }
+        .container{max-width: 1024px}
+        .article_a {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<!--第一部分-->
+<!--<div class="item_1">
+    <div class="container">
+        <div class="row pt20">
+            <img src="__STATIC__/newjoin/images/logo.png" width="100" class="pull-left pl10">
+            <div class="pull-right pr10" style="color: white;padding-top: 10px">
+                <empty name="user">
+                    <a href="{:U('Home/user/login_new_join')}" style="color: white"> Hi.请登录</a>
+                    &nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp
+                    <a href="{:U('Home/user/reg_new_join')}" style="color: white">免费注册</a>
+                <else/>
+                    <a href="javascript:void(0);" style="color: white">{$user['mobile']}</a>
+                    &nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp
+                    <a style="color: white" href="{:U('Home/user/logout_new_join')}">退出</a>
+                </empty>
+            </div>
+        </div>
+        <div class="text-center " style="margin-top: 12%" >
+            <img class="pic_01" src="__STATIC__/newjoin/images/font_b.png" width="50%">
+        </div>
+        <div class="text-center" style="margin: 2% 0px">
+            <a href="{:U('Newjoin/agreement')}" class="btn btn-default pl40 pr40" style="color: #39baae;background-color: white">
+                立即入驻
+            </a>
+        </div>
+        <p class="text-center" style="color: white;padding-bottom: 6%"><a style="color: white;" href="{:U('Newjoin/agreement')}">查询入住进度</a></p>
+    </div>
+</div>-->
+<div class="item_1 " >
+    <div class="container" >
+        <div class="row pt20">
+            <img src="__STATIC__/newjoin/images/logo.png" width="100" class="pull-left pl10">
+            <div class="pull-right pr10" style="color: white;padding-top: 10px">
+                <empty name="user">
+                    <a href="{:U('Home/user/login_new_join')}" style="color: white"> Hi.请登录</a>
+                    &nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp
+                    <a href="{:U('Home/user/reg_new_join')}" style="color: white">免费注册</a>
+                <else/>
+                    <a href="javascript:void(0);" style="color: white">{$user['mobile']}</a>
+                    &nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp
+                    <a style="color: white" href="{:U('Home/user/logout_new_join')}">退出</a>
+                </empty>
+            </div>
+        </div>
+        <div class="text-center " style="margin-top: 12%" >
+            <img class="pic_01" src="__STATIC__/newjoin/images/font_b.png" width="70%">
+        </div>
+        <div class="text-center" style="margin: 6% 0px">
+            <a href="{:U('Newjoin/agreement')}" class="btn btn-default" style="color: #39baae;background-color: white;width: 197px;line-height: 34px;font-size: 22px">
+                立即入驻
+            </a>
+        </div>
+        <p class="text-center" style="color: white;padding-bottom: 6%">查询入驻进度</p>
+    </div>
+</div>
+<!--第二部分-->
+<div class="container">
+    <ul class="thumbnails row " style="margin: 100px 0px 80px 0px">
+        <li class="col-md-4 col-sm-6">
+            <div class="thumbnail" style="border: none">
+                <a href="{:U('Home/Article/join_detail',array('article_id'=>$data['article']['ganggao']['article_id']))}"><img src="__STATIC__/newjoin/images/a_1.png" style="width: 66px; height: 66px;"></a>
+                <div class="caption text-center">
+                    <h3 style="color: #39baae" class="mt10" >信息公告</h3>
+                    <a href="{:U('Home/Article/join_detail',array('article_id'=>$data['article']['ganggao']['article_id']))}" style="color: #888888">
+                        <p>{$data['article']['ganggao']['title']}</p>
+                    </a>
+                </div>
+            </div>
+        </li>
+        <li class="col-md-4 col-sm-6">
+            <div href="#" class="thumbnail" style="border: none">
+                <a href="{:U('Home/Article/join_detail',array('article_id'=>$data['article']['zhangshang']['article_id']))}"><img src="__STATIC__/newjoin/images/a_2.png" style="width: 66px; height: 66px;"></a>
+                <div class="caption text-center">
+                    <h3 style="color: #39baae" class="mt10" >招商标准</h3>
+                    <a href="{:U('Home/Article/join_detail',array('article_id'=>$data['article']['zhangshang']['article_id']))}" style="color: #888888">
+                        <p>{$data['article']['zhangshang']['title']}</p>
+                    </a>
+                </div>
+            </div>
+        </li>
+        <li class="col-md-4 col-sm-6">
+            <div href="#" class="thumbnail" style="border: none">
+                <a href="{:U('Home/Article/join_detail',array('article_id'=>$data['article']['zifei']['article_id']))}"><img src="__STATIC__/newjoin/images/a_3.png" style="width: 66px; height: 66px;"></a>
+                <div class="caption text-center">
+                    <h3 style="color: #39baae" class="mt10" >自费标准</h3>
+                    <a href="{:U('Home/Article/join_detail',array('article_id'=>$data['article']['zifei']['article_id']))}" style="color: #888888">
+                        <p>{$data['article']['zifei']['title']}</p>
+                    </a>
+                </div>
+            </div>
+        </li>
+        <li class="col-md-4 col-sm-6">
+            <div href="#" class="thumbnail" style="border: none">
+                <a href="{:U('Home/Article/join_detail',array('article_id'=>$data['article']['youshi']['article_id']))}"><img src="__STATIC__/newjoin/images/a_4.png" style="width: 66px; height: 66px;"></a>
+                <div class="caption text-center">
+                    <h3 style="color: #39baae" class="mt10" >医之佳商城优势</h3>
+                    <a href="{:U('Home/Article/join_detail',array('article_id'=>$data['article']['youshi']['article_id']))}" style="color: #888888">
+                        <p>{$data['article']['youshi']['title']}</p>
+                    </a>
+                </div>
+            </div>
+        </li>
+        <li class="col-md-4 col-sm-6">
+            <div class="thumbnail" style="border: none">
+                <a href="{:U('Home/Article/join_detail',array('article_id'=>$data['article']['help']['article_id']))}"><img src="__STATIC__/newjoin/images/a_5.png" style="width: 66px; height: 66px;"></a>
+                <div class="caption text-center">
+                    <h3 style="color: #39baae" class="mt10" >帮助中心</h3>
+                    <a href="{:U('Home/Article/join_detail',array('article_id'=>$data['article']['help']['article_id']))}" style="color: #888888">
+                        <p>{$data['article']['help']['title']}</p>
+                    </a>
+                </div>
+            </div>
+        </li>
+        <li class="col-md-4 col-sm-6">
+            <div class="thumbnail" style="border: none">
+                <img src="__STATIC__/newjoin/images/a_6.png" style="width: 66px; height: 66px;">
+                <div class="caption text-center">
+                    <h3 style="color: #888888" class="mt10" >联系方式</h3>
+                    <p>招商电话：{$tpshop_config['shop_info_phone']}</p>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<!--第三部分-->
+<!--<div class="item_3">
+    <div class="container text-center">
+        <img src="__STATIC__/newjoin/images/font_m.png" width="300" class="mt70">
+        <ul class="row mt40">
+            <li class="col-md-3  col-sm-6">
+                <h3 class="pb10">申请入驻</h3>
+                <volist name="data.article.shengqingruzhu" id="vo">
+                    <a class="article_a" href="{:U('Home/Article/join_detail',array('article_id'=>$vo['article_id']))}"><p>{$vo.title}</p></a>
+                </volist>
+            </li>
+            <li class="col-md-3  col-sm-6">
+                <h3 class="pb10">签订协议</h3>
+                <volist name="data.article.qiandingxieyi" id="vo">
+                    <a class="article_a" href="{:U('Home/Article/join_detail',array('article_id'=>$vo['article_id']))}"><p>{$vo.title}</p></a>
+                </volist>
+            </li>
+            <li class="col-md-3  col-sm-6">
+                <h3 class="pb10">准备开店</h3>
+                <volist name="data.article.shengqingruzhu" id="vo">
+                    <a class="article_a" href="{:U('Home/Article/join_detail',array('article_id'=>$vo['article_id']))}"><p>{$vo.title}</p></a>
+                </volist>
+            </li>
+            <li class="col-md-3  col-sm-6">
+                <h3 class="pb10">商品销售</h3>
+                <volist name="data.article.shangpingxiaoshou" id="vo">
+                    <a class="article_a" href="{:U('Home/Article/join_detail',array('article_id'=>$vo['article_id']))}"><p>{$vo.title}</p></a>
+                </volist>
+            </li>
+        </ul>
+        <a href="{:U('Newjoin/agreement')}" class="btn btn-default pl40 pr40 mt20 mb70"
+           style="color: white;background-color: transparent;border: 1px solid white">
+            查看入驻标准
+        </a>
+    </div>
+</div>-->
+<div class="item_3">
+    <div class="container text-center">
+        <img src="__STATIC__/newjoin/images/font_m.png" width="300" class="mt70">
+        <ul class="row mt40">
+            <li class="col-md-3  col-sm-6">
+                <h3 class="pb10">申请入驻</h3>
+                <p>准备店铺信息</p>
+                <p>资质在线填写入驻</p>
+                <p>信息上传资质文件</p>
+            </li>
+            <li class="col-md-3  col-sm-6">
+                <h3 class="pb10">签订协议</h3>
+                <p>在线审核</p>
+                <p>双方确认合同</p>
+                <p>商家邮寄合同</p>
+            </li>
+            <li class="col-md-3  col-sm-6">
+                <h3 class="pb10">准备开店</h3>
+                <p>商家缴纳费用</p>
+                <p>上线培训</p>
+                <p>开通商家管理后台</p>
+            </li>
+            <li class="col-md-3  col-sm-6">
+                <h3 class="pb10">商品销售</h3>
+                <p>商品录入</p>
+                <p>装修店铺</p>
+                <p>店铺上线销售</p>
+            </li>
+        </ul>
+        <a href="{:U('Newjoin/agreement')}" class="btn btn-default pl40 pr40 mt20 mb70"
+           style="color: white;background-color: transparent;border: 1px solid white">
+            查看入驻标准
+        </a>
+    </div>
+</div>
+<!--第四部分-->
+<div class="container">
+    <ul class="thumbnails row mt70 mb70">
+        <li class="col-md-3  col-sm-6">
+            <div class="thumbnail" style="border: none">
+                <img src="__STATIC__/newjoin/images/b_1.png" width="176">
+            </div>
+        </li>
+        <li class="col-md-3  col-sm-6">
+            <div class="thumbnail" style="border: none">
+                <img src="__STATIC__/newjoin/images/b_2.png" width="177">
+            </div>
+        </li>
+        <li class="col-md-3  col-sm-6">
+            <div class="thumbnail" style="border: none">
+                <img src="__STATIC__/newjoin/images/b_3.png" width="178">
+            </div>
+        </li>
+        <li class="col-md-3  col-sm-6">
+            <div class="thumbnail" style="border: none">
+                <img src="__STATIC__/newjoin/images/b_4.png" width="178">
+            </div>
+        </li>
+    </ul>
+</div>
+<script>
+    $(function () {
+        if($(window).width()<600){
+            $('.pic_01').css({'width':'80%'});
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<foreach name="store_list" item="vo" key="k">
+     <li class="show_store_li">
+        <dl>
+            <div class="clear"></div>
+            <dt>
+                <div class="right_button"><a href="{:U('Mobile/store/index',array('store_id'=>$vo['store_id']))}">进入店铺</a></div>
+                <img onerror="this.src='/public/images/nopicseller.png'" src="{$vo.store_logo|default='/public/images/nopicseller.png'}" />
+                 <span>{$vo.store_name}</span> <a href="{:U('Mobile/store/index',array('store_id'=>$vo['store_id']))}">更多商品</a>
+             </dt>
+            <div class="clear"></div>
+            <notempty name="$vo.goodsList">
+            <dd>
+                <volist name="$vo.goodsList" id="vogoods">
+                <div>
+                    <a href="{:U('Mobile/goods/goodsInfo',array('id'=>$vogoods['goods_id']))}">
+                        <img src="{$vogoods.goods_id|goods_thum_images=120,120}" />
+                    </a>
+                </div>
+                </volist>
+            </dd>
+            
+            </notempty>
+        </dl>
+      </li>
+      <div class="clear"></div>
+</foreach>

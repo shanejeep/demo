@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>订单支付成功</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script type="text/javascript" src="__STATIC__/js/jquery.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: "微软雅黑","Microsoft YaHei";
+        }
+        body{
+            max-width:600px;
+            min-width: 300px;
+            margin: 0px auto;
+        }
+        li{
+            list-style: none;
+        }
+        h1{
+            font-size: 20px;
+            color: #222222;
+            line-height: 60px;
+        }
+        h2{
+            font-size: 16px;
+            color: #333333;
+            line-height: 52px;
+        }
+        p{
+            font-size: 15px;
+            color: #666666;
+            line-height: 28px;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .p15{
+            padding: 15px;
+        }
+        .p110{
+            padding: 10%;
+        }
+        .con_text{
+            display: inline-block;
+            margin: 0px 15px;
+        }
+        .pic_1{
+            padding: 40px 0px 20px 0px;
+        }
+        .pic_1 img{
+            display: block;
+            margin: 0 auto;
+        }
+        .btn{
+            display: block;
+            text-decoration:none;
+            width: 100%;
+            line-height: 40px;
+            text-align:center;
+            font-size: 14px;
+            color: #333333;
+            border: 1px solid #333333;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body >
+<div class="pic_1">
+    <img src="__STATIC__/images/V_1.png" style="width: 80px">
+</div>
+<div class="con_text">
+    <h2>支付成功，我们将在第一时间给你发货！</h2>
+
+    <p>订单号：<if condition="$master_order_sn neq ''">{$master_order_sn}&nbsp;<else/>{$order['order_sn']}</if></p>
+
+    <p>付款金额：￥<if condition="$master_order_sn neq ''">{$sum_order_amount}<else/>{$order['order_amount']}</if></p>
+
+    <p>支付方式：{$pay_name}</p>
+</div>
+<div style="margin: 25px 15px 15px 15px;">
+    <if condition="$master_order_sn neq ''">
+        <a class="btn" href="{:U('Mobile/User/order_list')}">订单详情<i></i></a>
+    <else/>
+        <a class="btn" href="{:U('/Mobile/User/order_detail',array('id'=>$order['order_id']))}">订单详情<i></i></a>
+    </if>
+    <!--<a class="btn" href="{:U('/Mobile/User/order_detail',array('id'=>$order['order_id']))}">查看订单</a>-->
+</div>
+</body>
+</html>
+

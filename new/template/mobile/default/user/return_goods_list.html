@@ -1,0 +1,106 @@
+<include file="public/header" title="退换货" body="g4"/>
+<include file="public/header_nav" title="退换货" href="javascript:history.back(-1);"/>
+<!--进度查询-s-->
+    <div class="attention-shoppay" id="list1" >
+        <if condition="empty($list)">
+            <!--没有进度-s-->
+            <div class="comment_con p">
+                <div class="none"><img src="__STATIC__/images/none.png"><br><br>亲，此处还没有进度哦~</div>
+            </div>
+            <!--没有进度-e-->
+        <else/>
+            <div class="searchsh"></div>
+            <foreach name="list" item="rg">
+                <div class="severde tuharecha">
+                <div class="myorder p">
+                    <div class="content30">
+                        <div class="order">
+                            <div class="fl">
+                                <span>服务单号：<em>{$rg[id]}</em></span>
+                            </div>
+                            <div class="fr">
+                                <span class="red">
+                                    <if condition="$rg[status] eq 0">待客服处理</if>
+                                    <if condition="$rg[status] eq 1">客服处理中</if>
+                                    <if condition="$rg[status] eq 2">已完成</if>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="myorder p">
+                    <div class="content30">
+                        <a href="{:U('Mobile/User/return_goods_info',array('id'=>$rg[id]))}">
+                            <div class="order">
+                                <div class="fl">
+                                    <span>
+                                        <if condition="$rg[status] eq 0">您的服务单已申请成功，待售后审核中 </if>
+                                        <if condition="$rg[status] eq 1">客服处理中</if>
+                                        <if condition="$rg[status] eq 2">已完成</if>
+                                    </span>
+                                </div>
+                                <div class="fr">
+                                    <i class="Mright"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                    <!--商品信息-s-->
+                        <div class="sc_list se_sclist paycloseto">
+                            <div class="maleri30">
+                                <div class="shopimg fl">
+                                    <img src="{$rg.goods_id|goods_thum_images=100,100}">
+                                </div>
+                                <div class="deleshow fr">
+                                    <div class="deletes">
+                                        <a class="daaloe">{$goodsList[$rg[goods_id]]}</a>
+                                    </div>
+                                    <div class="qxatten">
+                                        <p class="weight"><span>申请时间：</span><span>{:date('Y-m-d H:i:s',$rg[addtime])}</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <!--商品信息-e-->
+                <div class="xomjdche">
+                    <div class="maleri30">
+                        <a href="{:U('Mobile/User/return_goods_info',array('id'=>$rg[id]))}">进度查询</a>
+                    </div>
+                </div>
+            </div>
+            </foreach>
+        </if>
+    </div>
+<!--进度查询-e-->
+
+    <div id="getmore" style="font-size:.32rem;text-align: center;color:#888;padding:.25rem .24rem .4rem; clear:both">
+        <a href="javascript:void(0)" onClick="ajax_sourch_submit($(this).attr('type'),$(this).attr('new'))" new="{:I('new2')}" type=""  style="color: #000000;font-size: 18px;text-decoration: none;">点击加载更多</a>
+    </div>
+
+<script type="text/javascript">
+    /**
+     *加载更多
+     */
+    var  page = 1;
+    function ajax_sourch_submit(n,w)
+    {
+        ++page;
+        $.ajax({
+            type : "GET",
+            url:"/index.php?m=Mobile&c=User&a=return_goods_list&",
+            data:{type:n,is_ajax:1,p:page,new2:w},
+            success: function(data)
+            {
+                if(data == '')
+                    $('#getmore').hide();
+                else
+                {
+                    $("#list"+n).append(data);
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

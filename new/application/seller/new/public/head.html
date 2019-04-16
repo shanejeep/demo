@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>商家中心</title>
+<link href="__PUBLIC__/static/css/base.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/static/css/seller_center.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/static/font/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<!--[if IE 7]>
+  <link rel="stylesheet" href="__PUBLIC__/static/font/font-awesome/css/font-awesome-ie7.min.css">
+<![endif]-->
+<script type="text/javascript" src="__PUBLIC__/static/js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/js/seller.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/js/waypoints.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/js/jquery-ui/jquery-ui.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/js/jquery.validation.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/js/layer/layer.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/global.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/myAjax.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/myFormValidate.js"></script>
+<script type="text/javascript" src="__ROOT__/public/static/js/layer/laydate/laydate.js"></script>
+<link href="__PUBLIC__/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="__PUBLIC__/plugins/bootstrap/css/bootstrap-fileinput.css" rel="stylesheet">
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="__PUBLIC__/static/js/html5shiv.js"></script>
+      <script src="__PUBLIC__/static/js/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<header class="ncsc-head-layout w">
+  <div class="wrapper">
+    <div class="ncsc-admin">
+      <dl class="ncsc-admin-info">
+        <dt class="admin-avatar"><img src="__PUBLIC__/static/images/seller/default_user_portrait.gif" width="32" class="pngFix" alt=""/></dt>
+        <dd class="admin-permission">当前用户</dd>
+        <dd class="admin-name">{$seller['seller_name']}</dd>
+      </dl>
+      <div class="ncsc-admin-function"><a href="{:U('Home/Store/index',array('store_id'=>STORE_ID))}" title="前往店铺" ><i class="icon-home"></i></a>
+      <a href="{:U('Admin/admin_info',array('seller_id'=>$seller['seller_id']))}" title="修改密码" target="_blank"><i class="icon-wrench"></i></a>
+      <a href="{:U('Admin/logout')}" title="安全退出"><i class="icon-signout"></i></a></div>
+    </div>
+    <div class="center-logo"> <a href="/" target="_blank">
+    	<img src="__PUBLIC__/static/images/seller/seller_center_logo.png" class="pngFix" alt=""/></a>
+      <h1>商家中心</h1>
+    </div>
+    <div class="index-search-container">
+      <div class="index-sitemap"><a href="javascript:void(0);">导航管理 <i class="icon-angle-down"></i></a>
+        <div class="sitemap-menu-arrow"></div>
+        <div class="sitemap-menu">
+          <div class="title-bar">
+            <h2> <i class="icon-sitemap"></i>管理导航<em>小提示：添加您经常使用的功能到首页侧边栏，方便操作。</em> </h2>
+            <span id="closeSitemap" class="close">X</span></div>
+          	<div id="quicklink_list" class="content">
+          	<foreach name="menuArr" item="v2" key="k2">
+             <dl>
+              <dt>{$v2.name}</dt>
+                <foreach name="v2.child" item="v3">
+                <dd class="<php>if(!empty($quicklink)){if(in_array($v3['op'].'_'.$v3['act'],$quicklink)){echo 'selected';}}</php>">
+                	<i nctype="btn_add_quicklink" data-quicklink-act="{$v3[op]}_{$v3[act]}" class="icon-check" title="添加为常用功能菜单"></i>
+                	<a href={:U("$v3[op]/$v3[act]")}> {$v3.name} </a>
+                </dd>
+            	</foreach>
+             </dl>
+            </foreach>     
+           </div>
+        </div>
+      </div>
+      <div class="search-bar">
+        <form method="get" target="_blank" action="{:U('Home/Goods/search')}">
+          <input type="hidden" name="act" value="search">
+          <input type="text" nctype="search_text" name="q" placeholder="商城商品搜索" class="search-input-text">
+          <input type="submit" nctype="search_submit" class="search-input-btn pngFix" value="">
+        </form>
+      </div>
+    </div>
+    <nav class="ncsc-nav">
+    
+      <dl <if condition="ACTION_NAME eq 'index' AND CONTROLLER_NAME eq 'Index'">class="current"</if>>
+        <dt><a href="{:U('Index/index')}">首页</a></dt>
+        <dd class="arrow"></dd>
+      </dl>
+      
+      <foreach name="menuArr" item="vo" key="kk">
+      <dl <if condition="ACTION_NAME eq $vo[child][0][act] AND CONTROLLER_NAME eq $vo[child][0][op]">class="current"</if>>
+        <dt><a href="/index.php?m=Seller&c={$vo[child][0][op]}&a={$vo[child][0][act]}">{$vo.name}</a></dt>
+        <dd>
+          <ul>	
+          		<foreach name="vo.child" item="vv">
+                <li> <a href='{:U("$vv[op]/$vv[act]")}'> {$vv.name} </a> </li>
+				</foreach>
+           </ul>
+        </dd>
+        <dd class="arrow"></dd>
+      </dl>
+      </foreach>
+	</nav>
+  </div>
+</header>

@@ -1,0 +1,250 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta name="Generator" content="tpshop" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>购物流程-{$tpshop_config['shop_info_store_title']}</title>
+<meta name="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+<meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<link rel="stylesheet" href="__STATIC__/css/public.css">
+<link rel="stylesheet" href="__STATIC__/css/flow.css">
+<link rel="stylesheet" href="__STATIC__/css/style_jm.css">
+    <link rel="stylesheet" href="__STATIC__/css/reset.css">
+<script type="text/javascript" src="__STATIC__/js/jquery.js"></script>
+<script type="text/javascript" src="__STATIC__/js/fastclick.js"></script>
+<script src="__PUBLIC__/js/global.js"></script>
+<script src="__PUBLIC__/js/mobile_common.js"></script>
+<style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            font-family:"微软雅黑" ;
+        }
+        .box-w{
+            position:fixed;
+            width: 100%;
+            max-width:640px;
+            height: 100%;
+            top:0px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0,0,0,0.3);
+            display: none;
+        }
+        .box-n{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80%;
+            background-color: white;
+            border-radius:10px;
+            margin: 0px auto;
+            transform: translate(-50%,-50%);
+        }
+        .badge{
+            background-color: #b25f9e;
+            padding: 1px 3px;
+            color: white;
+            font-size: 12px;
+        }
+        .badge-border{
+            border: 1px solid #b25f9e;
+            border-left: 0px;
+            font-size: 12px;
+            padding: 0px 3px;
+        }
+        .border_radius{
+            width: 20px;
+            height: 20px;
+            border-radius: 20px;
+            position: absolute;
+            top: 50%;
+            left: 7.5%;
+            transform: translate(-50%,-50%);
+            background: url("__STATIC__/images/icon_a2.png");
+            background-size: contain;
+        }
+        .btn_2 div{
+            display: block;
+            width: 50%;
+            height: 44px;
+            font-size: 15px;
+            text-align: center;
+            line-height: 44px;
+            float: left;
+        }
+        .btn_2 div .a1{
+            display: block;
+            border-top: 1px solid #c3c3c3;
+            border-radius: 0 0 0 10px;
+        }
+        .btn_2 div .a2{
+            display: block;
+            background-color:#f12d2e ;
+
+            border-radius: 0 0 10px 0;
+        }
+       .h-mid a.cart_two{width: 50%; float: left;height: 94%; overflow: hidden;};
+    </style>
+</head>
+<body style="background: rgb(235, 236, 237);position:relative;">
+<div class="tab_nav">
+    <div class="header">
+      <div class="h-left">
+        <a class="sb-back" href="javascript:history.back(-1)" title="返回"></a>
+      </div>
+      <div style="overflow: hidden;" class="h-mid">
+          <a class="cart_two" href="{:U('mobile/cart/cart')}">购物车</a>
+          <a class="cart_two"  style="border-bottom: 4px solid #454c5b;"  href="{:U('mobile/cart/subscribe')}">需求列表</a>
+      </div>
+    </div>
+</div>
+ 
+<div class="screen-wrap fullscreen login">
+    <div class="page-shopping ">
+      <div class="cart_list">
+        <form id="cart_form" name="formCart" action="{:U('Mobile/Cart/ajaxCartList')}?is_drug=1" method="post">
+
+        </form>
+      </div>
+    </div>
+<div style="height:72px;"></div>
+</div>
+<div class="f_block" id="pop" style="position: fixed; bottom: 0px; left: 0px; height: 0px; z-index: 99999999; overflow: hidden; width: 100%; background: rgb(255, 255, 255);">
+  <p class="f_title"><span>选择自提点</span><a class="c_close" href="javascript:void(0)" onClick="close_pop()"></a></p>
+  <div id="pickcontent"></div>
+</div>
+
+<script type="text/javascript">
+
+function showCheckoutOther(obj)
+{
+  var otherParent = obj.parentNode;
+  otherParent.className = (otherParent.className=='checkout_other') ? 'checkout_other2' : 'checkout_other';
+  var spanzi = obj.getElementsByTagName('span')[0];
+  spanzi.className= spanzi.className == 'right_arrow_flow' ? 'right_arrow_flow2' : 'right_arrow_flow';
+}
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    ajax_cart_list(); // ajax 请求获取购物车列表
+});
+
+// ajax 提交购物车
+var before_request = 1; // 上一次请求是否已经有返回来, 有才可以进行下一次请求
+function ajax_cart_list(){
+
+    $(".input-num").each(function(){
+        var max = $(this).data("max");
+        var min = $(this).data("min");
+        var cart_id = $(this).data("id");
+        var num=parseInt($("input[name='goods_num["+cart_id+"]']").val());
+        <!-- check_num(cart_id,num); -->
+    });
+	
+	if(before_request == 0) // 上一次请求没回来 不进行下一次请求
+	    return false;
+	before_request = 0;
+	
+    $.ajax({
+        type : "POST",
+        url:"{:U('Mobile/Cart/ajaxCartList')}?is_drug=1",//+tab,
+        data : $('#cart_form').serialize(),// 你的formid
+        success: function(data){
+            $("#cart_form").html('');
+            $("#cart_form").append(data);
+			before_request = 1;			
+        }
+    });
+}
+
+/**
+ * 购买商品数量加加减减
+ * 购买数量 , 购物车id , 库存数量
+ */
+function switch_num(num,cart_id,store_count)
+{
+    var num2 = parseInt($("input[name='goods_num["+cart_id+"]']").val());
+    num2 += num;
+    if(num2 < 1) num2 = 1; // 保证购买数量不能少于 1
+    if(num2 > store_count)
+    {   alert("库存只有 "+store_count+" 件, 你只能买 "+store_count+" 件");
+        num2 = store_count; // 保证购买数量不能多余库存数量
+    }
+    var min_b=parseInt($("input[name='goods_num["+cart_id+"]']").data("min"));
+    var max_b=parseInt($("input[name='goods_num["+cart_id+"]']").data("max"));
+    if(num2 < min_b){
+        alert('购买数量不能小于最小商品购买数量！');
+        before_request = 0;
+         $("input[name='goods_num["+cart_id+"]']").val(min_b);
+        return false;
+    }
+    if(num2 > max_b){
+        alert('购买数量不能大于最大商品购买数量！');
+         before_request = 0;
+        $("input[name='goods_num["+cart_id+"]']").val(max_b);
+        return false;
+    }
+
+    $("input[name='goods_num["+cart_id+"]']").val(num2);
+
+    ajax_cart_list(); // ajax 更新商品价格 和数量
+}
+
+<!-- function check_num(cart_id,num){ -->
+    <!-- var min_b=parseInt($("input[name='goods_num["+cart_id+"]']").data("min")); -->
+    <!-- var max_b=parseInt($("input[name='goods_num["+cart_id+"]']").data("max")); -->
+    <!-- if(num < min_b){ -->
+        <!-- alert('购买数量不能小于最小商品购买数量！'); -->
+        <!-- before_request = 0; -->
+         <!-- $("input[name='goods_num["+cart_id+"]']").val(min_b); -->
+        <!-- return false; -->
+    <!-- } -->
+     <!-- if(num > max_b){ -->
+        <!-- alert('购买数量不能大于最大商品购买数量！'); -->
+         <!-- before_request = 0; -->
+        <!-- $("input[name='goods_num["+cart_id+"]']").val(max_b); -->
+        <!-- return false; -->
+    <!-- } -->
+    <!-- before_request = 1; -->
+<!-- } -->
+
+// ajax 删除购物车的商品
+function ajax_del_cart(ids)
+{
+    $.ajax({
+        type : "POST",
+        url:"{:U('Mobile/Cart/ajaxDelCart')}",
+        data:{ids:ids},
+        dataType:'json',
+        success: function(data){
+            if(data.status == 1)
+        	{
+            	ajax_cart_list(); //ajax 请求获取购物车列表	
+        	}               
+        }
+    });
+}
+
+// 批量删除购物车的商品
+function del_cart_more()
+{
+    if(!confirm('确定要删除吗?'))
+        return false;
+    // 循环获取复选框选中的值
+    var chk_value = [];
+    $('input[name^="cart_select"]:checked').each(function(){
+        var s_name = $(this).attr('name');
+        var id = s_name.replace('cart_select[','').replace(']','');
+        chk_value.push(id);
+    });
+    // ajax调用删除
+    if(chk_value.length > 0)
+        ajax_del_cart(chk_value.join(','));
+}
+</script> 
+</body>
+</html>

@@ -1,0 +1,26 @@
+<html>
+<head>
+<title>视频播放</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+	<div onclick="returnapp({$app_type})" style="height:0.2rem; font-size: 0.5rem;z-index: 9999; position: fixed;top: 0.2rem;color: #FFF;z-index: 999; left:0.15rem; width:0.25rem;display:inline-block;/*让span变为块状元素，只有块状元素可以缩放*/transform:scale(1,2);/*缩放属性；两个参数：(水平缩放比例,垂直缩放比例)；1表示原比例*/ /*私有缩放属性，为了兼容各浏览器；注：不兼容IE8以下浏览器*/ -ms-transform:scale(1,2);-webkit-transform:scale(1,2);-moz-transform:scale(1,2);-o-transform:scale(1,2);"> < </div>
+  <video onclick="showbb();" id="video" style="position: fixed;top: 0px;left:0px;width:100%;height:100%;" poster="http://yizjapp.oss-cn-hangzhou.aliyuncs.com/mallTopic/fuke/img/play.png" poster="http://yizjapp.oss-cn-hangzhou.aliyuncs.com/mallTopic/fuke/img/play.jpg" controls preload="none"  x5-video-player-type="h5"  data-setup="{}">
+    <source src="{$purl}" type="video/mp4">
+  </video>
+  <script type="text/javascript">
+  	var video = document.getElementById("video");
+  	function showbb(){
+  		if(video.paused){
+			video.play();
+		}else{
+			video.pause();
+		}
+	}
+  </script>
+</body>
+</html>

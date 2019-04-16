@@ -1,0 +1,139 @@
+<include file="public/header"/>
+<body>
+<header>
+  <div class="tab_nav">
+    <div class="header">
+      <div class="h-left"><a class="sb-back" href="javascript:history.back(-1)" title="返回"></a></div>
+      <div class="h-mid">我的收藏</div>
+      <div class="h-right">
+        <aside class="top_bar">
+          <div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a href="javascript:;"></a> </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</header>
+<include file="public/menu"/>
+
+<div id="tbh5v0">
+    <input type="hidden" value="{$Request.param.collect_type}" id="collect_type">
+    <div class="sc_nav">
+        <ul class="">
+            <li class='tab_head <empty name="$Request.param.collect_type"> on </empty>' id="goods_ka1">
+                <a href="{:U('User/collect_list',array('collect_type'=>' '))}" class="sc1">收藏的宝贝</a>
+            </li>
+            <li class="tab_head <if condition='$Request.param.collect_type eq 1'>on</if>" id="goods_ka2">
+                <a href="{:U('User/collect_list',array('collect_type'=>1))}" class="sc2">收藏的店铺</a>
+            </li>
+        </ul>
+    </div>
+
+<if condition="$Request.param.collect_type eq ''">
+    <!--商品列表-s-->
+    <div class="main" id="user_goods_ka_1">
+        <div class="shouchang" id="lists">
+            <foreach name="lists" item="list">
+                <dl>
+                    <dt>
+                        <a href="{:U('Goods/goodsInfo',array('id'=>$list[goods_id]))}">
+                            <img src="{$list.goods_id|goods_thum_images=200,200}" style="width:4rem; height:4rem;">
+                        </a>
+                    </dt>
+                    <dd>
+                        <a href="{:U('Goods/goodsInfo',array('id'=>$list[goods_id]))}">
+                            <p>{$list.goods_name}</p>
+                            <strong>¥{$list.shop_price}</strong>
+                        </a>
+                        <span>
+                    <switch name="list.drug_attr">
+                         <case value="3"><a href="javascript:AjaxAddCart({$list.goods_id},1,1)" class="s_flow" style=" color:#E71F19;font-size:14px;">加入购物车</a></case>
+                        <default/>
+                           <a href="javascript:AjaxAddCart({$list.goods_id},1,0)" class="s_flow" style=" color:#E71F19;font-size:14px;">加入购物车</a>
+                    </switch>
+                         <a href="{:U('User/cancel_collect',array('collect_id'=>$list[collect_id]))}" class="s_out" style=" color:#999;font-size:14px;">删除</a>
+                        </span>
+                    </dd>
+                </dl>
+            </foreach>
+        </div>
+    </div>
+<!--商品列表-s-->
+<else/>
+<!--店铺列表-s-->
+    <div class="main" id="user_goods_ka_2">
+        <div class="dianpu" id="lists">
+            <foreach name="lists" item="list">
+                <dl>
+                    <dt>
+                        <span>
+                            <a href="{:U('mobile/Store/index',array('store_id'=>$list[store_id]))}">{$list.store_name}</a>
+                        </span>
+                        <em>
+                            <a href="javascript:;" onclick="cancelCollect({$list['log_id']});">删除收藏</a>
+                        </em>
+                    </dt>
+                    <dd>
+                        <i>
+                            <a href="{:U('mobile/Store/index',array('store_id'=>$list[store_id]))}">
+                            <img src="{$list.store_logo|default='/public/images/store_default_logo.png'}"  style="width: 6.332rem; height: 2.25rem;">
+                            </a>
+                        </i>
+                        <em><a href="{:U('mobile/Store/index',array('store_id'=>$list[store_id]))}">进店逛逛</a></em>
+                    </dd>
+                </dl>
+            </foreach>
+        </div>
+    </div>
+    <!--店铺列表-e-->
+</if>
+    <notempty  name="lists">
+        <section class="list-pagination" id="getmore">
+            <div style="" class="pagenav-wrapper" >
+                <div class="pagenav-content">
+                    <div >
+                        <div class="p-next" onclick="ajax_sourch_submit()">加载更多</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <else/>
+        <div style="" class="pagenav-wrapper" >
+            <div class="pagenav-content">
+                <div >
+                    <div class="p-next">--您还没有收藏--</div>
+                </div>
+            </div>
+        </div>
+    </notempty>
+</div>
+
+<script>
+    var  page = 1;
+     /*** ajax 提交表单 查询订单列表结果*/
+     function ajax_sourch_submit()
+     {
+         var t= $('#collect_type').val();
+        page += 1;
+        $.ajax({
+            type : "GET",
+            url:"{:U('Mobile/User/collect_list',null,'')}/is_ajax/1/p/"+page+"/collect_type/"+t,//+tab,
+//			data : $('#filter_form').serialize(),// 你的formid 搜索表单 序列化提交
+            success: function(data)
+            {
+                if($.trim(data) == '')
+                    $('#getmore').hide();
+                else
+                    $("lists").append(data);
+            }
+        });
+     }
+    function cancelCollect(log_id){
+        //询问框
+        if(!confirm('您确定要取消收藏'))
+            return false;
+        window.location.href="/index.php/Mobile/User/del_store_collect/log_id/"+log_id;
+    }
+</script>
+<include file="public/footer_nav"/>
+</body>
+</html>

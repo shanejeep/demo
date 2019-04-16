@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>商家入驻认证页面</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href="__STATIC__/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__STATIC__/css/bootstrap-fileinput.css" rel="stylesheet">
+    <link href="__STATIC__/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="header">
+    <ul>
+        <li class="active_01">个人入驻</li>
+        <li>企业入驻</li>
+    </ul>
+</div>
+<!--个人入驻-->
+<div class="content">
+     <form id="form1" action="" method="post" enctype="multipart/form-data">
+    <input type="hidden" id="apply_type" name="apply_type" value="1">
+    <!--第一部分-->
+    <div class="ptb20 plr32">
+        <span class="title">店铺信息</span>
+        <div class="team mt42">
+            <div class="list_1">
+                <span>*</span>店铺名称
+            </div>
+            <div class="list_2">
+                <div class="ipt">
+                    <input type="text" id="store_name" data-notice="店铺名称"  name="store_name" value="{$apply.store_name}">
+                </div>
+                <div class="list_js">js判断错误</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="mt32">
+            <div class="list_01">
+                <span>*</span>店铺LOGO
+            </div>
+            <div class="list_02" style="height: 46px;cursor:pointer">
+                <div class="form-group pull-left mr10 ">
+                    <div class="fileinput fileinput-new pull-left exampleInputUpload" data-provides="fileinput">
+                        <div class="fileinput-new check_pic_11">
+                            <img class='picImg' style="width: 46px;height: 46px"  src="{$apply.store_logo|default='__STATIC__/images/add_logo.png'}" />
+                        </div>
+                        <div class="fileinput-preview fileinput-exists pn check_pic_12"
+                             style="width: 46px;height: 46px"></div>
+                        <div style="display: none">
+                            <a href="javascript:" class="btn btn-default btn-file btn-xs yc_11"
+                               data-dismiss="fileinput">移除</a>
+                            <span class="btn btn-primary btn-file btn-xs pull-right " >
+                                    <span class="fileinput-new">选择文件</span>
+                                    <span class="fileinput-exists">换一张</span>
+                                    <input class="choose_pic11" type="file" id="store_logo" data-notice="店铺LOGO" name="store_logo" value="{$apply.store_logo}" accept="image/gif,image/jpeg,image/x-png"/>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="yc yc_01">移除</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="team mt32 mb40">
+            <div class="list_1">
+                <span>*</span>店铺所在地
+            </div>
+            <div class="list_2">
+                <div class="ipt col_120 pull-left mr20">
+                    <select data-notice="省"  id="company_province" name="company_province"  onchange="get_city(this,0)">
+                        <option value="0" >请选择省市</option>
+                       <volist name="province" id="vo">
+                            <option value="{$vo.id}" <if condition="$vo[id] eq $apply[company_province]">selected</if>>{$vo.name}</option>
+                        </volist>
+                    </select>
+                </div>
+                <div class="ipt col_120 pull-left mr20">
+                    <select onchange="get_area(this)" data-notice="市"  id="company_city" name="company_city">
+                          <option value="0" >请选择城市</option>
+                        <volist name="city" id="vo">
+                                 <option value="{$vo.id}" <if condition="$vo[id] eq $apply[company_city]">selected</if>>{$vo.name}</option>
+                        </volist>
+                    </select>
+                </div>
+                <div class="ipt col_120 pull-left">
+                    <select id="company_district"  data-notice="县"  name="company_district">
+                           <option value="0" >请选择区县</option>
+                         <volist name="district" id="vo">
+                           <option value="{$vo.id}" <if condition="$vo[id] eq $apply[company_district]">selected</if>>{$vo.name}</option>
+                        </volist>
+                    </select>
+                </div>
+                <div class="clear"></div>
+                <div class="list_js">js判断错误</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="line_1"></div>
+    <!--第二部分-->
+    <div class="ptb20 plr32">
+
+        <span class="title">店主信息</span>
+        <div class="team mt42">
+            <div class="list_1">
+                <span>*</span>姓名
+            </div>
+            <div class="list_2">
+                <div class="ipt">
+                    <input type="text" id="store_person_name" data-notice="姓名"  name="store_person_name" value="{$apply.store_person_name}">
+                </div>
+                <div class="list_js">js判断错误</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="team mt32 mb40">
+            <div class="list_1">
+                <span>*</span>手机号
+            </div>
+            <div class="list_2">
+                <div class="ipt col_100 pull-left mr20">
+                    <select>
+                        <option name="" value="0"> 中国+86</option>
+                   <!--      <option name="" value="1"> 中国+86</option>
+                        <option name="" value="2"> 中国+86</option> -->
+                    </select>
+                </div>
+                <div class="ipt col_280 pull-left">
+                    <input type="number" maxlength="11" type="text" id="store_person_mobile" data-notice="手机号" name="store_person_mobile" value="{$apply.store_person_mobile}">
+                </div>
+                <div class="clear"></div>
+                <div class="list_js">js判断错误</div>
+            </div>
+        </div>
+        <div class="team mt42">
+            <div class="list_1">
+                <span>*</span>E-mail
+            </div>
+            <div class="list_2">
+                <div class="ipt">
+                    <input type="text" maxlength="32" id="store_person_email" data-notice="E-mail" name="store_person_email" value="{$apply.store_person_email}">
+                </div>
+                <div class="list_js">js判断错误</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="team mt42">
+            <div class="list_1">
+                QQ
+            </div>
+            <div class="list_2">
+                <div class="ipt">
+                    <input type="number" maxlength="11" id="store_person_qq" data-notice="QQ" name="store_person_qq" value="{$apply.store_person_qq}">
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="team mt32 mb40">
+            <div class="list_1">
+                <span>*</span>身份证正面
+            </div>
+            <div class="list_2">
+                <div class="ipt col_100 pull-left mr10 file_up text-center line-height-30">
+                    选择文件
+                    <input type="file" id="store_person_cert" data-notice="身份证正面" name="store_person_cert" onchange="document.getElementById('uploader5').innerHTML = this.value;
+                            document.getElementById('uploader5').style.color = '#333333'">
+                </div>
+                <div class="ipt col_280 pull-left border0 line-height-30 nowrap text-999" id="uploader5">
+                    支持JEPG、PNG格式，不超过2M
+                </div>
+                <div class="clear"></div>
+                <div class="list_js">js判断错误</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="team mt32 mb40">
+            <div class="list_1">
+                <span>*</span>身份证背面
+            </div>
+            <div class="list_2">
+                <div class="ipt col_100 pull-left mr10 file_up text-center line-height-30">
+                    选择文件
+                    <input type="file" name="store_person_cert_f" id="store_person_cert_f" data-notice="身份证背面" onchange="document.getElementById('uploader6').innerHTML = this.value;
+                            document.getElementById('uploader6').style.color = '#333333'">
+                </div>
+                <div class="ipt col_280 pull-left border0 line-height-30 nowrap text-999" id="uploader6">
+                    支持JEPG、PNG格式，不超过2M
+                </div>
+                <div class="clear"></div>
+                <div class="list_js">js判断错误</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+    <div class="btn_qy">
+        <a href="javascript:submit_form('1')">
+            提交
+        </a>
+    </div>
+</form>
+</div>
+<!--企业入驻-->
+<div class="content" style="display: none">
+    <form id="form2" action="" method="post" enctype="multipart/form-data">
+    <!-- <input type="hidden" name="apply_type" value="0"> -->
+    <!--第一部分-->
+    <div class="ptb20 plr32">
+
+        <span class="title">店铺信息</span>
+        <div class="team mt42">
+            <div class="list_1">
+                <span>*</span>店铺名称
+            </div>
+            <div class="list_2">
+                <div class="ipt">
+                    <input type="text" id="cp_store_name" data-notice="店铺名称" name="store_name" value="{$apply.store_name}">
+                </div>
+                <div class="list_js">js判断错误</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="mt32">
+            <div class="list_01">
+                <span>*</span>店铺LOGO
+            </div>
+            <div class="list_02" style="height: 46px">
+                <div class="form-group pull-left mr10 ">
+                    <div class="fileinput fileinput-new pull-left exampleInputUpload" data-provides="fileinput">
+                        <div class="fileinput-new check_pic_21">
+                            <img class='picImg' style="width: 46px;height: 46px;text-align: center;cursor: pointer;" src="{$apply.store_logo|default='__STATIC__/images/add_logo.png'}"/>
+                        </div>
+                        <div class="fileinput-preview fileinput-exists pn check_pic_22"
+                             style="width: 46px;height: 46px;text-align: center;overflow: hidden"></div>
+                        <div style="display: none">
+                            <a href="javascript:" class="btn btn-default btn-file btn-xs yc_21" style="width: 55px"
+                               data-dismiss="fileinput">移除</a>
+                            <span class="btn btn-primary btn-file btn-xs pull-right " style="width: 55px">
+                                    <span class="fileinput-new">选择文件</span>
+                                    <span class="fileinput-exists">换一张</span>
+                                    <input class="choose_pic21" type="file" id="cp_store_logo" data-notice="店铺LOGO" name="store_logo" value="{$apply.store_logo}" accept="image/gif,image/jpeg,image/x-png"/>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="yc yc_02">移除</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="team mt32 mb40">
+            <div class="list_1">
+                <span>*</span>店铺所在地
+            </div>
+            <div class="list_2">
+                <div class="ipt col_120 pull-left mr20">
+                    <select id="company_province2" data-notice="省" name="company_province" onchange="get_city2(this,0)">
+                         <option value="0" >请选择省市</option>  
+                       <volist name="province" id="vo">
+                            <option value="{$vo.id}" <if condition="$vo[id] eq $apply[company_province]">selected</if>>{$vo.name}</option>
+                        </volist>
+                    </select>
+                </div>
+                <div class="ipt col_120 pull-left mr20">
+                    <select onchange="get_area2(this)"  data-notice="市" id="company_city2" name="company_city">
+                         <option value="0" >请选择城市</option>  
+                        <volist name="city" id="vo">
+                                 <option value="{$vo.id}" <if condition="$vo[id] eq $apply[company_city]">selected</if>>{$vo.name}</option>
+                        </volist>
+                    </select>
+                </div>
+                <div class="ipt col_120 pull-left">
+                    <select id="company_district2" data-notice="县" name="company_district">
+                           <option value="0" >请选择区县</option>
+                         <volist name="district" id="vo">
+                           <option value="{$vo.id}" <if condition="$vo[id] eq $apply[company_district]">selected</if>>{$vo.name}</option>
+                        </volist>
+                    </select>
+                </div>
+                <div class="clear"></div>
+                <div class="list_js">js判断错误</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="line_1"></div>
+    <!--第二部分-->
+    <div class=" ptb20 plr32">
+
+        <span class="title">店铺负责人信息</span>
+        <div class="team mt42">
+            <div class="list_1">
+                <span>*</span>姓名
+            </div>
+            <div class="list_2">
+                <div class="ipt">
+                    <input type="text" id="cp_store_person_name" data-notice="姓名" name="store_person_name" value="{$apply.store_person_name}" >
+                </div>
+                <div class="list_js">js判断错误</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="team mt32 mb40">
+            <div class="list_1">
+                <span>*</span>手机号
+            </div>
+            <div class="list_2">
+                <div class="ipt col_100 pull-left mr20">
+                    <select>
+                        <option name="" value="0"> 中国+86</option><!-- 
+                        <option name="" value="1"> 中国+86</option>
+                        <option name="" value="2"> 中国+86</option> -->
+                    </select>
+                </div>
+                <div class="ipt col_280 pull-left">
+                    <input maxlength="11" type="number" id="cp_store_person_mobile" data-notice="手机号" name="store_person_mobile" value="{$apply.store_person_mobile}">
+                </div>
+                <div class="clear"></div>
+                <div class="list_js">js判断错误</div>
+            </div>
+        </div>
+        <div class="team mt42">
+            <div class="list_1">
+                <span>*</span>E-mail
+            </div>
+            <div class="list_2">
+                <div class="ipt">
+                    <input type="text" maxlength="32" id="cp_store_person_email" data-notice="E-mail"  name="store_person_email" value="{$apply.store_person_email}" >
+                </div>
+                <div class="list_js">js判断错误</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="team mt42">
+            <div class="list_1">
+                QQ
+            </div>
+            <div class="list_2">
+                <div class="ipt">
+                    <input type="number" maxlength="11" id="cp_store_person_qq" data-notice="QQ"  name="store_person_qq" value="{$apply.store_person_qq}">
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="team mt32 mb40">
+            <div class="list_1">
+                <span>*</span>身份证正面
+            </div>
+            <div class="list_2">
+                <div class="ipt col_100 pull-left mr10 file_up text-center line-height-30">
+                    选择文件
+                    <input type="file" id="cp_store_person_cert" data-notice="身份证正面" name="store_person_cert" onchange="document.getElementById('uploader1').innerHTML = this.value;
+                            document.getElementById('uploader1').style.color = '#333333'">
+                </div>
+                <div class="ipt col_280 pull-left border0 line-height-30 nowrap text-999" id="uploader1">
+                    支持JEPG、PNG格式，不超过2M
+                </div>
+                <div class="clear"></div>
+                <div class="list_js">js判断错误</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="team mt32 mb40">
+            <div class="list_1">
+                <span>*</span>身份证背面
+            </div>
+            <div class="list_2">
+                <div class="ipt col_100 pull-left mr10 file_up text-center line-height-30">
+                    选择文件
+                    <input type="file" name="store_person_cert_f" id="cp_store_person_cert_f" data-notice="身份证背面" onchange="document.getElementById('uploader2').innerHTML = this.value;
+                            document.getElementById('uploader2').style.color = '#333333'">
+                </div>
+                <div class="ipt col_280 pull-left border0 line-height-30 nowrap text-999" id="uploader2">
+                    支持JEPG、PNG格式，不超过2M
+                </div>
+                <div class="clear"></div>
+                <div class="list_js">js判断错误</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+    <div class="line_1"></div>
+    <!--第三部分-->
+    <div class=" ptb20 plr32">
+
+        <span class="title">企业信息</span>
+        <div class="team mt42">
+            <div class="list_1">
+                <span>*</span>公司名称
+            </div>
+            <div class="list_2">
+                <div class="ipt">
+                    <input type="text" maxlength="35" id="company_name" data-notice="公司名称" name="company_name" value="{$apply.company_name}">
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="team mt32 mb40">
+            <div class="list_1">
+                电话
+            </div>
+            <div class="list_2">
+         <!--        <div class="ipt col_100 pull-left mr20">
+                    <select>
+                        <option name="" value="0"> 中国+86</option>
+                        <option name="" value="1"> 中国+86</option>
+                        <option name="" value="2"> 中国+86</option>
+                    </select>
+                </div> -->
+                <div class="ipt col_280 pull-left">
+                    <input type="number" maxlength="32" id="company_telephone" data-notice="电话" name="company_telephone" class="input260" value="{$apply.company_telephone}">
+                </div>
+                <div class="clear"></div>
+                <div class="list_js">js判断错误</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+<!--         <div class="team mt42">
+            <div class="list_1">
+                E-mail
+            </div>
+            <div class="list_2">
+                <div class="ipt">
+                    <input type="text"  maxlength="32" id="company_email" data-notice="E-mail" name="company_email" class="input260" value="{$apply.company_email}">
+                </div>
+                <div class="list_js">js判断错误</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="team mt42">
+            <div class="list_1">
+                QQ
+            </div>
+            <div class="list_2">
+                <div class="ipt">
+                    <input type="number" maxlength="16" id="company_qq" data-notice="QQ" name="company_qq" class="input260" value="{$apply.company_qq}">
+                </div>
+                <div class="list_js">js判断错误</div>
+            </div>
+            <div class="clear"></div>
+        </div> -->
+        <div class="team mt32 mb40">
+            <div class="list_1">
+                <span>*</span>企业类型
+            </div>
+            <div class="list_2">
+                <div class="ipt col_120 pull-left mr10">
+                    <select id="sc_id" data-notice="企业类型"  name="sc_id">
+                        <option value="0" >请选择类型 </option>
+                        <volist name="store_class"  id="vo_cat">
+                        <option value="{$vo_cat.sc_id}" >{$vo_cat.sc_name} </option>
+                        </volist>
+                    </select>
+                </div>
+                <div class="ipt  pull-left border0 line-height-30 filename nowrap text-999" style="width: 270px">
+                    请上传营业执照，店铺负责人身份证，医疗企业经营许可证
+                </div>
+                <div class="clear"></div>
+                <div class="list_js">js判断错误</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="team mt32 mb40">
+            <div class="list_1">
+                <span>*</span>营业执照
+            </div>
+            <div class="list_2">
+                <div class="ipt col_100 pull-left mr10 file_up text-center line-height-30">
+                    证照资质
+                    <input type="file" id="business_licence_cert" data-notice="营业执照" name="business_licence_cert" onchange="document.getElementById('uploader3').innerHTML = this.value; document.getElementById('uploader3').style.color = '#333333'">
+                </div>
+                <div class="ipt col_280 pull-left border0 line-height-30 text-999 nowrap" id="uploader3">
+                    支持JEPG、PNG格式，不超过2M
+                </div>
+                <div class="clear"></div>
+                <div class="list_js">js判断错误</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div style="display: none;" id="show_bls" class="team mt32 mb40">
+            <div class="list_1">
+                <span>*</span>许可证
+            </div>
+            <div class="list_2">
+                <div class="ipt col_100 pull-left mr10 file_up text-center line-height-30">
+                    选择文件
+                    <input type="file" id="business_licence" data-notice="许可证" name="business_licence" onchange="document.getElementById('uploader4').innerHTML = this.value; document.getElementById('uploader4').style.color = '#333333'">
+                </div>
+                <div class="ipt col_280 pull-left border0 line-height-30 nowrap text-999" id="uploader4">
+                    支持JEPG、PNG格式，不超过2M
+                </div>
+                <div class="clear"></div>
+                <div class="list_js">js判断错误</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+    <div class="btn_qy"> <a href="javascript:submit_form('2')">提交</a> </div>
+</form>
+</div>
+<script src="__STATIC__/js/jquery-1.10.2.min.js"></script>
+<script src="/public/js/layer/layer-min.js"></script>
+<script src="__STATIC__/js/bootstrap-fileinput.js"></script>
+<script>
+    $(function () {
+
+        $('.header').find('li').bind('click', function () {
+            $('.header').find('li').removeClass('active_01');
+            $(this).addClass('active_01');
+
+            $('.content').hide();
+            $('.content').eq($(this).index()).show();
+        });
+
+        $('.check_pic_11,.check_pic_12').click(function () {
+            $('.choose_pic11').click();
+        });
+
+        $('.yc_01').click(function () {
+            $('.yc_11').click();
+        });
+
+        $('.check_pic_21,.check_pic_22').click(function () {
+            $('.choose_pic21').click();
+        });
+
+        $('.yc_02').click(function () {
+            $('.yc_21').click();
+        })
+        $("#sc_id").change(function(){
+                var myval=$(this).val(); 
+                if(myval == 15 || myval == 21 || myval == 22){
+                    $("#show_bls").show();
+                }else{
+                   $("#show_bls").hide();
+                }
+                
+        });
+
+    });
+
+    //检查字段
+    function checkfield(type){
+        var apply_type = type;
+        if(apply_type == 1){
+            var store_person_cert= $("#store_person_cert").val();
+            var store_person_cert_f= $("#store_person_cert_f").val();
+            if(store_person_cert == '' || store_person_cert_f==''){
+                layer.msg('请上传负责人身份证信息！');
+                return false;
+            }
+            var store_name=$("#store_name").val();
+            if(store_name == ''){
+                layer.msg('请填写店铺名称');
+                return false;
+            }
+            var store_logo=$("#store_logo").val();
+            if(store_logo == ''){
+                layer.msg('请上传店铺LOGO');
+                return false;
+            }
+            var company_province=$("#company_province").val();
+            var company_city=$("#company_city").val();
+            var company_district=$("#company_district").val();
+            if(company_province == 0 || company_city == 0 || company_district == 0){
+                layer.msg('请完善店铺店所在地！');
+                return false;
+            }
+            var store_person_name=$("#store_person_name").val();
+            if(store_person_name == ""){
+                layer.msg('请填写店铺负责人姓名！');
+                return false;
+            }
+            var store_person_mobile=$("#store_person_mobile").val();
+            if(store_person_mobile == ""){
+                layer.msg('请填写店铺负责人手机！');
+                return false;
+            }
+        }else{
+             var business_licence_cert= $("#business_licence_cert").val();
+            if(business_licence_cert == ''){
+                layer.msg('请上传营业执照！');
+                return false;
+            }
+            var myval=$("#sc_id").val(); 
+            var business_license= $("#business_licence").val();
+            if((myval == 15 || myval == 21 || myval == 22) &&  business_license=='' ){
+                layer.msg('请上传许可证！');
+                return false;
+            }
+            var cp_store_person_cert= $("#cp_store_person_cert").val();
+            var cp_store_person_cert_f= $("#cp_store_person_cert_f").val();
+            if(cp_store_person_cert == '' || cp_store_person_cert_f ==''){
+                layer.msg('请上传负责人身份证信息！');
+                return false;
+            }
+             var cp_store_name=$("#cp_store_name").val();
+            if(cp_store_name == ''){
+                layer.msg('请填写店铺名称');
+                return false;
+            }
+            var cp_store_logo=$("#cp_store_logo").val();
+            if(cp_store_logo == ''){
+                layer.msg('请上传店铺LOGO');
+                return false;
+            }
+            var cp_company_province=$("#company_province2").val();
+            var cp_company_city=$("#company_city2").val();
+            var cp_company_district=$("#company_district2").val();
+            if(cp_company_province == 0 || cp_company_city == 0 || cp_company_district == 0){
+                layer.msg('请完善店铺店所在地！');
+                return false;
+            }
+            var cp_store_person_name=$("#cp_store_person_name").val();
+            if(cp_store_person_name == ""){
+                layer.msg('请填写店铺负责人姓名！');
+                return false;
+            }
+            var cp_store_person_mobile=$("#cp_store_person_mobile").val();
+            if(cp_store_person_mobile == ""){
+                layer.msg('请填写店铺负责人手机！');
+                return false;
+            }
+            var company_name=$("#company_name").val();
+            if(company_name == ""){
+                layer.msg('请填写公司名称！');
+                return false;
+            }
+            var sc_id=$("#sc_id").val();
+            if(sc_id == 0){
+                layer.msg('请选择店铺类型！');
+                return false;
+            }   
+        }
+        return true;
+    }
+
+    /**
+     * 获取城市
+     * @param t  省份select对象
+     */
+    function get_city(t,selected){
+        var parent_id = $(t).val();
+        if(!parent_id > 0){
+            return;
+        }
+        var url = '/index.php?m=Home&c=Api&a=getRegion&level=2&parent_id='+ parent_id+"&selected="+selected;
+        $.ajax({
+            type : "GET",
+            url  : url,
+            error: function(request) {
+                showErrorMsg("服务器繁忙, 请联系管理员!");
+                return;
+            },
+            success: function(v) {
+                v = '<option value="0">选择城市</option>'+ v;          
+                $('#company_city').empty().html(v);
+            }
+        });
+    }
+
+    /**
+ * 获取地区
+ * @param t  城市select对象
+ */
+function get_area(t){
+    var parent_id = $(t).val();
+    if(parent_id == '0'){
+        var district_html = '<option value="0">选择区域</option>';
+        $('#company_district').empty().css('display','none');
+        return;
+    }
+    $('#company_district').empty().css('display','inline');
+    // $('#twon').empty().css('display','none');
+    var url = '/index.php?m=Home&c=Api&a=getRegion&level=3&parent_id='+ parent_id;
+    $.ajax({
+        type : "GET",
+        url  : url,
+        error: function(request) {
+            alert("服务器繁忙, 请联系管理员!");
+            return;
+        },
+        success: function(v) {
+            v = '<option value="0">选择区域</option>'+ v;
+            $('#company_district').empty().html(v);
+        }
+    });
+}
+/**
+     * 获取城市
+     * @param t  省份select对象
+     */
+    function get_city2(t,selected){
+        var parent_id = $(t).val();
+        if(!parent_id > 0){
+            return;
+        }
+        var url = '/index.php?m=Home&c=Api&a=getRegion&level=2&parent_id='+ parent_id+"&selected="+selected;
+        $.ajax({
+            type : "GET",
+            url  : url,
+            error: function(request) {
+                showErrorMsg("服务器繁忙, 请联系管理员!");
+                return;
+            },
+            success: function(v) {
+                v = '<option value="0">选择城市</option>'+ v;          
+                $('#company_city2').empty().html(v);
+            }
+        });
+    }
+
+    /**
+ * 获取地区
+ * @param t  城市select对象
+ */
+function get_area2(t){
+    var parent_id = $(t).val();
+    if(parent_id == '0'){
+        var district_html = '<option value="0">选择区域</option>';
+        $('#company_district2').empty().html(district_html);
+        return;
+    }
+    var url = '/index.php?m=Home&c=Api&a=getRegion&level=3&parent_id='+ parent_id;
+    $.ajax({
+        type : "GET",
+        url  : url,
+        error: function(request) {
+            alert("服务器繁忙, 请联系管理员!");
+            return;
+        },
+        success: function(v) {
+            v = '<option value="0">选择区域</option>'+ v;
+            $('#company_district2').empty().html(v);
+        }
+    });
+}
+//1 ie  0不是ie
+function isie(){
+    if (window.ActiveXObject || "ActiveXObject" in window){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
+before_request = 1; // 标识上一次ajax 请求有没回来, 没有回来不再进行下一次
+/**提交表单1*/
+function submit_form(form_id){
+ var formId="#form"+form_id;
+ var status=checkfield(form_id);
+ if(status == false){
+    return;
+ }
+ var index = layer.load(1, {shade: [0.6,'#777']}); //0代表加载的风格，支持0-2
+ var is_ie=isie();
+ if(is_ie == 1){
+    $(formId).submit();
+ }else{
+      var submit_url="{:U('home/Newjoin/index_join')}?is_ajax=1";
+    if(before_request == 0) return false;
+     var formData = new FormData($(formId)[0]);      
+    $.ajax({
+            type : "POST",
+            url  : submit_url,
+            data: formData,  
+            async: false,  
+            cache: false,
+            dataType:'json',
+            contentType: false,  
+            processData: false,    
+            error: function(request) {
+                layer.close(index);
+                layer.alert("服务器繁忙, 请联系管理员!",{icon:2});
+                return;
+            },
+            success: function(v) {
+                layer.close(index);
+                before_request = 1; // 标识ajax 请求已经返回 
+                    if(v.status == 1)
+                    { 
+                        layer.msg("提交成功，请等待审核！",{icon:1});
+                        location.href = "{:U('home/Newjoin/index')}";
+                    }else if(v.status == 0){
+                        layer.msg(v.msg,{icon:2});
+                    }else{
+                         layer.msg("您网络异常，请您重新登录再操作！",{icon:2,shade:[0]});
+                    }
+                }
+      });   
+ }
+
+  // var fields=$(formId).serializeArray();
+  //   for (index = 0; index < fields.length; ++index) 
+  //   { 
+  //       var al_id="#"+fields[index].name;
+  //       if ($(al_id).val() == "" ||  0 ) 
+  //       {   
+  //           layer.msg($(al_id).data("notice")+"填写有误！");
+  //           return false;
+  //       } 
+  //   } 
+}
+</script>
+</body>
+</html>

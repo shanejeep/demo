@@ -1,0 +1,191 @@
+<include file="public/layout" />
+<body style="background-color: rgb(255, 255, 255); overflow: auto; cursor: default; -moz-user-select: inherit;">
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+	<div class="fixed-bar">
+		<div class="item-title">
+			<div class="subject">
+				<h3>国家管理</h3>
+			</div>
+		</div>
+	</div>
+	<div class="flexigrid">
+		<div class="mDiv">
+			<div class="tDiv">
+				<div class="tDiv2">
+					<div class="fbutton">
+						<a onclick="add_country(this);">
+							<div class="add" title="添加国家">
+								<span><i class="fa fa-plus"></i>添加国家</span>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div style="clear:both"></div>
+			</div>
+			<form class="navbar-form form-inline"  id="search-form2" onsubmit="return false">
+				<input type="hidden" name="order_by" value="id">
+			</form>
+		</div>
+		<div class="hDiv">
+			<div class="hDivBox">
+				<table cellspacing="0" cellpadding="0">
+					<thead>
+					<tr>
+						<th align="left" abbr="user_id" axis="col3" class="">
+							<div style="text-align: center; width: 100px;" class="">ID</div>
+						</th>
+						<th align="left" abbr="nickname" axis="col4" class="">
+							<div style="text-align: center; width: 150px;" class="">名称</div>
+						</th>
+						<th align="center" abbr="reg_time" axis="col6" class="">
+							<div style="text-align: center; width: 120px;" class="">创建日期</div>
+						</th>
+						<th align="center" axis="col1" class="handle">
+							<div style="text-align: center; width: 150px;">操作</div>
+						</th>
+						<th style="width:100%" axis="col7">
+							<div></div>
+						</th>
+					</tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+		<div class="bDiv" style="height: auto;" id="ajax_return">
+		</div>
+	</div>
+</div>
+<script>
+    $(document).ready(function(){
+        // 点击刷新数据
+        var ssort = 'sdesc';
+        var on_sclick = 0;
+        $('.hDivBox > table>thead>tr>th').hover(
+            function () {
+                if(typeof($(this).attr('abbr')) == "undefined"){
+                    return false;
+                }
+                $(this).addClass('thOver');
+                if($(this).hasClass('sorted')){
+                    if(ssort == 'sdesc'){
+                        $(this).find('div').removeClass('sdesc');
+                        $(this).find('div').addClass('sasc');
+                    }else{
+                        $(this).find('div').removeClass('sasc');
+                        $(this).find('div').addClass('sdesc');
+                    }
+                }else{
+                    $(this).find('div').addClass(ssort);
+                }
+            }, function () {
+                if(typeof($(this).attr('abbr')) == "undefined"){
+                    return false;
+                }
+                if(on_sclick == 0){
+                    if($(this).hasClass('sorted')){
+                        if(ssort == 'sdesc'){
+                            $(this).find('div').removeClass('sasc');
+                            $(this).find('div').addClass('sdesc');
+                        }else{
+                            $(this).find('div').removeClass('sdesc');
+                            $(this).find('div').addClass('sasc');
+                        }
+                    }else{
+                        $(this).find('div').removeClass(ssort);
+                    }
+                }
+                $(this).removeClass("thOver");
+                on_sclick = 0;
+            }
+        );
+        $('.hDivBox > table>thead>tr>th').click(function(){
+            if(typeof($(this).attr('abbr')) == "undefined"){
+                return false;
+            }
+            if($(this).hasClass('sorted')){
+                $(this).find('div').removeClass(ssort);
+                if(ssort == 'sdesc'){
+                    ssort = 'sasc';
+                }else{
+                    ssort = 'sdesc';
+                }
+                $(this).find('div').addClass(ssort);
+                on_sclick = 1;
+            }else{
+                $('.hDivBox > table>thead>tr>th').removeClass('sorted');
+                $('.hDivBox > table>thead>tr>th').find('div').removeClass(ssort);
+                $(this).addClass('sorted');
+                $(this).find('div').addClass(ssort);
+                var hDivBox_th_index = $(this).index();
+                var flexigrid_tr =   $('#flexigrid > table>tbody>tr')
+                flexigrid_tr.each(function(){
+                    $(this).find('td').removeClass('sorted');
+                    $(this).children('td').eq(hDivBox_th_index).addClass('sorted');
+                });
+            }
+            sort($(this).attr('abbr'));
+        });
+
+        $('.fa-refresh').click(function(){
+            location.href = location.href;
+        });
+        ajax_get_table('search-form2',1);
+    });
+    // ajax 抓取页面
+    function ajax_get_table(tab,page){
+        cur_page = page; //当前页面 保存为全局变量
+        $.ajax({
+            type : "POST",
+            url:"/index.php/Admin/tools/ajaxcountrylist/p/"+page,//+tab,
+            data : $('#'+tab).serialize(),// 你的formid
+            success: function(data){
+                $("#ajax_return").html('');
+                $("#ajax_return").append(data);
+            }
+        });
+    }
+    //发送站内信
+    function add_country(obj)
+    {
+        var id = $(obj).attr('data-id');
+        if(id == undefined || id==''){
+            var url = "{:U('Admin/tools/countryHandle')}";
+		}else{
+            var url = "/index.php/Admin/tools/countryHandle/id/"+id;
+		}
+        layer.open({
+            type: 2,
+            title: '国家',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['580px', '200px'],
+            content: url
+        });
+    }
+    // 点击排序
+    function sort(field)
+    {
+        $("input[name='order_by']").val(field);
+        var v = $("input[name='sort']").val() == 'desc' ? 'asc' : 'desc';
+        $("input[name='sort']").val(v);
+        ajax_get_table('search-form2',cur_page);
+    }
+    /**
+     * 回调函数
+     */
+    function call_back(v) {
+        layer.closeAll();
+        if (v == 1) {
+            layer.msg('保存成功！',{icon:1});
+        }else if(v == 2){
+            layer.alert('名称重复，请重新创建！', {icon: 2});
+		}else {
+            layer.alert('保存失败！', {icon: 2});
+        }
+    }
+
+</script>
+</body>
+</html>

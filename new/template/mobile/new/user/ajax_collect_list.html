@@ -1,0 +1,48 @@
+<if condition="$Request.param.collect_type eq ''">
+    <foreach name="lists" item="list">
+        <div class="shouchang">
+            <dl>
+                <dt>
+                    <a href="{:U('Goods/goodsInfo',array('id'=>$list[goods_id]))}">
+                        <img src="{$list.goods_id|goods_thum_images=200,200}" style="width:4rem; height:4rem;">
+                    </a>
+                </dt>
+                <dd>
+                    <a href="{:U('Goods/goodsInfo',array('id'=>$list[goods_id]))}">
+                        <p>{$list.goods_name}</p>
+                        <strong>¥{$list.shop_price}</strong>
+                    </a>
+                    <span>
+                    <switch name="list.drug_attr">
+                         <case value="3"><a href="javascript:AjaxAddCart({$list.goods_id},1,1)" class="s_flow" style=" color:#E71F19;font-size:14px;">加入购物车</a></case>
+                        <default/>
+                           <a href="javascript:AjaxAddCart({$list.goods_id},1,0)" class="s_flow" style=" color:#E71F19;font-size:14px;">加入购物车</a>
+                    </switch>
+                       <a href="{:U('User/cancel_collect',array('collect_id'=>$list[collect_id]))}" class="s_out" style=" color:#999;font-size:14px;">删除</a>
+                    </span>
+                </dd>
+            </dl>
+        </div>
+    </foreach>
+<else/>
+    <foreach name="lists" item="list">
+        <dl>
+            <dt>
+                        <span>
+                            <a href="{:U('mobile/Store/index',array('store_id'=>$list[store_id]))}">{$list.store_name}</a>
+                        </span>
+                <em>
+                    <a href="javascript:;" onclick="cancelCollect({$list['log_id']});">删除收藏</a>
+                </em>
+            </dt>
+            <dd>
+                <i>
+                    <a href="{:U('mobile/Store/index',array('store_id'=>$list[store_id]))}">
+                        <img src="{$list.store_logo|default='/public/images/store_default_logo.png'}"  style="width: 6.332rem; height: 2.25rem;">
+                    </a>
+                </i>
+                <em><a href="{:U('mobile/Store/index',array('store_id'=>$list[store_id]))}">进店逛逛</a></em>
+            </dd>
+        </dl>
+    </foreach>
+</if>

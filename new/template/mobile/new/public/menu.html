@@ -1,0 +1,128 @@
+<script type="text/javascript" src="__STATIC__/js/mobile.js" ></script>
+<div class="goods_nav hid" id="menu">
+      <div class="Triangle">
+        <h2></h2>
+      </div>
+      <ul>
+        <li><a href="{$httpHosts}"><span class="menu1"></span><i>首页</i></a></li>
+        <li><a href="{:U('mobile/Goods/categoryList')}"><span class="menu2"></span><i>分类</i></a></li>
+        <li><a href="{:U('mobile/Cart/cart')}"><span class="menu3"></span><i>购物车</i></a></li>
+        <li><a href="{:U('mobile/User/index')}"><span class="menu4"></span><i>我的</i></a></li>
+        {$jeeper}
+      
+   </ul>
+ </div> 
+<script type="text/javascript" src="__STATIC__/js/jquery.js"></script>
+<script typet="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+	$(".share_menu").click(function(){
+    var weChat = {
+        init: function() {
+            this.getData();        
+        },
+        getData: function() {
+            $.ajax({
+                type: "post",
+                url: "{:U('Home/Api/get_package')}",
+                dataType: "json",
+                data: {url: window.location.href},
+                success: function(res) {
+                    //console.log(res)
+                    if(res.code == 0){
+                        weChat.wxConfig(res.data);
+                    }
+                }
+            });
+        },
+        wxConfig: function(res) {
+            wx.config({
+                debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: 'wxe2c91d34b93805ec', // 必填，公众号的唯一标识
+                timestamp: res['timestamp'], // 必填，生成签名的时间戳
+                nonceStr: res['nonceStr'], // 必填，生成签名的随机串
+                signature: res['signature'], // 必填，签名，见附录1
+                jsApiList: ['checkJsApi',
+                    'onMenuShareTimeline',
+                    'onMenuShareAppMessage',
+                    'onMenuShareQQ',
+                    'onMenuShareQZone'
+                ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            });
+            var shareDetail = {
+                title: "666",
+                imgUrl: "http://yizjapp.oss-cn-hangzhou.aliyuncs.com/upload/goods/2017/12-14/6b873938895398801c4b18ea20f28569.jpg?x-oss-process=image/resize,m_pad,h_400,w_400",
+                desc: "shop.yzjia.com"
+            }
+            wx.ready(function() {
+                //分享到朋友圈
+                wx.onMenuShareTimeline({
+                    title: shareDetail.title, // 分享标题
+                    link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                    imgUrl: shareDetail.imgUrl, // 分享图标
+                    desc: shareDetail.desc,
+                    success: function(res) {
+                        // 用户确认分享后执行的回调函数
+                    },
+                    cancel: function(res) {
+                        // 用户取消分享后执行的回调函数
+                    }
+                });
+                //分享给朋友
+                wx.onMenuShareAppMessage({
+                    title: shareDetail.title, // 分享标题
+                    link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                    imgUrl: shareDetail.imgUrl, // 分享图标
+                    desc: shareDetail.desc,
+                    success: function(res) {
+                        // 用户确认分享后执行的回调函数
+                        //alert("share success")
+                    },
+                    cancel: function(res) {
+                        // 用户取消分享后执行的回调函数
+                    }
+                });
+                //分享到QQ
+                wx.onMenuShareQQ({
+                    title: shareDetail.title, // 分享标题
+                    link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                    imgUrl: shareDetail.imgUrl, // 分享图标
+                    desc: shareDetail.desc,
+                    success: function(res) {
+                        // 用户确认分享后执行的回调函数
+                    },
+                    cancel: function(res) {
+                        // 用户取消分享后执行的回调函数
+                    }
+                });
+                //分享到腾讯微博
+                wx.onMenuShareWeibo({
+                    title: shareDetail.title, // 分享标题
+                    link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                    imgUrl: shareDetail.imgUrl, // 分享图标
+                    desc: shareDetail.desc,
+                    success: function(res) {
+                        // 用户确认分享后执行的回调函数
+                    },
+                    cancel: function(res) {
+                        // 用户取消分享后执行的回调函数
+                    }
+                });
+                //分享到QQ空间
+                wx.onMenuShareQZone({
+                    title: shareDetail.title, // 分享标题
+                    link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                    imgUrl: shareDetail.imgUrl, // 分享图标
+                    desc: shareDetail.desc,
+                    success: function(res) {
+                        // 用户确认分享后执行的回调函数
+                    },
+                    cancel: function(res) {
+                        // 用户取消分享后执行的回调函数
+                    }
+                });
+            });
+        }
+    }
+    weChat.init();
+	});
+ </script>

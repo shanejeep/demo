@@ -1,0 +1,1267 @@
+<include file="public/head"/>
+<!--以下是在线编辑器 代码 -->
+<style>
+    .ncsc-goods-default-pic .goodspic-uplaod .upload-thumb{width: 180px;height:180px; display: inline-block;}
+    .ncsc-goods-default-pic .goodspic-uplaod .upload-thumb img{ height: 160px; width: 160px;}
+    .ncsc-goods-default-pic .goodspic-uplaod .upload-thumb{line-height: 20px;margin-right: 6px;}
+    .ncsc-goods-default-pic .goodspic-uplaod .upload-thumb:nth-child(5n){margin-right: 0;}
+    .ncsc-goods-default-pic{display: inherit;}
+    /*.ncsc-form-goods dl dd{width: 98%;}*/
+    .text-warning {color: #8a6d3b;}a{ color:#3BAEDA}
+    /*.ncsc-form-goods{padding: 10px;}*/
+    .table-bordered {border: 1px solid #f4f4f4;}
+    .table { width: 100%;max-width: 100%;margin-bottom: 20px;}
+    ul.group-list {width: 96%;min-width: 1000px; margin: auto 5px;list-style: disc outside none;}
+    ul.group-list li { white-space: nowrap;float: left; width: 150px; height: 25px;padding: 3px 5px;list-style-type: none;list-style-position: outside;border: 0px;margin: 0px;}
+    .row .table-bordered td .btn,.row .table-bordered td img{vertical-align: middle;}
+    .row .table-bordered td{padding: 8px;line-height: 1.42857143;}
+    .table-bordered{width: 100%}
+    .table-bordered tr td{border: 1px solid #f4f4f4;}
+    .btn-success {color: #fff;background-color: #48CFAE;border-color: #398439 solid 1px;}
+    .btn {display: inline-block;padding: 6px 12px;margin-bottom: 0;font-size: 14px;
+        font-weight: 400;line-height: 1.42857143;text-align: center;white-space: nowrap; vertical-align: middle;
+        -ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;-webkit-user-select: none;-moz-user-select: none;
+        -ms-user-select: none;user-select: none;background-image: none;border: 1px solid transparent; border-radius: 4px;
+    }
+    .col-xs-8 {width: 66.66666667%;}
+    .col-xs-4 {width: 33.33333333%;}
+    .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {float: left;}
+    .row .tab-pane h4{padding: 10px 0;}
+    .row .tab-pane h4 input{vertical-align: middle;}
+    .table-striped>tbody>tr:nth-of-type(odd) {background-color: #f9f9f9;}
+    .ncap-form-default .title{border-bottom: 0}
+    .ncap-form-default dl.row, .ncap-form-all dd.opt{/*border-color: #F0F0F0;*/border: none;}
+    .ncap-form-default dl.row:hover, .ncap-form-all dd.opt:hover{border: none;box-shadow: inherit;}
+    a:hover {color: #3BAEDA;text-decoration: none;}
+    .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+        padding: 8px;line-height: 1.42857143;vertical-align: top; border-top: 1px solid #ddd;}
+    ul.group-list{min-width: 100%;}
+    input{vertical-align:middle;}
+    .ncsc-form-goods h4{margin: 10px 0 10px 10px;}
+    .clabackkj{background-color: #F5F5F5;border-bottom: solid 1px #E7E7E7;overflow: hidden;}
+    .clabackkj h3{border-bottom: 0;display: inline-block;}
+    .clabackkj .ncbtn{float: right;margin-right: 15px;height: 12px;line-height: 12px;}
+    #tab_goods_images dl dd{width: 99%;}
+    .alert-block{margin-top: 0;}
+    select{
+		min-width:120px;
+    }
+</style>
+<script type="text/javascript">
+    /*
+     * 在线编辑器相 关配置 js
+     *  参考 地址 http://fex.baidu.com/ueditor/
+     */
+    window.UEDITOR_Admin_URL = "__ROOT__/public/plugins/Ueditor/";
+    var URL_upload = "{$URL_upload}";
+    var URL_fileUp = "{$URL_fileUp}";
+    var URL_scrawlUp = "{$URL_scrawlUp}";
+    var URL_getRemoteImage = "{$URL_getRemoteImage}";
+    var URL_imageManager = "{$URL_imageManager}";
+    var URL_imageUp = "{$URL_imageUp}";
+    var URL_getMovie = "{$URL_getMovie}";
+    var URL_home = "{$URL_home}";
+</script>
+<script type="text/javascript" charset="utf-8" src="__ROOT__/public/plugins/Ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="__ROOT__/public/plugins/Ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="__ROOT__/public/plugins/Ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript">
+
+    var editor;
+    $(function () {
+        //具体参数配置在  editor_config.js  中
+        var options = {
+            zIndex: 999,
+            initialFrameWidth: "95%", //初化宽度
+            initialFrameHeight: 400, //初化高度
+            focus: false, //初始化时，是否让编辑器获得焦点true或false
+            maximumWords: 99999, removeFormatAttributes: 'class,style,lang,width,height,align,hspace,valign'
+            , //允许的最大字符数 'fullscreen',
+            pasteplain:false, //是否默认为纯文本粘贴。false为不使用纯文本粘贴，true为使用纯文本粘贴
+            autoHeightEnabled: true
+            /*   autotypeset: {
+             mergeEmptyline: true,        //合并空行
+             removeClass: true,           //去掉冗余的class
+             removeEmptyline: false,      //去掉空行
+             textAlign: "left",           //段落的排版方式，可以是 left,right,center,justify 去掉这个属性表示不执行排版
+             imageBlockLine: 'center',    //图片的浮动方式，独占一行剧中,左右浮动，默认: center,left,right,none 去掉这个属性表示不执行排版
+             pasteFilter: false,          //根据规则过滤没事粘贴进来的内容
+             clearFontSize: false,        //去掉所有的内嵌字号，使用编辑器默认的字号
+             clearFontFamily: false,      //去掉所有的内嵌字体，使用编辑器默认的字体
+             removeEmptyNode: false,      //去掉空节点
+             //可以去掉的标签
+             removeTagNames: {"font": 1},
+             indent: false,               // 行首缩进
+             indentValue: '0em'           //行首缩进的大小
+             }*/,
+            toolbars: [
+                ['fullscreen', 'source', '|', 'undo', 'redo',
+                    '|', 'bold', 'italic', 'underline', 'fontborder',
+                    'strikethrough', 'superscript', 'subscript',
+                    'removeformat', 'formatmatch', 'autotypeset',
+                    'blockquote', 'pasteplain', '|', 'forecolor',
+                    'backcolor', 'insertorderedlist',
+                    'insertunorderedlist', 'selectall', 'cleardoc', '|',
+                    'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
+                    'customstyle', 'paragraph', 'fontfamily', 'fontsize',
+                    '|', 'directionalityltr', 'directionalityrtl',
+                    'indent', '|', 'justifyleft', 'justifycenter',
+                    'justifyright', 'justifyjustify', '|', 'touppercase',
+                    'tolowercase', '|', 'link', 'unlink', 'anchor', '|',
+                    'imagenone', 'imageleft', 'imageright', 'imagecenter',
+                    '|', 'insertimage', 'emotion', 'insertvideo',
+                    'attachment', 'map', 'gmap', 'insertframe',
+                    'insertcode', 'webapp', 'pagebreak', 'template',
+                    'background', '|', 'horizontal', 'date', 'time',
+                    'spechars', 'wordimage', '|',
+                    'inserttable', 'deletetable',
+                    'insertparagraphbeforetable', 'insertrow', 'deleterow',
+                    'insertcol', 'deletecol', 'mergecells', 'mergeright',
+                    'mergedown', 'splittocells', 'splittorows',
+                    'splittocols', '|', 'print', 'preview', 'searchreplace']
+            ]
+        };
+        editor = new UE.ui.Editor(options);
+        editor.render("goods_content");  //  指定 textarea 的  id 为 goods_content
+
+    });
+</script>
+<!--以上是在线编辑器 代码  end-->
+<div class="ncsc-layout wrapper">
+    <include file="public/left"/>
+    <div id="layoutRight" class="ncsc-layout-right">
+        <div class="ncsc-path"><i class="icon-desktop"></i>商家管理中心<i class="icon-angle-right"></i>商品<i class="icon-angle-right"></i>商品发布</div>
+        <div class="main-content" id="mainContent">
+            <div class="tabmenu">
+                <ul class="tab pngFix">
+                    <li class="active"><a onclick="select_nav(this);" data-id="tab_tongyong">通用信息</a></li>
+                    <li class="normal"><a onclick="select_nav(this);" data-id="tab_goods_images">商品相册</a></li>
+                    <li class="normal"><a onclick="select_nav(this);" data-id="tab_goods_spec">商品规格</a></li>
+                    <li class="normal"><a onclick="select_nav(this);" data-id="tab_goods_attr">商品属性</a></li>
+                    <li class="normal"><a onclick="select_nav(this);" data-id="tab_goods_shipping">商品物流</a></li>
+                </ul>
+            </div>
+            <div class="item-publish">
+                <form method="post" id="addEditGoodsForm" >
+                    <input type="hidden" name="goods_id" value="{$goodsInfo.goods_id}">
+                    <div class="ncsc-form-goods active" id="tab_tongyong">
+                        <h3 id="demo1">商品基本信息</h3>
+                        <dl>
+                            <dt><i class="required">*</i>商品名称：</dt>
+                            <dd>
+                                <input type="text" value="{$goodsInfo.goods_name}" name="goods_name"  class="text w400">
+                                <span id="err_goods_name"></span>
+                                <p class="hint">商品标题名称长度至少3个字符，最长50个汉字</p>
+                            </dd>
+                        </dl>
+
+                        <dl>
+                            <dt>商品简介：</dt>
+                            <dd>
+                                <textarea name="goods_remark" class="textarea h60 w400">{$goodsInfo.goods_remark}</textarea>
+                                <span id="err_goods_remark"></span>
+                                <p class="hint">商品简介最长不能超过140个汉字</p>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>商品货号：</dt>
+                            <dd>
+                                <p>
+                                    <input type="text" value="{$goodsInfo.goods_sn}" name="goods_sn" class="text">
+                                </p>
+                                <p class="hint">商家货号是指商家管理商品的编号<br>最多可输入20个字符，支持输入中文、字母、数字、_、/、-和小数点</p>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>SPU：</dt>
+                            <dd>
+                                <p>
+                                    <input type="text" value="{$goodsInfo.spu}" name="spu" class="text">
+                                </p>
+                                <p class="hint">可不填</p>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>SKU：</dt>
+                            <dd>
+                                <p>
+                                    <input type="text" value="{$goodsInfo.sku}" name="sku" class="text">
+                                </p>
+                                <p class="hint">可不填</p>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><i class="required">*</i>商品分类：</dt>
+                            <dd>
+                                <select name="cat_id1" id="cat_id1"  <empty name="$goodsInfo.goods_id">onchange="get_category_sales_model(this.value,'cat_id2','0',0);"</else>onchange="get_category_sales_model(this.value,'cat_id2','0',{$goodsInfo.goods_id});"</empty>onchange="get_category_sales_model(this.value,'cat_id2','0');">-->
+                                    <option value="0">请选择商品分类</option>
+                                    <foreach name="cat_list" item="v" key="k" >
+                                        <option value="{$v['id']}" <if condition="$v['id'] eq $goodsInfo['cat_id1']">selected="selected"</if> >
+                                        {$v['name']}
+                                        </option>
+                                    </foreach>
+                                </select>
+                                <select name="cat_id2" id="cat_id2" onchange="get_category2(this.value,'cat_id3','0');">
+                                    <option value="0">请选择商品分类</option>
+                                </select>
+                                <select name="cat_id3" id="cat_id3">
+                                    <option value="0">请选择商品分类</option>
+                                </select>
+                                <p class="hint">请选择商品分类</p>
+                            </dd>
+                        </dl>
+
+                        <dl>
+                            <dt><i class="required">*</i>销售模式：</dt>
+                            <dd>
+                                <ul class="ncsc-form-radio-list" id="xsms_ul">
+                                    <!--<li>
+                                        <label>
+                                            <input id="" class="check_sales_model" type="radio" <empty name="goodsInfo">checked="checked"</empty> <if condition="$goodsInfo[sales_model] eq 1">checked="checked"</if> value="1" name="sales_model">
+                                            国内现货
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>
+                                            <input class="check_sales_model" type="radio" <if condition="$goodsInfo[sales_model] eq 2">checked="checked"</if> value="2" name="sales_model">
+                                            海外直邮
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label>
+                                            <input class="check_sales_model" type="radio" <if condition="$goodsInfo[sales_model] eq 3">checked="checked"</if> value="3" name="sales_model">
+                                            保税区发货
+                                        </label>
+                                    </li>-->
+                                </ul>
+                                <p class="hint">请选择商品分类</p>
+                            </dd>
+                        </dl>
+                        <dl class="shopping_country">
+                            <dt><i class="required">*</i>发货国家：</dt>
+                            <dd id="countryList">
+                                <select name="shopping_country" id="shopping_country">
+                                    <option value="0">选择国家</option>
+                                    <foreach name="countryList" item="v" key="k" >
+                                        <option value="{$v['id']}" <if condition="$v['id'] eq $goodsInfo['shopping_country'] ">selected="selected"</if>>
+                                        {$v['name']}
+                                        </option>
+                                    </foreach>
+                                </select>
+                            </dd>
+                        </dl>
+
+                        <dl>
+                            <dt>商品扩展分类：</dt>
+                            <dd>
+                                <div>
+                                    <select name="ext_goods_cat_id1[]" onchange="ext_get_category2(this.value,this,'0');">
+                                        <option value="0">请选择商品分类</option>
+                                        <foreach name="cat_list" item="v" key="k" >
+                                            <option value="{$v['id']}" <if condition="$v['id'] eq $goodsInfo['ext_cat_list']['ext_goods_cat_id1'][0]">selected="selected"</if> >
+                                            {$v['name']}
+                                            </option>
+                                        </foreach>
+                                    </select>
+                                    <select name="ext_goods_cat_id1[]" id="ext_goods_cat_id1_2" onchange="ext_get_category2(this.value,this,'0');">
+                                        <option value="0">请选择商品分类</option>
+                                    </select>
+                                    <select name="ext_goods_cat_id1[]" id="ext_goods_cat_id1_3">
+                                        <option value="0">请选择商品分类</option>
+                                    </select>
+                                    <p class="hint"></p>
+                                </div>
+
+                                <div>
+                                    <select name="ext_goods_cat_id2[]" onchange="ext_get_category2(this.value,this,'0');">
+                                        <option value="0">请选择商品分类</option>
+                                        <foreach name="cat_list" item="v" key="k" >
+                                            <option value="{$v['id']}" <if condition="$v['id'] eq $goodsInfo['ext_cat_list']['ext_goods_cat_id2'][0]">selected="selected"</if> >
+                                            {$v['name']}
+                                            </option>
+                                        </foreach>
+                                    </select>
+                                    <select name="ext_goods_cat_id2[]" id="ext_goods_cat_id2_2" onchange="ext_get_category2(this.value,this,'0');">
+                                        <option value="0">请选择商品分类</option>
+                                    </select>
+                                    <select name="ext_goods_cat_id2[]" id="ext_goods_cat_id2_3">
+                                        <option value="0">请选择商品分类</option>
+                                    </select>
+                                    <p class="hint"></p>
+                                </div>
+
+                                <div>
+                                    <select name="ext_goods_cat_id3[]" onchange="ext_get_category2(this.value,this,'0');">
+                                        <option value="0">请选择商品分类</option>
+                                        <foreach name="cat_list" item="v" key="k" >
+                                            <option value="{$v['id']}" <if condition="$v['id'] eq $goodsInfo['ext_cat_list']['ext_goods_cat_id3'][0]">selected="selected"</if> >
+                                            {$v['name']}
+                                            </option>
+                                        </foreach>
+                                    </select>
+                                    <select name="ext_goods_cat_id3[]" id="ext_goods_cat_id3_2" onchange="ext_get_category2(this.value,this,'0');">
+                                        <option value="0">请选择商品分类</option>
+                                    </select>
+                                    <select name="ext_goods_cat_id3[]" id="ext_goods_cat_id3_3">
+                                        <option value="0">请选择商品分类</option>
+                                    </select>
+                                    <p class="hint"></p>
+                                </div>
+                            </dd>
+                        </dl>
+
+                        <dl>
+                            <dt>本店分类：</dt>
+                            <dd>
+                                <select name="store_cat_id1" id="store_cat_id1" onchange="get_store_category(this.value,'store_cat_id2','0');">
+                                    <option value="0">请选择分类</option>
+                                    <foreach name="store_goods_class_list" item="v" key="k" >
+                                        <option value="{$v['cat_id']}" <if condition="$v['cat_id'] eq $goodsInfo['store_cat_id1']">selected="selected"</if> >
+                                        {$v['cat_name']}
+                                        </option>
+                                    </foreach>
+                                </select>
+                                <select name="store_cat_id2" id="store_cat_id2">
+                                    <option value="0">请选择分类</option>
+                                </select>
+                                <span id="err_cat_id" style="color:#F00; display:none;"></span>
+                                <p class="hint">可不选,为了用户更好检索到该商品，最好选择</p>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>商品品牌：</dt>
+                            <dd>
+                                <select name="brand_id" id="brand_id">
+                                    <option value="0">选择品牌</option>
+                                    <foreach name="brandList" item="v" key="k" >
+                                        <if condition="$v['status'] eq 0">
+                                            <option value="{$v['id']}"  data-cat_id1="{$v['cat_id1']}" <if condition="$v['id'] eq $goodsInfo['brand_id'] ">selected="selected"</if>>
+                                            {$v['name']}
+                                            </option>
+                                        </if>
+                                    </foreach>
+                                </select>
+                                <p class="hint">可不选,为了用户更好检索到该商品，最好选择</p>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>供应商：</dt>
+                            <dd>
+                                <select name="suppliers_id" id="suppliers_id">
+                                    <option value="0">不指定供应商属于本店商品</option>
+                                    <foreach name="suppliersList" item="v" key="k" >
+                                        <option value="{$v['suppliers_id']}"  <if condition="$v['suppliers_id'] eq $goodsInfo['suppliers_id'] ">selected="selected"</if>>
+                                        {$v['suppliers_name']}
+                                        </option>
+                                    </foreach>
+                                </select>
+                                <p class="hint">可不选,为了用户更好检索到该商品，最好选择</p>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><i class="required">*</i>本店售价：</dt>
+                            <dd>
+                                <input name="shop_price" id="shop_price" value="{$goodsInfo.shop_price}" class="text w60" type="text" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')"><em class="add-on"><i class="icon-renminbi"></i></em> <span></span>
+                                <p class="hint">价格必须是0.01~9999999之间的数字，且不能高于市场价。<br>
+                                    此价格为商品实际销售价格，如果商品存在规格，该价格显示最低价格。该价格影响到积分赠送</p>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><i class="required">*</i>市场价：</dt>
+                            <dd>
+                                <input name="market_price" value="{$goodsInfo.market_price}" class="text w60" type="text" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')"><em class="add-on"><i class="icon-renminbi"></i></em> <span></span>
+
+                                <p class="hint">价格必须是0.01~9999999之间的数字，此价格仅为市场参考售价，请根据该实际情况认真填写。</p>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>成本价：</dt>
+                            <dd>
+                                <input value="{$goodsInfo.cost_price}" name="cost_price" class="text w60" type="text" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')"><em class="add-on"><i class="icon-renminbi"></i></em> <span></span>
+
+                                <p class="hint">价格必须是0.00~9999999之间的数字，此价格为商户对所销售的商品实际成本价格进行备注记录，非必填选项，不会在前台销售页面中显示。</p>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><i class="required">*</i>商品图片：</dt>
+                            <dd>
+                                <div class="ncsc-goods-default-pic">
+                                    <div class="goodspic-uplaod">
+                            <div class="fileinput fileinput-new pull-left" data-provides="fileinput" class="exampleInputUpload" style="width: 130px;padding: 5px;border: 1px solid #c3c3c3">
+                                <div class="fileinput-new" >
+                                    <img class='picImg' style="width: 120px;height: 120px;text-align: center" src="{$goodsInfo.original_img|default='__PUBLIC__/plugins/bootstrap/images/noimage.png'}"/>
+                                </div>
+                                <div class="fileinput-preview fileinput-exists pn" style="width: 120px;height: 120px;text-align: center;overflow: hidden" ></div>
+                                <div style="padding-top: 5px">
+                                    <a href="javascript:" class="btn btn-default btn-file btn-xs" style="width: 45px;padding: 6px;"
+                                       data-dismiss="fileinput">移除</a>
+                                    <span class="btn btn-primary btn-file btn-xs pull-right" style="width: 55px;padding: 6px;">
+                                        <span class="fileinput-new">选择文件</span>
+                                        <span class="fileinput-exists">换一张</span>
+                                        <input type="file" name="original_img" id="picID"/>
+                                    </span>
+                                </div>
+                            </div>
+                                    </div>
+                                </div>
+                                <p class="hint">上传的图片不能大于<span style="color: red;">1M</span>。</p>
+                                <div id="demo"></div>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>最小购买量</dt>
+                            <dd>
+                                <input value="{$goodsInfo.min_buy|default=1}" name="min_buy" class="text w60" type="text"  onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')"> <span></span>
+
+                                <p class="hint">价格必须是0~999之间的数字，用于限制用户前台单个订单购买数量。</p>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>最大购买量：</dt>
+                            <dd>
+                                <input value="{$goodsInfo.max_buy|default=999}" name="max_buy" class="text w60" type="text" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')"> <span></span>
+
+                                <p class="hint">价格必须是0~999之间的数字，用于限制用户前台单个订单购买数量。</p>
+                            </dd>
+                        </dl>
+
+                        <dl>
+                            <dt>商品重量：</dt>
+                            <dd>
+                                <p>
+                                    <input type="text"  value="{$goodsInfo.weight}" name="weight" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" class="text">
+                                </p>
+                                <p class="hint">克 (以克为单位<span style="color: red;">如果不填重量，物流费可能会出现偏差！</span>)</p>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>是否包邮：</dt>
+                            <dd>
+                                <ul class="ncsc-form-radio-list">
+                                    <li>
+                                        <label>
+                                            <input type="radio" <if condition="$goodsInfo[is_free_shipping] eq 1">checked="checked"</if> value="1" name="is_free_shipping">
+                                            是</label>
+                                    </li>
+                                    <li>
+                                        <label>
+                                            <input type="radio" <if condition="$goodsInfo[is_free_shipping] eq 0">checked="checked"</if> value="0" name="is_free_shipping">
+                                            否</label>
+                                    </li>
+                                </ul>
+                                <p class="hint"></p>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt nc_type="no_spec"><i class="required">*</i>商品库存：</dt>
+                            <dd nc_type="no_spec">
+                                <if condition="$goodsInfo[goods_id] gt 0">
+                                    <input name="store_count" value="{$goodsInfo.store_count}" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" class="text w60" type="text">
+                                <else/>
+                                    <input name="store_count" value="{$tpshop_config[basic_default_storage]}" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" class="text w60" type="text">
+                                </if>
+                                    <span></span>
+                                <p class="hint">商铺库存数量必须为0~999999999之间的整数<br>若启用了库存默认配置，则系统自动计算商品的总数，此处无需卖家填写</p>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>赠送积分：</dt>
+                            <dd>
+                                <p>
+                                    <input type="text" value="{$goodsInfo.give_integral}" name="give_integral" id="give_integral" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" class="text">
+                                    <p class="hint" id="give_integral_hint">赠送积分不能超过100</p>
+                                </p>
+                                <p class="hint">购买商品赠送用户积分，积分比例1元:{$tpshop_config[shopping_point_rate]}分</p>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>兑换积分：</dt>
+                            <dd>
+                                <p>
+                                    <input type="text" value="{$goodsInfo.exchange_integral}" name="exchange_integral" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" class="text">
+                                </p>
+                                <p class="hint">兑换该商品可使用多少积分，积分比例1元:{$tpshop_config[shopping_point_rate]}分</p>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>商品关键词：</dt>
+                            <dd>
+                                <p>
+                                    <input type="text" value="{$goodsInfo.keywords}" name="keywords" class="text">
+                                </p>
+                                <p class="hint">多个关键词，用空格隔开</p>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>排序：</dt>
+                            <dd>
+                                <input value="{$goodsInfo.sort|default=50}" name="sort" class="text w60" type="text" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')"> <span></span>
+
+                                <p class="hint">排序必须是0~999之间的数字，用于前台排序。</p>
+                            </dd>
+                        </dl>
+						  <!-----------------------dengxing begin---------------------------->
+						<eq name="dis_seller" value="1">					
+                        <dl>
+                            <dt>医学服务费：</dt>
+                            <dd>
+                                <p>
+                                    <input type="text" value="{$goodsInfo.sales_commission}" name="sales_commission" class="text">
+                                </p>
+                                <p class="hint"></p>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>推广服务费：</dt>
+                            <dd>
+                                <p>
+                                    <input type="text" value="{$goodsInfo.promote_commission}" name="promote_commission" class="text">
+                                </p>
+                                <p class="hint"></p>
+                            </dd>
+                        </dl>
+						</eq>
+                        <!-----------------------dengxing end---------------------------->
+                            <if condition="($_GET[goods_id] eq 0) OR ($goodsInfo[is_virtual] eq 1)">
+                        <h3 id="demo3">特殊商品</h3>
+                        <dl class="special-01">
+					        <dt>虚拟商品：</dt>
+					        <dd>
+					          <ul class="ncsc-form-radio-list">
+					            <li>
+					               <input type="radio" name="is_virtual" value="1" id="is_virtual_1" <if condition="$goodsInfo[is_virtual] eq 1">disabled  checked</if>><label for="is_virtual_1">是</label>
+					            </li>
+					            <li>
+					               <input type="radio" name="is_virtual" value="0" id="is_virtual_0" <if condition="$goodsInfo[is_virtual] eq 1">disabled<else/>checked</if>><label for="is_virtual_0">否</label>
+					            </li>
+					          </ul>
+					          <p class="hint vital">*虚拟商品不能参加限时折扣和组合销售两种促销活动。也不能赠送赠品和推荐搭配。</p>
+					          <p class="hint vital">*勾选发布虚拟商品后，该商品交易类型为“虚拟兑换码”验证形式,无需物流发货。</p>
+					        </dd>
+				     	</dl>
+				     	<dl class="special-01" nctype="virtual_valid" style="display: none;">
+					        <dt><i class="required">*</i>虚拟商品有效期至：</dt>
+					        <dd>
+					          <input type="text" name="virtual_indate" id="virtual_indate" class="w80 text hasDatepicker" value="{$goodsInfo[virtual_indate]|date='Y-m-d',###}" readonly="readonly"><em class="add-on"><i class="icon-calendar"></i></em>
+					          <span></span>
+					          <p class="hint">虚拟商品可兑换的有效期，过期后商品不能购买，电子兑换码不能使用。</p>
+					        </dd>
+					    </dl>
+					    <dl class="special-01" nctype="virtual_valid" style="display: none;">
+					        <dt><i class="required">*</i>虚拟商品购买上限：</dt>
+					        <dd>
+					          <input type="text" name="virtual_limit" id="virtual_limit" class="w80 text" value="{$goodsInfo['virtual_limit']}"  onpaste="this.value=this.value.replace(/[^\d]/g,'')" onKeyUp="this.value=this.value.replace(/[^\d]/g,'')"  onblur="checkInputNum(this.name,1,10);" >
+					          <span></span>
+					          <p class="hint">请填写1~10之间的数字，虚拟商品最高购买数量不能超过10个。</p>
+					        </dd>
+					    </dl>
+					    <dl class="special-01" nctype="virtual_valid" style="display: none;">
+					        <dt>支持过期退款：</dt>
+					        <dd>
+					          <ul class="ncsc-form-radio-list">
+					            <li>
+					              <input type="radio" name="virtual_refund" id="virtual_refund_1" value="1" <if condition="$goodsInfo[virtual_refund] eq 1">checked</if>>
+					              <label for="virtual_refund_1">是</label>
+					            </li>
+					            <li>
+					              <input type="radio" name="virtual_refund" id="virtual_refund_0" value="0" <if condition="$goodsInfo[virtual_refund] eq 0">checked</if>>
+					              <label for="virtual_refund_0">否</label>
+					            </li>
+					          </ul>
+					          <p class="hint">兑换码过期后是否可以申请退款。</p>
+					        </dd>
+					    </dl>
+					    </if>
+                        <h3 id="demo2">商品详情描述</h3>
+                        <dl>
+                            <dt>商品详情描述：</dt>
+                            <dd>
+                                <p>
+                                    <textarea id="goods_content" name="goods_content" class="txt">{$goodsInfo.goods_content}</textarea>
+                                </p>
+                                <p class="hint">商品详情描述</p>
+                            </dd>
+                        </dl>
+                    </div>
+
+                    <div class="ncsc-form-goods" id="tab_goods_images" style="display: none;">
+                        <dl>
+                            <dd>
+                                <div class="ncsc-form-goods-pic">
+									<div class="container">
+							            <div class="ncsc-goodspic-list" style="opacity: 1;">
+								        <div class="clabackkj">
+								          <h3>管理缩略图</h3>
+								          <a ata-original-title="添加商品" onclick="add_image();" class="ncbtn ncbtn-grapefruit mt5"><i class="fa fa-plus"></i>添加缩略图</a>
+								         </div>
+								        	<ul nctype="ul0" class="goods-pic-list">
+								        	<foreach name="goodsImages" item="vo" key="k" >
+							                    <li id="li-{$vo.img_id}" class="ncsc-goodspic-upload ">
+                                                    <div class="fileinput fileinput-new pull-left" data-provides="fileinput" class="exampleInputUpload" style="width: 130px;padding: 5px;border: 1px solid #c3c3c3">
+                                                        <div class="fileinput-new" >
+                                                            <img class='picImg' style="width: 120px;height: 120px;text-align: center" src="{$vo['image_url']|default='__PUBLIC__/plugins/bootstrap/images/noimage.png'}"/>
+                                                        </div>
+                                                        <div class="fileinput-preview fileinput-exists pn" style="width: 120px;height: 120px;text-align: center;overflow: hidden" ></div>
+                                                        <div style="padding-top: 5px">
+                                                            <a href="javascript:" data-id="{$vo['img_id']}" class="btn btn-default btn-file btn-xs btn-del" style="width: 45px;padding: 6px;"
+                                                               data-dismiss="fileinput">移除</a>
+                                                            <span data-id="{$vo['img_id']}" class="btn btn-primary btn-file btn-xs pull-right" style="width: 55px;padding: 6px;">
+                                                                <span  class="fileinput-new">选择文件</span>
+                                                                <span  class="fileinput-exists">换一张</span>
+                                                                <input type="file" name="goods_images[]" id="picID_{$k}"/>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+									          </li>
+									      </foreach>
+									      <if condition="$image_count lt 5">
+									      <for start="$image_count" end="5">
+										      	<li class="ncsc-goodspic-upload">
+                                             <div class="fileinput fileinput-new pull-left" data-provides="fileinput" class="exampleInputUpload" style="width: 130px;padding: 5px;border: 1px solid #c3c3c3">
+                                                    <div class="fileinput-new" >
+                                                        <img class='picImg' style="width: 120px;height: 120px;text-align: center" src="__PUBLIC__/plugins/bootstrap/images/noimage.png"/>
+                                                    </div>
+                                                    <div class="fileinput-preview fileinput-exists pn" style="width: 120px;height: 120px;text-align: center;overflow: hidden" ></div>
+                                                    <div style="padding-top: 5px">
+                                                        <a href="javascript:" class="btn btn-default btn-file btn-xs" style="width: 45px;padding: 6px;"
+                                                           data-dismiss="fileinput">移除</a>
+                                                        <span class="btn btn-primary btn-file btn-xs pull-right" style="width: 55px;padding: 6px;">
+                                                            <span class="fileinput-new">选择文件</span>
+                                                            <span class="fileinput-exists">换一张</span>
+                                                            <input type="file" name="goods_images[]" id="picID_{$i}"/>
+                                                        </span>
+                                                    </div>
+                                                </div>
+										         </li>
+										  </for>
+									      </if>
+									      </ul>
+									      <!-- <input type="hidden" value="" name="goods_images[]" > -->
+                                          <input type="hidden" value="" id="del_ids" name="del_ids" >
+									      </div>
+								      </div>
+								      <div style="width: 209px;" class="sidebar"><div class="alert alert-info alert-block" id="uploadHelp">
+									    <div class="faq-img"></div>
+									    <h4>上传要求：</h4><ul>
+									    <li>1. 请使用jpg\jpeg\png等格式、单张大小不超过1M的正方形图片。</li>
+									    <li>3. 最多可上传10张图片，默认前面5张上传框不可删除, 新增加的上传框可删除, 但对上传的图片无影响, 已实际上传图片数量为准</li>
+									    <li>4. 更改排序数字修改商品图片的排列显示顺序, 数字越小的越靠前显示</li>
+									    <li>5. 图片质量要清晰，不能虚化，要保证亮度充足。</li>
+									    <li>6. 操作完成后请点击"保存"按钮 , 否则上传的图片不会被保存</li>
+									    </ul><h4>建议:</h4><ul><li>1. 主图为白色背景正面图。</li><li>2. 排序依次为正面图-&gt;背面图-&gt;侧面图-&gt;细节图。</li></ul></div>
+									   </div>
+								</div>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="ncsc-form-goods" id="tab_goods_spec" style="display: none;">
+                        <table class="table table-bordered" id="goods_spec_table">
+                            <tr>
+                                <td colspan="2">
+                                    <div class="alert mt15 mb5"><strong>操作提示：</strong>
+									  <ul>
+										<li style="color:red">发布商品时, 如果规格没有显示出来请检查以下步骤</li>
+									    <li>1、"通用信息"选项卡中是否选择商品分类</li>
+									    <li>2、如果已经选择商品分类, 请在总平台确认商品分类是否关联商品模型</li>
+									    <li>3、如果分类已经关联商品模型, 请检查商品模型是否关联规格</li>
+									  </ul>
+									</div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div id="ajax_spec_data"><!-- ajax 返回规格--></div>
+                    </div>
+                    <div class="ncsc-form-goods" id="tab_goods_attr" style="display: none;">
+                        <table class="table table-bordered" id="goods_attr_table">
+                            <tr>
+                                <td colspan="2">
+                                    <div class="alert mt15 mb5"><strong>操作提示：</strong>
+									  <ul>
+										<li style="color:red">发布商品时, 如果规格没有显示出来请检查以下步骤</li>
+									    <li>1、"通用信息"选项卡中是否选择商品分类</li>
+									    <li>2、如果已经选择商品分类, 请在总平台确认商品分类是否关联商品模型</li>
+									    <li>3、如果分类已经关联商品模型, 请检查商品模型是否关联规格</li>
+									  </ul>
+									</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="ncsc-form-goods" id="tab_goods_shipping" style="display: none;">
+                        <h4><b>物流配送：</b><input type="checkbox" onclick="choosebox(this)">全选</h4>
+                        <table class="table table-bordered table-striped dataTable" id="goods_shipping_table">
+                            <foreach name="plugin_shipping" item="shipping" key="kk">
+                                <tr>
+                                    <td class="title left" style="padding-right:50px;">
+                                        <b>{$shipping[name]}：</b>
+                                        <label class="right"><input type="checkbox" value="1" cka="mod-{$kk}">全选</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <ul class="group-list">
+                                            <foreach name="shipping_area" item="vv">
+                                                <if condition="$vv[shipping_code] eq $shipping[code]">
+                                                    <li><label><input type="checkbox" name="shipping_area_ids[]" value="{$vv.shipping_area_id}" <if condition="in_array($vv['shipping_area_id'],$goods_shipping_area_ids)">checked='checked='</if> ck="mod-{$kk}">{$vv.shipping_area_name}</label></li>
+                                                </if>
+                                            </foreach>
+                                            <div class="clear-both"></div>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </foreach>
+                        </table>
+                    </div>
+                    <div class="bottom tc hr32">
+                        <label class="submit-border">
+                            <input nctype="formSubmit" class="submit" value="保存" type="submit">
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<include file="public/foot"/>
+<script>
+
+    /*
+     * 上传之后删除组图input
+     * @access   public
+     * @val      string  删除的图片input
+     */
+    function ClearPicArr2(obj,path){
+        var action = $(obj).attr('ncaction');
+        if(action != undefined && action =='del'){
+            $(obj).parent().parent().remove();
+        }
+        //删除图片文件
+        if(path == '' || path == undefined){
+            return;
+        }
+        // 删除数据库记录
+         $.ajax({
+            type:'GET',
+            url:"{:U('Seller/Goods/del_goods_images')}",
+            data:{filename:path},
+            success:function(){
+                 $(obj).parent().siblings('.upload-thumb').find('img').attr("src", '/public/static/images/default_goods_image_240.gif'); // 删除完服务器的, 再删除 html上的图片
+                //删除input goods_image
+                $(obj).parent().siblings('.upload-thumb').find('input[type=hidden]').val("");
+                $(obj).parent().siblings('.show-sort').find('input[type=text]').val("0");
+                
+                //如果删除的是商品主图, 则把商品主图隐藏域删掉
+                if($("#original_img").val() == path){
+                	$("#original_img").val("");
+                    $("#original_img2").attr("src" , '/Public/static/images/default_goods_image_240.gif');
+                }
+            }
+        });
+    }
+
+    $(".pull-right").click(function(){
+        var did=$("#del_ids").val();
+        var mydid=$(this).data('id');
+        if(did == ''){
+            $("#del_ids").val(mydid)
+        }else{
+              $("#del_ids").val(did+','+mydid)
+        }
+    });
+
+    $(".btn-del").click(function(){
+        var mydid=$(this).data('id');
+        var url = "{:U('ajax_del_img')}?img_id="+mydid;
+        $.ajax({
+            type:"GET",
+            url:url,
+            error:function(){
+             layer.alert("服务器繁忙, 请联系管理员!",{icon:2});
+                return;
+            },
+            success:function(){
+                layer.alert("删除成功!",{icon:1});
+                $("#li-"+mydid).remove();
+            }
+        });
+    });
+    /**
+     * 获取多级联动的商品分类
+     */
+    function get_category2(id, next, select_id) {
+        var url = '/index.php?m=Seller&c=Index&a=get_category&parent_id=' + id;
+        $.ajax({
+            type: "GET",
+            url: url,
+            error: function (request) {
+                layer.alert("服务器繁忙, 请联系管理员!",{icon:2});
+                return;
+            },
+            success: function (v) {
+                v = "<option value='0'>请选择商品分类</option>" + v;
+                $('#' + next).empty().html(v);
+                (select_id > 0) && $('#' + next).val(select_id);//默认选中
+            }
+        });
+    }
+    /**
+     * 获取多级联动的商品分类
+     */
+    function get_category_sales_model(cat_id, next, select_id,goods_id) {
+        var url = '/index.php?m=Seller&c=Index&a=get_category&parent_id=' + cat_id;
+        $.ajax({
+            type: "GET",
+            url: url,
+            error: function (request) {
+                layer.alert("服务器繁忙, 请联系管理员!",{icon:2});
+                return;
+            },
+            success: function (v) {
+                v = "<option value='0'>请选择商品分类</option>" + v;
+                $('#' + next).empty().html(v);
+                (select_id > 0) && $('#' + next).val(select_id);//默认选中
+            }
+        });
+        getSalesModel(goods_id,cat_id);
+    }
+    function getSalesModel(goods_id,cat_id) {
+        var goods_id = '{$goodsInfo.goods_id}';
+        var url = '/index.php?m=Seller&c=Index&a=getCategorySalesModel&id=' + cat_id+'&goods_id='+goods_id;
+        $.ajax({
+            type: "GET",
+            url: url,
+            error: function (request) {
+                layer.alert("服务器繁忙, 请联系管理员!",{icon:2});
+                return;
+            },
+            success: function (v) {
+                $('#xsms_ul').empty().html(v);
+            }
+        });
+    }
+    /**
+     * 获取多级联动的商品分类
+     */
+    function ext_get_category2(id, obj, select_id) {
+        var ele = $(obj);
+        var cat2_obj = ele.next("select");
+        var url = '/index.php?m=Seller&c=Index&a=get_category&parent_id=' + id;
+        $.ajax({
+            type: "GET",
+            url: url,
+            error: function (request) {
+                layer.alert("服务器繁忙, 请联系管理员!",{icon:2});
+                return;
+            },
+            success: function (v) {
+                v = "<option value='0'>请选择商品分类</option>" + v;
+                cat2_obj.empty().html(v);
+                (select_id > 0) && cat2_obj.val(select_id);//默认选中
+            }
+        });
+    }
+
+    /**
+     * 获取多级联动的商品分类
+     */
+    function get_info_category2(id, next, select_id) {
+        var url = '/index.php?m=Seller&c=Index&a=get_category&parent_id=' + id;
+        $.ajax({
+            type: "GET",
+            url: url,
+            error: function (request) {
+                layer.alert("服务器繁忙, 请联系管理员!",{icon:2});
+                return;
+            },
+            success: function (v) {
+                v = "<option value='0'>请选择商品分类</option>" + v;
+                $('#' + next).empty().html(v);
+                (select_id > 0) && $('#' + next).val(select_id);//默认选中
+            }
+        });
+    }
+
+
+
+    function select_nav(obj){
+        var data_id = $(obj).attr('data-id');
+        $('.ncsc-form-goods').hide();
+        $('#'+data_id).show();
+        $(obj).parent().parent().find('li').removeClass('active');
+        $(obj).parent().addClass('active');
+    }
+    // 上传商品图片成功回调函数
+    function call_back(fileurl_tmp){
+        $("#original_img").val(fileurl_tmp);
+        $("#original_img2").attr('src', fileurl_tmp);
+    }
+
+    var cur_img_id = "";
+    function img_upload(num,elementid,path,callback){
+    	cur_img_id = elementid;
+    	GetUploadify(num,elementid,path,callback);
+    }
+
+    // 上传商品相册回调函数
+    function call_back2(paths){
+    	if(paths == undefined || paths[0] == undefined) return ;
+    	$("img[nctype="+cur_img_id+"]").attr("src" , paths[0]);
+    	$("input[data-id="+cur_img_id+"]").val(paths[0]);
+
+    	//重新绑定删除事件
+    	$("input[data-id="+cur_img_id+"]").parent().siblings(".show-default").find("a:eq(0)").removeAttr('onclick').click(function(){  ClearPicArr2(this, paths[0]) }); ;
+
+    }
+
+    /**
+     *	添加图片
+     */
+    function add_image(){
+    	var length = $('.goods-pic-list>.ncsc-goodspic-upload').length;
+    	if(length >= 10){
+    		layer.alert("缩略图数量不能超过10个!", {icon:2});
+    		return;
+    	}
+    	var new_id = "file_"+(length);
+    	var  last_div = $(".goods-pic-list:last").children("li:first-child").prop("outerHTML");
+    	$(".goods-pic-list:last").children("li:last-child").after(last_div);
+
+    	var last_li = $(".goods-pic-list").children("li:last-child");
+    	//第一个: a标签
+    	last_li.find("a:eq(0)").attr("href" ,  '/public/static/images/default_goods_image_240.gif');
+    	//img标签
+    	last_li.find("img:eq(0)").attr("nctype" , new_id).attr("src" ,  '/public/static/images/default_goods_image_240.gif'); //src
+    	//隐藏域: goods_images
+    	last_li.find("input[type=hidden]:eq(0)").attr("data-id" , new_id);
+    	//排序字段:
+    	last_li.find("input.text").val(0);
+
+    	//第二个: a标签 移除, 图片上传后, 修改ClearPicArr2参数, 添加ncaction属性, 如果该属性是del, 说明是超过5个的上传框, 可以删除.
+    	last_li.find("a:eq(1)").attr("ncaction" , "del").removeAttr('onclick').click(function(){  ClearPicArr2(this,'') });
+    	//第三个: a标签, 上传图片按钮
+    	last_li.find("a:eq(2)").unbind('click').removeAttr('onclick').click(function(){  img_upload(10,  new_id, 'goods', 'call_back2') });
+
+    }
+
+    /**
+     * ajax 加载规格 和属性
+     */
+    function ajaxGetSpecAttr(goods_id,cat_id3)
+    {
+        // ajax调用 返回规格
+        $.ajax({
+            type:'GET',
+//			data:{goods_id:goods_id,cat_id3:cat_id3},
+            url:"/index.php?m=Seller&c=Goods&a=ajaxGetSpecSelect&goods_id="+goods_id+"&cat_id3="+cat_id3,
+            success:function(data){
+                $("#ajax_spec_data").html('');
+                $("#ajax_spec_data").append(data);
+                if($.trim(data) != '')
+                    ajaxGetSpecInput();	// 触发完  马上处罚 规格输入框
+            }
+        });
+
+        // 商品类型切换时 ajax 调用  返回不同的属性输入框
+        $.ajax({
+            type:'GET',
+//			data:{goods_id:goods_id,cat_id3:cat_id3},
+            url:"/index.php?m=Seller&c=Goods&a=ajaxGetAttrInput&goods_id="+goods_id+"&cat_id3="+cat_id3,
+            success:function(data){
+                $("#goods_attr_table tr:gt(0)").remove();
+                $("#goods_attr_table").append(data);
+            }
+        });
+    }
+
+    $("body").on("click", ".check_sales_model", function () {
+        var url = "{:U('index/getGoodsCountryList')}"
+        var sales_model = $('input:radio[name="sales_model"]:checked').val();
+        $.post(url, {sales_model: sales_model}, function (data) {
+            if (data.code == 0) {
+                layer.msg(data.msg);
+                return;
+            }
+            $("#countryList").html('');
+            $("#countryList").html(data.msg);
+        });
+    });
+
+    /** 以下是编辑时默认选中某个商品分类*/
+    $(document).ready(function(){
+        var goods_id = "{$goodsInfo.goods_id}";
+        var cat_id = "{$goodsInfo.cat_id1}";
+        getSalesModel(goods_id,cat_id);
+        $.ajax({
+            type:'get',
+            url:"/index.php?m=Seller&c=Goods&a=ajaxCheckCat",
+            dataType:'json',
+            success:function(data){
+                if(data.status == 0){
+                     alert('您至少需要绑定一个经营类目才能发布商品！');
+                     location.href="{:U('Store/bind_class_list')}";
+                }
+            }
+        });
+        //弹出提示层
+        $(".submit").click(function () {
+            var index = layer.load(1, {
+                shade: [0.1,'#fff'] //0.1透明度的白色背景
+            });
+        });
+
+        $(".del_ext_cat").click(function () {
+            $(this).parent().html('');
+        });
+
+    	$("#shop_price").blur(function(){  
+    		//可赠送积分    			
+			var send_point = calc_send_point();
+			$("#give_integral_hint").html("可赠送积分不能超过"+send_point);
+        });
+    	$('#shop_price').trigger("blur");
+    	
+        // 商品分类第二个下拉菜单
+        <if condition="$goodsInfo['cat_id2'] gt 0">
+                get_category2("{$goodsInfo['cat_id1']}",'cat_id2',"{$goodsInfo['cat_id2']}");
+        </if>
+
+        // 商品分类第三个下拉菜单
+        <if condition="$goodsInfo['cat_id3'] gt 0">
+            get_category2("{$goodsInfo['cat_id2']}",'cat_id3',"{$goodsInfo['cat_id3']}");
+        </if>
+
+
+
+        // 扩展分类1第二个下拉菜单
+        <if condition="$goodsInfo['ext_cat_list']['ext_goods_cat_id1'][0] gt 0">
+            get_info_category2("{$goodsInfo['ext_cat_list']['ext_goods_cat_id1'][0]}",'ext_goods_cat_id1_2',"{$goodsInfo['ext_cat_list']['ext_goods_cat_id1'][1]}");
+        </if>
+
+        // 扩展分类1第三个下拉菜单
+        <if condition="$goodsInfo['ext_cat_list']['ext_goods_cat_id1'][1] gt 0">
+            get_info_category2("{$goodsInfo['ext_cat_list']['ext_goods_cat_id1'][1]}",'ext_goods_cat_id1_3',"{$goodsInfo['ext_cat_list']['ext_goods_cat_id1'][2]}");
+        </if>
+
+
+        // 扩展分类2第二个下拉菜单
+        <if condition="$goodsInfo['ext_cat_list']['ext_goods_cat_id2'][0] gt 0">
+            get_info_category2("{$goodsInfo['ext_cat_list']['ext_goods_cat_id2'][0]}",'ext_goods_cat_id2_2',"{$goodsInfo['ext_cat_list']['ext_goods_cat_id2'][1]}");
+        </if>
+
+        // 扩展分类2第三个下拉菜单
+        <if condition="$goodsInfo['ext_cat_list']['ext_goods_cat_id2'][1] gt 0">
+            get_info_category2("{$goodsInfo['ext_cat_list']['ext_goods_cat_id2'][1]}",'ext_goods_cat_id2_3',"{$goodsInfo['ext_cat_list']['ext_goods_cat_id2'][2]}");
+        </if>
+
+
+        // 扩展分类3第二个下拉菜单
+        <if condition="$goodsInfo['ext_cat_list']['ext_goods_cat_id3'][0] gt 0">
+            get_info_category2("{$goodsInfo['ext_cat_list']['ext_goods_cat_id3'][0]}",'ext_goods_cat_id3_2',"{$goodsInfo['ext_cat_list']['ext_goods_cat_id3'][1]}");
+        </if>
+
+        // 扩展分类3第三个下拉菜单
+        <if condition="$goodsInfo['ext_cat_list']['ext_goods_cat_id3'][1] gt 0">
+            get_info_category2("{$goodsInfo['ext_cat_list']['ext_goods_cat_id3'][1]}",'ext_goods_cat_id3_3',"{$goodsInfo['ext_cat_list']['ext_goods_cat_id3'][2]}");
+        </if>
+
+
+        // 店铺内部分类
+        <if condition="$goodsInfo['store_cat_id2'] gt 0">
+                get_store_category("{$goodsInfo['store_cat_id1']}",'store_cat_id2',"{$goodsInfo['store_cat_id2']}");
+        </if>
+
+        // 如果是编辑的时候 加载 规格 和属性
+        <if condition="$goodsInfo['cat_id3'] gt 0">
+                ajaxGetSpecAttr({$goodsInfo['goods_id']},{$goodsInfo['cat_id3']});
+        </if>
+
+        // 商品品牌根据分类显示相关的品牌
+        $('#brand_id option').each(function(){
+            var cat_id1 = $('#cat_id1').val();
+            if($(this).data('cat_id1') != cat_id1 && $(this).val() > 0)
+                $(this).hide();
+        });
+        
+        <if condition="$goodsInfo['is_virtual'] eq 1">
+        	$('[nctype="virtual_valid"]').show();
+        	$('[nctype="virtual_null"]').hide();
+		</if>
+		
+		$("#addEditGoodsForm").validate({
+    		debug: true, //调试模式取消submit的默认提交功能   
+    		focusInvalid: false, //当为false时，验证无效时，没有焦点响应  
+            onkeyup: false,   
+            submitHandler: function(form){   //表单提交句柄,为一回调函数，带一个参数：form
+            	var send_point = calc_send_point();   
+            	var give_integral = $("input[name='give_integral']").val();
+            	if(give_integral > send_point){
+            		layer.alert("最多可赠送积分不能超过"+send_point , {icon:2, time:2000});
+            		return;
+            	}
+            	// ajax_submit_form('addEditGoodsForm','{:U('Goods/addEditGoods?is_ajax=1')}');
+                ajaxImg_submit_form('addEditGoodsForm',"{:U('Goods/addEditGoods?is_ajax=1')}");
+            },  
+            ignore:":button,:checkbox,:hidden",	//不验证的元素
+            rules:{
+            	goods_name:{
+            		required:true
+            	},
+            	shop_price:{
+            		required:true,
+            		number:true,
+            		min:0
+            	},
+                shopping_country: {
+                    required: true,
+                    min:1,
+                },
+                sales_model: {
+                    required: true,
+                    min:1,
+                },
+            	market_price:{
+            		required:true,
+            		number:true,
+            		min:0
+            	},
+            	store_count:{
+            		required:true,
+            		digits:true,
+            		min:0
+            	}
+            },
+            messages:{
+            	goods_name:{
+            		required:"请填写商品名称"
+            	},
+            	shop_price:{
+            		required:"请填写商品售价",
+            		number:"请输入数字",
+            		min:"商品价格不能小于0"
+            	},
+                shopping_country: {
+                    required:"请选择发货国家",
+                    min:"请选择发货国家"
+                },
+                sales_model: {
+                    required:"请选择销售模式",
+                    min:"请选择销售模式"
+                },
+            	market_price:{
+            		required:"请填写市场售价",
+            		number:"请输入数字",
+            		min:"商品价格不能小于0"
+            	},
+            	store_count:{
+            		required:"请输入库存",
+            		digits:"库存必须是正数",
+            		min:"库存数量不能小于0"
+            	}
+            },
+            errorPlacement: function (error, element) { 
+                layer.msg(error.text(),{time:1000});
+            }
+    	});
+    });
+    
+    /** 计算最多可赠送积分数 */
+    function calc_send_point(){
+    	
+    	var point_rate = "{$tpshop_config['shopping_point_rate']|default=1}";
+    	var point_send_limit = "{$tpshop_config[shopping_point_send_limit]|default=1}";
+    	 
+    	var shop_price = $("#shop_price").val();
+		//可赠送积分    			
+		var send_point = shop_price * point_rate * point_send_limit / 100;
+		return send_point;
+    }
+    
+    function get_store_category(id,next,select_id){
+        var url = '/index.php?m=Home&c=api&a=get_store_category&parent_id='+ id;
+        $.ajax({
+            type : "GET",
+            url : url,
+            error: function(request) {
+                layer.alert("服务器繁忙, 请联系管理员!",{icon:2});
+                return;
+            },
+            success: function(v) {
+                v = "<option value='0'>请选择商品分类</option>" + v;
+                $('#'+next).empty().html(v);
+                (select_id > 0) && $('#'+next).val(select_id);//默认选中
+            }
+        });
+    }
+    // 商品类型切换时 ajax 调用  返回不同的属性输入框
+    $("#cat_id3").change(function(){
+        var goods_id = '{$goodsInfo.goods_id}';
+        var cat_id3 = $(this).val();
+        if(cat_id3 == 0)
+            return false;
+        ajaxGetSpecAttr(goods_id,cat_id3);
+    });
+    // 商品分类切换时,过滤掉非当前分类下的品牌 不能给太多品牌选择
+    $("#cat_id1").change(function(){
+        $('#brand_id option').show();
+        $('#brand_id option').each(function(){
+            var cat_id1 = $('#cat_id1').val();
+            if($(this).data('cat_id1') != cat_id1 && $(this).val() > 0)
+                $(this).hide();
+        });
+    });
+    // 属性输入框的加减事件
+    function addAttr(a)
+    {
+        var attr = $(a).parent().parent().prop("outerHTML");
+        attr = attr.replace('addAttr','delAttr').replace('+','-');
+        $(a).parent().parent().after(attr);
+    }
+    // 属性输入框的加减事件
+    function delAttr(a)
+    {
+        $(a).parent().parent().remove();
+    }
+    function choosebox(o){
+        var vt = $(o).is(':checked');
+        if(vt){
+            $('input[type=checkbox]').prop('checked',vt);
+        }else{
+            $('input[type=checkbox]').removeAttr('checked');
+        }
+    }
+    $(document).ready(function(){
+        $(":checkbox[cka]").click(function(){
+            var $cks = $(":checkbox[ck='"+$(this).attr("cka")+"']");
+            if($(this).is(':checked')){
+                $cks.each(function(){$(this).prop("checked",true);});
+            }else{
+                $cks.each(function(){$(this).removeAttr('checked');});
+            }
+        });
+    });
+    
+    
+    var is_virtual = <?php echo ($_GET[goods_id] == 0) || ($goodsInfo[is_virtual] == 1) ? "1" : "0"; ?>;
+    
+    /* 虚拟控制 // 虚拟商品有效期 */
+    if(is_virtual == '1'){	//虚拟商品属性
+    	$('#virtual_indate').layDate();
+        $('[name="is_virtual"]').change(function(){
+            if ($('#is_virtual_1').prop("checked")) {
+                $('[nctype="virtual_valid"]').show();
+                $('[nctype="virtual_null"]').hide();
+            } else {
+                $('[nctype="virtual_valid"]').hide();
+                $('[nctype="virtual_null"]').show();
+                $('#virtual_indate').val('');
+                $('#virtual_limit').val('');
+            }
+        });
+    }
+    
+    
+    
+</script>
+</body>
+</html>

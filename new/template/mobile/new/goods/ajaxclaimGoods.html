@@ -1,0 +1,86 @@
+  <notempty name="goods_list">
+                <foreach name="goods_list" item="vo" key="k">
+                    <li>
+                        <!--<a href="{:U('Mobile/Goods/goodsInfo',array('id'=>$vo[goods_id]))}" class="item">-->
+                        <a  href="{:U('Mobile/Goods/claimGoodsView',array('id'=>$vo[goods_id],'did'=>$doctor_id,'mid'=>$member_id,'app_type'=>$app_type,'access_type'=>$access_type))}" class="item">
+                            <div style="position:relative;" class="pic_box">
+                                <eq name="vo.dis" value="1">
+                                <div class="active_box">
+                                    <span style=" background-position:0px -36px">新品</span>
+                                </div>
+                                </eq>
+                                <img src="{$vo.goods_id|goods_thum_images=400,400}">
+                                <neq name="vo.dis" value="1">
+                                <div style="position:absolute;opacity:0.5;width:100%;height:100%; line-height:28px;text-align:center;color:#FFF; background:#000;padding-top:20px;">商家已关闭药事服务功能</div>
+                                </neq>
+                            </div>
+                            <div class="title_box">{$vo.goods_name}</div>
+                            <div class="price_box">
+                                 <div class="price_tags"><i>￥{$vo.shop_price}</i></div>
+                                 <!-- <div class="bz-tuiguang"><span>必&nbsp;赚</span><c style="color: #F16358">￥{$vo.sales_commission}</c></div> -->
+                                 <div class="bz-tuiguang"><c style="color: #F16358">必赚&yen;<l style="font-size: 15px;">{$vo.sales_commission}</l></c></div>
+                            </div>
+                        </a>
+                        <div class="goods-btn">
+                                    <?php $vo['cr_user_id'] = get_claim_record($doctor_id,$vo['goods_id']); ?>
+                                    <?php if($_GET['is_have'] && $vo['cr_user_id']!=null){ ?>
+                                    <button class="renlin renlin{$vo['goods_id']}" data-goodsId="{$vo['goods_id']}" data-status="2">已收藏</button>
+                                    <?php }elseif($vo['cr_user_id']==null){ ?>
+                                    <button class="renlin renlin{$vo['goods_id']}" data-goodsId="{$vo['goods_id']}" data-status="1">收藏</button>
+                                    <?php } ?>
+                                    <eq name="vo.dis" value="1">
+                                        <if condition="$member_id neq 0"> 
+                                         <button onclick="send({$vo.goods_id},{$doctor_id},{$member_id},'{$token}')">发送</button>
+                                        </if>
+                                    <else/>
+                                    <button disabled="disabled" >发送</button>
+                                    </eq>
+                                    <button onclick="qrcode('{$vo.goods_id}','{$vo.did}')">二维码</button>
+                                    <!--分享咕噜咕噜 -->
+                                   <button onclick="shareWith('{$vo.goods_id}','{$vo.did}')">分享</button>
+
+                        </div>
+                    </li>
+                </foreach>
+            </notempty>
+<script type="text/javascript">             
+    $('.renlin').click(function () {
+        var goods_id = $(this).attr('data-goodsId');
+        var num = $(this).attr('data-status');
+        claimGoods(goods_id,num,num);
+    });
+    
+    /**
+     * 收藏商品 取消收藏
+     * @param goods_id
+     */
+    function claimGoods(goods_id, num, type) {
+        $.ajax({
+            type: "GET",
+            url: "{:U('Mobile/Goods/claim')}",
+            data: {gid: goods_id, doctor_id: doctorid, action: num},
+            dataType: "json",
+            success: function (data) {
+                if(type == 1){
+                    layer.msg(data.msg);
+                    $(".renlin"+goods_id).text("已收藏")
+                    $(".renlin"+goods_id).attr("data-status","2");
+
+                    //关闭当前页面
+                    // if (data.sta) {
+                    //     window.location.reload();
+                    // }
+                }else{
+                       layer.msg(data.msg);
+                    $(".renlin"+goods_id).text("收藏");
+                     $(".renlin"+goods_id).attr("data-status","1");
+
+                    // if (data.sta) {
+                    //     window.location.reload();
+                    // }
+                }
+
+            }
+        });
+    }
+            </script>

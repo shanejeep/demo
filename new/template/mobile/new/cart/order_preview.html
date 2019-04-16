@@ -1,0 +1,597 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta name="Generator" content="tpshop" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>购物流程-{$tpshop_config['shop_info_store_title']}</title>
+    <meta name="keywords" content="{$tpshop_config['shop_info_store_keyword']}" />
+    <meta name="description" content="{$tpshop_config['shop_info_store_desc']}" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <link rel="stylesheet" href="__STATIC__/css/style_idcard.css">
+    <link rel="stylesheet" href="__STATIC__/css/public.css">
+    <link rel="stylesheet" href="__STATIC__/css/flow.css">
+    <link rel="stylesheet" href="__STATIC__/css/style_jm.css">
+    <script type="text/javascript" src="__STATIC__/js/jquery.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/layer/layer.js"></script>
+    <script src="__PUBLIC__/js/global.js"></script>
+    <script src="__PUBLIC__/js/mobile_common.js"></script>
+    <script src="__STATIC__/js/bootstrap-fileinput.js"></script>
+    <style type="text/css">
+        a.file{
+            position: relative;
+            display: inline-block;
+            background: url(/template/mobile/new/static/images/xiangji.png) no-repeat center center;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 0px 0px;
+            overflow: hidden;
+            color: #1E88C7;
+            text-decoration: none;
+            text-indent: 0;
+            line-height: 20px;
+            background-size: auto 50px;
+        }
+        .p_main {
+            width: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .file input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+        }
+
+    </style>
+</head>
+<body style="background: rgb(235, 236, 237);position:relative;">
+<div class="tab_nav">
+    <div class="header">
+        <div class="h-left"> <a class="sb-back" href="javascript:history.back(-1)" title="返回"></a> </div>
+        <div class="h-mid"> 确认订单 </div>
+    </div>
+</div>
+<div class="screen-wrap fullscreen login">
+    <form name="cart2_form" id="cart2_form" method="post" enctype="multipart/form-data">
+        <input type="hidden" value="{$s}" name="s" />
+        <section class="content" style="min-height: 294px;">
+            <div class="wrap">
+                <div class="active" style="min-height: 294px;">
+                    <div class="content-buy">
+                        <div class="wrap order-buy">
+                            <!-- deng start -->
+                            <a href="{:U('User/address_list',array('source'=>'order_preview','info_id'=>$info_id,'is_drug'=>$_GET['is_drug'],'s'=>$s))}">
+                                <!--deng end -->
+                                <!--<a href="{:U('User/address_list',array('source'=>'cart2','s'=>$s))}">-->
+                                <section class="address">
+                                    <div class="address-info" >收货人:
+                                        <p class="address-name">{$address.consignee}</p>
+                                        <p class="address-phone">{$address.mobile}</p>
+                                    </div>
+                                    <div class="address-details">收货地址：{$address.address}</div>
+                                    <input type="hidden" value="{$address.address_id}" name="address_id" />
+                                </section>
+                            </a>
+                            <section class="order " id="order4">
+                                <div  class="order-info" style="margin-top:0;">
+                                    <!--
+                                        <h4 class="seller-name" > <img src="__STATIC__/images/flow/dingdan.png" width="28">
+                                            订单详情 <a class="modify" href="{:U('Cart/cart')}">修改</a></h4>
+                                    -->
+                                </div>
+                                <section class="order-info" style=" margin-top:0px;">
+                                    <div class="order-list">
+                                        <ul class="order-list-info">
+                                            <!--商品列表-->
+                                            <foreach name="storeList" key="ky" item="v">
+                                                <div class="goods-list-title"> {$v[store_name]}</div>
+                                                <foreach name="cartList" item="v2"  key="k">
+                                                    <if condition="($v2[selected] eq '1') and ($v2[store_id] eq $v[store_id])">
+                                                        <div style="width:100%;height: 36px;line-height: 36px;font-size: 13px;border-top: 2px solid #888888;border-bottom: 2px dashed #c3c3c3">
+                                                            <div style="float: left;color: #222222">
+                                                                发货模式：<span style="font-weight: bold">{$v2['sales_model_title']}</span>
+                                                            </div>
+
+                                                            <if condition="$v2['sales_model'] eq 3">
+                                                                <div style="float: right;color: #222222">
+                                                                    本仓税费： ￥:<span>{$v2['custom_duty_price']}</span>
+                                                                </div>
+                                                            </if>
+                                                        </div>
+                                                        <li class="item" >
+                                                            <div class="itemPay list-price-nums" id="itemPay17">
+                                                                <p class="price">￥{$v2.member_goods_price}元</p>
+                                                                <p class="nums">x{$v2.goods_num}</p>
+                                                            </div>
+                                                            <div class="itemInfo list-info" id="itemInfo12">
+                                                                <div class="list-img"> <a href="{:U('Mobile/Goods/goodsInfo',array('id'=>$v2[goods_id]))}"> <img src="{$v2.goods_id|goods_thum_images=200,200}"></a> </div>
+                                                                <div class="list-cont">
+                                                                    <h5 class="goods-title">{$v2.goods_name} </h5>
+                                                                    <p class="godds-specification">{$v2.spec_key_name}</p>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </if>
+                                                </foreach>
+                                                <li class="flow_youhui_no">
+                                                    <div class="checkout_other">
+                                                        <div class="jmbag" href="javascript:void(0);" onClick="showCheckoutOther(this);"><span class="right_arrow_flow"></span>使用店铺优惠券</div>
+                                                        <table class="subbox_other sub_bonus" width="100%">
+                                                            <tr>
+                                                                <td  colspan="2">
+                                                                    <input type="radio" class="radio vam ma-ri-10" name="couponTypeSelect[{$v[store_id]}]" checked value="1"  onClick="ajax_order_price();javascript:document.getElementById('Bonus_span_{$ky}').style.display='none';" />
+                                                                    <select id="coupon_id" name="coupon_id[{$v[store_id]}]" class="vam ou-no coupon_list" onChange="checkrepact(this);">
+                                                                        <option value="0">选择优惠券</option>
+                                                                        <foreach name="couponList[$v[store_id]]" item="v3">
+                                                                            <if condition="$v3[store_id] eq $v[store_id]">
+                                                                                <option value="{$v3['id']}">{$v3['name']}</option>
+                                                                            </if>
+                                                                        </foreach>
+                                                                    </select>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    &nbsp;或 &nbsp;
+                                                                    <input type="radio" class="radio vam ma-ri-10" name="couponTypeSelect[{$v[store_id]}]"  value="2"  onClick="ajax_order_price();javascript:document.getElementById('Bonus_span_{$ky}').style.display='block';" />
+                                                                    <a href="javascript:void(0);"  class="a_other1_h" id="Bonus_a_0">直接输入优惠券</a>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <label id="Bonus_span_{$ky}" style="display:none;">
+                                                                        <input name="couponCode[{$v[store_id]}]" id="bonus_sn_0" type="text"   value="" placeholder="输入优惠券"  class="txt1" style="width:144px;"/>
+                                                                        <input name="validate_bonus" type="button" value="使用" onClick="ajax_order_price();" class="BonusButton" />
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+
+                                                        </table>
+                                                    </div>
+                                                </li>
+                                                <li class="flow_youhui_no">
+                                                    <label>
+                                                        选择物流：
+                                                        <select onChange="ajax_order_price();" class="vam ou-no" name="shipping_code[{$v[store_id]}]">
+                                                            <foreach name="shippingList" item="v4"  key="k4">
+                                                                <if condition="($v4['store_id'] eq $v['store_id']) and strlen($v4['name'])">
+                                                                    <option value="{$v4.shipping_code}">{$v4.name}</option>
+                                                                </if>
+                                                            </foreach>
+                                                        </select>
+                                                    </label>
+                                                </li>
+                                                <li class="flow_youhui_no">
+                                                    <label>
+                                                        给卖家留言：
+                                                        <input type="text" placeholder="给卖家留言" name="user_note[{$v[store_id]}]" style="vertical-align:middle" class="txt1">
+                                                    </label>
+                                                </li>
+                                            </foreach>
+                                            <li class="flow_youhui_no">
+                                                <label>
+                                                    使用余额：
+                                                    <input id="user_money" name="user_money"  type="text"   placeholder="输入余额" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onkeyup="this.value=/^\d+\.?\d{0,2}$/.test(this.value) ? this.value : ''" class="txt1" style="width:100px;"/>
+                                                    <input name="validate_bonus" type="button" value="使用" onClick="ajax_order_price();" class="BonusButton" />
+                                                    您的可用余额<em>{$user['user_money']}</em>
+                                                </label>
+                                            </li>
+                                            <li class="flow_youhui_no">
+                                                <label>
+                                                    使用积分：
+                                                    <input id="pay_points" name="pay_points" type="text"   placeholder="输入积分"  onpaste="this.value=this.value.replace(/[^\d]/g,'')" onKeyUp="this.value=this.value.replace(/[^\d]/g,'')" class="txt1" style="width:100px;"/>
+                                                    <input name="validate_bonus" type="button" value="使用" onClick="ajax_order_price();" class="BonusButton" />
+                                                    您的可用积分<em>{$user['pay_points']}</em>
+                                                </label>
+                                            </li>
+                                            <li class="flow_youhui_no">
+                                                <div class="checkout_other">
+                                                    <div class="jmbag" href="javascript:void(0);" onClick="showCheckoutOther(this);"><span class="right_arrow_flow"></span>使用平台优惠券</div>
+                                                    <table class="subbox_other sub_bonus" width="100%">
+                                                        <tr>
+                                                            <td  colspan="2">
+                                                                <input type="radio" class="radio vam ma-ri-10" name="couponTypeSelect[0]" checked value="1"  onClick="ajax_order_price();javascript:document.getElementById('Bonus_span_{$ky}').style.display='none';" />
+                                                                <select id="coupon_id" name="coupon_id[0]" class="vam ou-no coupon_list" onChange="checkrepact(this);">
+                                                                    <option value="0">请选择优惠券</option>
+                                                                    <foreach name="$couponList.0" item="v5">
+                                                                        <if condition="$v5[store_id] eq 0">
+                                                                            <option value="{$v5['id']}">{$v5['name']}</option>
+                                                                        </if>
+                                                                    </foreach>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                &nbsp;或 &nbsp;
+                                                                <input type="radio" class="radio vam ma-ri-10" name="couponTypeSelect[0]"  value="2"  onClick="ajax_order_price();javascript:document.getElementById('Bonus_span_x').style.display='block';" />
+                                                                <a href="javascript:void(0);"  class="a_other1_h" id="Bonus_a_0">直接输入优惠券</a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <label id="Bonus_span_x" style="display:none;">
+                                                                    <input name="couponCode[0]" id="bonus_sn_0" type="text"   value="" placeholder="输入优惠券"  class="txt1" style="width:144px;"/>
+                                                                    <input name="validate_bonus" type="button" value="使用" onClick="ajax_order_price();" class="BonusButton" />
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+
+                                                    </table>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </section>
+                            </section>
+						<if condition="$v2['sales_model'] eq 3 OR $v2['sales_model'] eq 2"> 
+                             <section class="order-info">
+                                        <input type="hidden" id="sale_models" value="1" >
+                                        <!-- 身份证正反面 -->
+                                        <div class="Header"><p> 海外购商品应海关要求需提供实名认证，请上传收货人信息以及与收货人姓名一致的身份证信息哦！</p> </div>
+                                        <div class="cont">
+                                            <div style="width: 48%;float: left">
+                                                <input style="border: 1px solid #DFDFDF; line-height: 30px; height: 32px;width: 250px;" type="text" id="true_name" name="true_name" value="" placeholder="用户姓名" />
+                                                <div style="clear: both; height: 10px;"></div>
+                                                <input style="border: 1px solid #DFDFDF; line-height: 30px; height: 32px; width: 250px;"  type="text" id="id_card" name="id_card" value="" placeholder="用户身份证号" />
+                                            </div>
+                                            <div style="clear: both; height: 10px;"></div>
+                                        </div>
+                              </section>
+                            </if>
+
+                            <if condition="$is_drug eq 1">
+                                <section class="order-info">
+                                    <!-- 身份证正反面 -->
+                                    <div class="Header"><p style="font-size: 12.5px;color: #3f3f3f;" >该药品为处方药品，请填写并上传真实的用药人和病例照片,购买后无特殊情况概不进行退款操作，敬请谅解</p> </div>
+                                    <div class="cont">
+                                        <ul>
+                                            <li style="padding: 2px 5px;" class="flow_youhui_no">
+                                                <div class="checkout_other">
+                                                    <a class="jmbag" href="{:U('User/info_list',array('source'=>'order_preview','s'=>$s,'info_id'=>$info_id,'address_id'=>$_GET['address_id']))}"><span style="height: 24px;background-position: right;width: 114px; color: #C5C5C5;text-align: right;padding-right: 15px;" class="right_arrow_flow"><empty name="info_name">选择用药人<else/>{$info_name}</empty></span>用药人信息</a>
+                                                    <input type="hidden" name="info_id" value="{$info_id}">
+                                                    <input type="hidden" name="is_drug" value="1">
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div class="p_main">
+                                            <p style="font-size: 16px;color: #1d1d1d;line-height: 36px;">上传病例：</p>
+                                            <a href="javascript:;" class="file"><div id="fileList1" style="width:60px;height:60px;"><img width="60" height="60"></div><input type="file" multiple onchange="handleFiles(this,1)" name="" accept="image/*"></a>
+                                            <a href="javascript:;" class="file"><div id="fileList2" style="width:60px;height:60px;"><img width="60" height="60"></div><input type="file" multiple onchange="handleFiles(this,2)" name="" accept="image/*"></a>
+                                            <a href="javascript:;" class="file"><div id="fileList3" style="width:60px;height:60px;"><img width="60" height="60"></div><input type="file" multiple onchange="handleFiles(this,3)" name="" accept="image/*"></a>
+                                            <a href="javascript:;" class="file"><div id="fileList4" style="width:60px;height:60px;"><img width="60" height="60"></div><input type="file" multiple onchange="handleFiles(this,4)" name="" accept="image/*"></a>
+                                            <input type="hidden" name="case1" id="case1" value="" />
+                                            <input type="hidden" name="case2" id="case2" value="" />
+                                            <input type="hidden" name="case3" id="case3" value="" />
+                                            <input type="hidden" name="case4" id="case4" value="" />
+                                            <span style=" font-size:14px; display:block; width:100%; overflow:hidden">
+                                                <p style="font-size: 13px;">点击上传病例照片（最多可上传4张）</p>
+                                            </span>
+                                        </div>
+                                        <div style="clear: both; height: 10px;"></div>
+                                    </div>
+                                </section>
+                            </if>
+
+                            <!--<section class="order-info">
+                                <div class="order-list">
+                                  <div class="content ptop0">
+                                    <div class="panel panel-default info-box">
+                                      <div class="orderInfo " >
+                                        <h4 class="seller-name"> <img src="__STATIC__/images/flow/dingdan.png" width="28"> 其他选项 </h4>
+                                      </div>
+                                      <table border=0 cellpadding=0 cellspacing=0 width="100%" class="checkgoods">
+                                        <tr>
+                                          <td colspan=4 class="tdother2" style="border-top:none;"><div class="checkout_other" >
+                                              <div class="jmbag" href="javascript:void(0);" onClick="showCheckoutOther(this);"><span class="right_arrow_flow"></span>开发票和缺货处理</div>
+                                              <div class="subbox_other" width="100%">
+                                                <table id='normal_invoice_tbody' width="100%">
+                                                  <tr>
+                                                    <td align=right style="vertical-align:top" width="84">发票抬头：</td>
+                                                    <td colspan="2">
+                                                      <input class="txt1" style='vertical-align:middle' type="text" name="invoice_title" placeholder="XXX单位 或 XX个人" />
+                                                    </td>
+                                                  </tr>
+                                                </table>
+                                              </div>
+                                            </div>
+                                            </td>
+                                        </tr>
+                                      </table>
+                                        <div style="height:10px; line-height:10px; clear:both;"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                            </section>-->
+                          
+                            <section class="order-info">
+                                <div class="order-list">
+                                    <div class="content ptop0">
+                                        <div class="panel panel-default info-box">
+                                            <div class="con-ct fo-con">
+                                                <ul class="ct-list order_total_ul" id="ECS_ORDERTOTAL" >
+                                                    <li class="order_total_li" >*该订单完成后，您将获得 <span class="price">相应的</span> 积分<br/></li>
+                                                    <li>
+                                                        <div class="subtotal">
+                                                            <span class="total-text">商品总额：</span><em class="price">￥{$total_price.total_fee}元</em><br/>
+                                                            <span class="total-text">配送费用：</span>￥<em class="price" id="postFee">{$total_price.shipping_price}</em>元<br/>
+                                                            <span class="total-text">关税：</span>￥&nbsp;<em class="price" id="total_custom_duty_price">{$total_price.total_custom_duty_price}</em>元<br/>
+                                                            <span class="total-text">使用优惠券：</span>-&nbsp;¥&nbsp;<em class="price" id="couponFee">0</em>元<br/>
+                                                            <span class="total-text">使用积分：</span>-&nbsp;¥&nbsp;<em class="price" id="pointsFee">0</em>元<br/>
+                                                            <span class="total-text">使用余额：</span>-&nbsp;¥&nbsp;<em class="price" id="balance">0</em>元<br/>
+                                                            <span class="total-text">优惠活动：</span>-&nbsp;¥&nbsp;<em class="price" id="order_prom_amount">0</em>元<br/>
+                                                            <span class="total-text">应付金额：</span>￥<strong class="price_total" id="payables">0</strong>元
+                                                            <span class="total-text" style=""></span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="panel panel-default info-box">
+                                                <div class="pay-btn">
+                                                    <input onClick="submit_order();" type="button" class="sub-btn btnRadius" value="提交订单"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+</div>
+<section class="f_mask" style="display: none;"></section>
+<include file="public/footer"/>
+<script>
+    $(function () {
+        $('.check_pic_01').click(function () {
+            $('.check_pic_02').click()
+        });
+        $('.check_pic_03').click(function () {
+            $('.check_pic_04').click()
+        });
+        $('.check_pic_03').height($('.check_pic_03').width());
+        $('.check_pic_01').height($('.check_pic_01').width());
+
+        $('.picImg_01').height($('.check_pic_03').width());
+    })
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        ajax_order_price(); // 计算订单价钱
+    });
+    //检查重复
+    function checkrepact(obj){
+        // var cval=$(obj).children('option:selected').val();
+        // var tpArr=new Array();
+        // $(".coupon_list").each(function(){
+        //        if(cval == $(this).val() && cval != 0){
+        //             tpArr.push($(this).val());
+        //        }
+        // });
+        // if(tpArr.length > 1) {
+        //     layer.msg("同一优惠券不能重复选择！");
+        //     $(obj).children('option:first').attr("selected","selected");
+        //     return false;
+        // }
+        ajax_order_price();
+    }
+
+    // 获取订单价格
+    function ajax_order_price()
+    {
+
+        $.ajax({
+            type : "POST",
+            url:'/index.php?m=Mobile&c=Cart&a=createOrder&act=order_price&t='+Math.random(),
+            data : $('#cart2_form').serialize(),
+            dataType: "json",
+            success: function(data){
+                if(data.status != 1)
+                {
+                    layer.msg(data.msg);
+                    // 登录超时
+                    if(data.status == -100)
+                        location.href = "{$login_url}";
+
+                    return false;
+                }
+                // console.log(data);
+                if(data.result.couponFee == null){
+                    $("#couponFee").text(0);// 优惠券
+                }else{
+                    $("#couponFee").text(data.result.couponFee);// 优惠券
+                }
+                $("#postFee").text(data.result.postFee); // 物流费
+                $("#balance").text(data.result.balance);// 余额
+                $("#pointsFee").text(data.result.pointsFee);// 积分支付
+                $("#payables").text(data.result.payables);// 应付
+                $("#order_prom_amount").text(data.result.order_prom_amount);// 订单 优惠活动
+            }
+        });
+    }
+    // 提交订单
+    // ajax_return_status = 1; // 标识ajax 请求是否已经回来 可以进行下一次请求
+
+    //     function checkOnSaleRe(goods_id,auth,order_id){
+    //         $.ajax({
+    //             type : "POST",
+    //             url:"/index.php?m=Mobile&c=Cart&a=check_on_sale",
+    //             data :{goods_id:goods_id,shopauth:auth,order_id:order_id} ,
+    //             dataType:'json',
+    //             async:false,
+    //             success: function(data){
+    //               if(data.status < 0)
+    //             {
+    //               ajax_return_status = 2;
+    //             }
+    //            }
+    //         });
+    //   }
+    function submit_order()
+    {
+        var indexs = null;
+        var formData = new FormData($( "#cart2_form" )[0]);
+        //如果是药品需要选择用药人和上传病例
+        var is_drug = "{$is_drug}";
+        if(is_drug == '1'){
+            //用药人不能为空
+            var yaoren = $("input[name='info_id']").val();
+            if(yaoren == ''){
+                layer.alert("请选择用药人！");
+                layer.close(indexs);
+                return false;
+            }
+
+            //病例不能为空啊
+            if($("#case1").val() == '' && $("#case2").val() == '' && $("#case3").val() == '' && $("#case4").val() == ''){
+                layer.close(indexs);
+                layer.alert("请上传病例");
+                return false;
+            }
+        }
+        $.ajax({
+            type : "POST",
+            url:"/index.php/Mobile/Cart/createOrder/act/submit_order",//+tab,+"&act=submit_order"
+            data : formData,// 你的formid
+            dataType: "json",
+            async: true,
+            cache: false,
+            contentType: false,
+            processData: false,
+            beforeSend:function(){
+                indexs = layer.load(1, {
+                    content: '数据提交中...',
+                    shade: [0.5,'#000'],
+                    success: function(layero) {
+                        layero.find('.layui-layer-content').css({
+                            'padding-top': '40px',
+                            'width': '100%',
+                            'color':'#FFF',
+                            'background-position-x': '18px'
+                        });
+                    }
+
+                });
+            }, complete: function () {
+                layer.close(indexs);
+            },
+            success: function(data){
+                if(data.status != '1')
+                {
+                    layer.msg(data.msg); //执行有误
+                    // 登录超时
+                    if(data.status == -100)
+                        location.href = "{$login_url}";
+                    ajax_return_status = 1; // 上一次ajax 已经返回, 可以进行下一次 ajax请求
+                    return false;
+                }
+                // console.log(data);
+                $("#postFee").text(data.result.postFee); // 物流费
+                if(data.result.couponFee == null){
+                    $("#couponFee").text(0);// 优惠券
+                }else{
+                    $("#couponFee").text(data.result.couponFee);// 优惠券
+                }
+                $("#balance").text(data.result.balance);// 余额
+                $("#pointsFee").text(data.result.pointsFee);// 积分支付
+                $("#payables").text(data.result.payables);// 应付
+                $("#order_prom_amount").text(data.result.order_prom_amount);// 订单 优惠活动
+                alert('订单提交成功，跳转支付页面!');
+                location.href = "/index.php?m=Mobile&c=Cart&a=cart4&master_order_sn="+data.result; // 跳转到结算页
+            }
+        });
+    }
+
+
+    window.URL = window.URL || window.webkitURL;
+    function handleFiles(obj,id) {
+        fileList = document.getElementById("fileList"+id);
+        var files = obj.files;
+        var imgdata = new FormData();
+        imgdata.append("img",files[0]);
+        $.ajax({
+            type : "POST",
+            url:"/index.php/home/Api/ajaxUpload/imgType/bl",//+tab,+"&act=submit_order"
+            data : imgdata,// 你的formid
+            dataType: "json",
+            cache: false,
+            contentType: false,
+            processData: false,
+            beforeSend:function(){
+                indexs = layer.load(1, {
+                    content: '正在上传...',
+                    shade: [0.5,'#000'],
+                    success: function(layero) {
+                        layero.find('.layui-layer-content').css({
+                            'padding-top': '40px',
+                            'width': '100%',
+                            'color':'#FFF',
+                            'background-position-x': '18px'
+                        });
+                    }
+                });
+            },
+            complete: function () {
+                layer.close(indexs);
+            },
+            success:function(data){
+                layer.close(indexs);
+                if(data.code != 1){
+                    layer.msg("上传失败,图片过大！");
+                    return false;
+                }
+                layer.msg("上传成功！");
+                $("#case"+id).val(data.data.img);
+            },
+            error:function(){
+                layer.close(indexs);
+                layer.msg("上传失败！");
+            }
+        });
+        img = new Image();
+        if(window.URL){
+            img.src = window.URL.createObjectURL(files[0]); //创建一个object URL，并不是你的本地路径
+            img.width = 60;
+            img.height = 60;
+            img.onload = function(e) {
+                window.URL.revokeObjectURL(this.src); //图片加载后，释放object URL
+            }
+            if(fileList.firstElementChild){
+                fileList.removeChild(fileList.firstElementChild);
+            }
+            fileList.appendChild(img);
+        }else if(window.FileReader){
+            //opera不支持createObjectURL/revokeObjectURL方法。我们用FileReader对象来处理
+            var reader = new FileReader();
+            reader.readAsDataURL(files[0]);
+            reader.onload = function(e){
+                img.src = this.result;
+                img.width = 60;
+                img.height = 60;
+                fileList.appendChild(img);
+            }
+        }else{
+            //ie
+            obj.select();
+            obj.blur();
+            var nfile = document.selection.createRange().text;
+            document.selection.empty();
+            img.src = nfile;
+            img.width = 60;
+            img.height = 60;
+            img.onload=function(){
+
+            }
+            fileList.appendChild(img);
+        }
+    }
+</script>
+<script src="http://yzjshop.oss-cn-hangzhou.aliyuncs.com/topic/common/layer/layer.js"></script>
+</body>
+</html>

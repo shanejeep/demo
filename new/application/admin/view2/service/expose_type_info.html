@@ -1,0 +1,65 @@
+<include file="public/layout" />
+<body style="background-color: #FFF; overflow: auto;">
+<div id="append_parent"></div>
+<div id="ajaxwaitid"></div>
+<div class="page">
+  <div class="fixed-bar">
+    <div class="item-title"><a class="back" href="{:U('Service/expose_type_list')}" title="返回举报类型列表"><i class="fa fa-arrow-circle-o-left"></i></a>
+      <div class="subject">
+        <h3>举报管理 - 新增</h3>
+        <h5>商城设置举报类型及处理被举报商品</h5>
+      </div>
+    </div>
+  </div>
+  <form id="add_form" method="post" enctype="multipart/form-data" action="">
+    <div class="ncap-form-default">
+      <dl class="row">
+        <dt class="tit">
+          <label for="expose_type_name"><em>*</em>举报类型</label>
+        </dt>
+        <dd class="opt">
+          <input type="text" id="expose_type_name" name="expose_type_name" class="input-txt">
+          <span class="err"></span>
+          <p class="notic"></p>
+        </dd>
+      </dl>
+      <dl class="row">
+        <dt class="tit">
+          <label for="expose_type_desc"><em>*</em>举报类型描述</label>
+        </dt>
+        <dd class="opt">
+          <textarea name="expose_type_desc" rows="6" class="tarea" id="expose_type_desc"></textarea>
+          <span class="err"></span>
+          <p class="notic"></p>
+        </dd>
+      </dl>
+      <div class="bot"><a href="JavaScript:void(0);" class="ncap-btn-big ncap-btn-green" id="submitBtn">确认提交</a></div>
+    </div>
+  </form>
+</div>
+<script type="text/javascript">
+//按钮先执行验证再提交表单
+$(function(){$("#submitBtn").click(function(){
+	    var expose_type_name = $('input[name="expose_type_name"]').val();
+	    var expose_type_desc = $('#expose_type_desc').val();
+	    var error ='';
+	    if($.trim(expose_type_name) == ''){
+	        error += "举报类型不能为空";
+	    }
+	    
+	    if($.trim(expose_type_desc) == ''){
+	    	 error += "举报类型描述不能为空";
+	    }
+	    
+	    if(error){
+	        layer.alert(error, {icon: 2});  //alert(error);
+	        return false;
+	    }
+     	$("#add_form").submit();
+	});
+});
+//
+</script> 
+
+</body>
+</html>

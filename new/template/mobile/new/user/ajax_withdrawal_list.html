@@ -1,0 +1,16 @@
+<?php if(empty($lists)){ ?>
+<script type="text/javascript">
+    alert('没有更多数据啦');
+    $("#getmore").hide();
+</script>
+<?php }else{ ?>
+<foreach name="lists" item="list" >
+    <li class="disbox">
+        <div class="disflex">
+            <p><?php if($list['status']==1){echo '审核通过';}elseif($list['status']==2){echo '打款成功';}elseif($list['status']==0){echo '申请中';}else{echo '审核失败'; } ?></p>
+            <i>{$list['create_time']|date='Y-m-d',###}</i>
+        </div>
+        <span>￥{$list['money']}</span>
+    </li>
+</foreach>
+<?php } ?>

@@ -1,0 +1,64 @@
+<foreach name="list" item="return_goods">
+        <div class="severde tuharecha">
+            <div class="myorder p">
+                <div class="content30">
+                    <div class="order">
+                        <div class="fl">
+                            <span>服务单号：<em>{$item.id}</em></span>
+                        </div>
+                        <div class="fr">
+                        <span class="red">
+                            <if condition="$rg[status] eq 0">待客服处理</if>
+                            <if condition="$rg[status] eq 1">客服处理中</if>
+                            <if condition="$rg[status] eq 2">已完成</if>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="myorder p">
+                <div class="content30">
+                    <a href="{:U('Mobile/User/return_goods_info',array('id'=>$rg[id]))}">
+                        <div class="order">
+                            <div class="fl">
+                            <span>
+                                <if condition="$rg[status] eq 0">您的服务单已申请成功，待售后审核中 </if>
+                                <if condition="$rg[status] eq 1">客服处理中</if>
+                                <if condition="$rg[status] eq 2">已完成</if>
+                            </span>
+                            </div>
+                            <div class="fr">
+                                <i class="Mright"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!--商品信息-s-->
+            <foreach name="orderinfo" item="og">
+                <if condition="$rg[order_id] eq $og[order_id]">
+                    <div class="sc_list se_sclist paycloseto">
+                        <div class="maleri30">
+                            <div class="shopimg fl">
+                                <img src="{$og.goods_id|goods_thum_images=100,100}">
+                            </div>
+                            <div class="deleshow fr">
+                                <div class="deletes">
+                                    <a class="daaloe">{$og[goods_name]}</a>
+                                </div>
+                                <div class="qxatten">
+                                    <p class="weight"><span>申请时间：</span><span>{:date('Y-m-d H:i:s',$rg[addtime])}</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </if>
+            </foreach>
+            <!--商品信息-e-->
+            <div class="xomjdche">
+                <div class="maleri30">
+                    <a href="{:U('Mobile/User/return_goods_info',array('id'=>$rg[id]))}">进度查询</a>
+                </div>
+            </div>
+        </div>
+</foreach>

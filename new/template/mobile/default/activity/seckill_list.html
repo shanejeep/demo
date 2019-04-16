@@ -1,0 +1,103 @@
+<include file="public/header" title="秒杀"/>
+<include file="public/header_nav" title="秒杀" href="javascript:history.back(-1)" />
+    <!--顶部时间栏-s-->
+    <div class="floor killtime p">
+        <div class="content30">
+            <ul>
+                <li class="red">
+                    <h3>{:date('H:00', $start_time)}</h3>
+                    <p>秒杀中</p>
+                </li>
+                <li>
+                    <h3>{:date('H:00', $start_time+7200)}</h3>
+                    <p>即将开场</p>
+                </li>
+                <li>
+                    <h3>{:date('H:00', $start_time+7200*2)}</h3>
+                    <p>即将开场</p>
+                </li>
+                <li>
+                    <h3>{:date('H:00', $start_time+7200*3)}</h3>
+                    <p>即将开场</p>
+                </li>
+                <li>
+                    <h3>{:date('H:00', $start_time+7200*4)}</h3>
+                    <p>即将开场</p>
+                </li>
+            </ul>
+            <div class="nowkill">
+                <span class="fl">正在秒杀，先下单先得哦~</span>
+                <span class="fr" id="surplus"></span>
+                <!--秒杀-end-->
+            </div>
+        </div>
+    </div>
+    <!--顶部时间栏-es-->
+
+    <!--秒杀商品-s-->
+    <div class="floor shopkill">
+        <ul>
+            <if condition="empty($seckill_list)">
+                <li style="text-align: center;">暂无抢购商品。。。。<li>
+            </if>
+        </ul>
+        <!--加载更多S-->
+            <div id="getmore" style="font-size:.32rem;text-align: center;color:#888;padding:.25rem .24rem .4rem; clear:both">
+                <a href="javascript:void(0)" onClick="ajax_sourch_submit()">点击加载更多</a>
+            </div>
+        <!--加载更多E-->
+    </div>
+    <!--秒杀商品-e-->
+
+<script>
+    $(function(){
+        ajax_sourch_submit();
+    })
+    function GetRTime(end_time){
+        var NowTime = new Date();
+        var t = end_time*1000 - NowTime.getTime();
+        var h=Math.floor(t/1000/60/60%24);
+        var m=Math.floor(t/1000/60%60);
+        var s=Math.floor(t/1000%60);
+        if(s >= 0){
+            return '剩余时间：'+ h + '时' + m + '分' +s+'秒';
+        }else{
+            return 0
+        }
+    }
+    // 倒计时
+    function GetRTime2(){
+        var text = GetRTime({$end_time});
+        if (text == 0){
+            $("#surplus").text('活动已结束');
+            location.href = '/indx.php/Mobile/Activity/seckill_list';
+        }else{
+            $("#surplus").text(text);
+        }
+    }
+    setInterval(GetRTime2,1000);
+
+    //加载更多
+    /**
+     * ajax加载更多商品
+     */
+    var  page = 1;
+    function ajax_sourch_submit()
+    {
+        $.ajax({
+            type : "GET",
+            url:"/index.php?m=Mobile&c=Activity&a=seckill_list&is_ajax=1&p="+page,
+            success: function(data){
+        if ($.trim(data) == '') {
+            $('#getmore').hide();
+            return false;
+        } else {
+            ++page;
+            $(".shopkill ul").append(data);
+        }
+    }
+    });
+    }
+</script>
+</body>
+</html>
